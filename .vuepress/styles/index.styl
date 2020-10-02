@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: url('https://static.redhat.com/libs/redhat/redhat-font/2/webfonts/RedHatDisplay/RedHatDisplay-Regular.woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RedHatText';
+  src: url('https://static.redhat.com/libs/redhat/redhat-font/2/webfonts/RedHatText/RedHatText-Regular.woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Overpass Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Overpass Mono Regular'), local('OverpassMono-Regular'), url(https://fonts.gstatic.com/s/overpassmono/v6/_Xmq-H86tzKDdAPa-KPQZ-AC1iG0ts-2.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+html, body
+  background-color black
+  background-image url('/bgtile.png')
+  background-repeat repeat
+  font-family RedHatText
+
+code, kbd, .line-number
+  background-color #343434
+  font-family 'Overpass Mono', monospace
+
+pre
+  font-family 'Overpass Mono', monospace
+  background-color #252525
+
+aside.sidebar
+    background rgba(255,255,255,0.25)
+    border-radius 0.8rem 2.2rem
+    border none
+    margin 0.5rem
+    box-shadow 0.35rem 0.35rem 0.2rem rgba(255,255,255,0.15)
+
+.search-box
+    &.focused
+        color black
+
+.suggestions
+    color black
+
+.custom-block-title
+    font-family 'RedHatDisplay', 'sans-serif'
+    font-size 1.5rem
+    text-decoration underline
+
+.custom-block
+    &.tip
+        color black
+    &.warning
+        background-color: #f3f5f7
+
+.navbar
+  .links
+    background: transparent
+  border: 0px;
+
+.nav-links
+  color: $textColor
+
+.nav-link:hover
+    color: white
+    text-shadow: 0.05rem 0.05rem 0.02rem white
+
+.navbar
+    background: transparent
+    background-color: transparent
+
+h1, h2, h3, h4
+  color: white
+  font-family: RedHatDisplay
+  &:hover
+      color: $accentColor
