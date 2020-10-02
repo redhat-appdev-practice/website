@@ -1,8 +1,18 @@
 module.exports = {
   title: 'Cloud-Native Application Development',
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
+  patterns: [
+    '**/*.md',
+    '.vuepress/config.js',
+    '.vuepress/theme/**/*',
+    '.vuepress/public/**/*',
+    '.vuepress/styles/**/*'
+  ],
   themeConfig: {
     logo: '/Logo.svg',
+    nextLinks: false,
+    prevLinks: false,
+    lastUpdated: true,
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Tracks', link: '/tracks/' } /**,
