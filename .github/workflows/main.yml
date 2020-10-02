@@ -1,5 +1,7 @@
 name: Build and Deploy
-on: [push]
+on:
+  push:
+    branches: trunk
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -10,6 +12,5 @@ jobs:
     - name: Build and Deploy
       uses: testthedocs/github-pages-deploy-action@master
       env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BUILD_DIR: .vuepress/build/ # The folder, the action should deploy.
         BUILD_SCRIPT: npx vuepress build
