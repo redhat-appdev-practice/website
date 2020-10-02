@@ -12,6 +12,6 @@ jobs:
     - name: Build and Deploy
       uses: testthedocs/github-pages-deploy-action@master
       env:
-        BUILD_DIR: src/.vuepress/dist/ # The folder, the action should deploy.
+        BUILD_DIR: .vuepress/dist/ # The folder, the action should deploy.
         BUILD_SCRIPT: cd src; npx vuepress build
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
