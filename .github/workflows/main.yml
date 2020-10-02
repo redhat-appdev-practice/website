@@ -12,5 +12,5 @@ jobs:
     - name: Build and Deploy
       uses: testthedocs/github-pages-deploy-action@master
       env:
-        BUILD_DIR: .vuepress/build/ # The folder, the action should deploy.
+        BUILD_DIR: .vuepress/dist/ # The folder, the action should deploy.
         BUILD_SCRIPT: npx vuepress build
