@@ -78,7 +78,11 @@ tags:
 
 The more and better your titles, tags, etc... - the better the site will index the articles.
 
-## Publish this site
+### Adding images
+
+Images can be placed in `src/.vuepress/public/` and everything in that directory will be relative to the web root. For example, if you place an image in `src/.vuepress/public/devtools/my-cool-image.svg`, it's relative path would be `https://<site>/devtools/my-cool-image.svg`.
+
+## Publishing this site
 
 This has been automated with [GitHub Actions](.github/workflows/main.yml). If you submit a pull-request against this site and that pull-request gets merged to the `trunk` branch, then the automation will compile and publish this site for you.
 
