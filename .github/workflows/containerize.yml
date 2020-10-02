@@ -32,3 +32,6 @@ jobs:
           username: ${{ secrets.QUAY_USER }}
           password: ${{ secrets.QUAY_PASS }}
           registry: ${{ secrets.QUAY_URL }}
+          push: true
+          tags: |
+            josphill/cnd-vuepress:latest
