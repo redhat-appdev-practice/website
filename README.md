@@ -1,4 +1,4 @@
-# This is a VuePress site for [Cloud-Native AppDev](https://redhat-appdev-practice.github.io).
+# This is a [VuePress](https://vuepress.vuejs.org/) site for [Cloud-Native AppDev](https://redhat-appdev-practice.github.io).
 
 ## Prerequisites
 * NodeJS >= 12
