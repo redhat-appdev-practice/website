@@ -13,25 +13,32 @@ module.exports = {
     lastUpdated: true,
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Tracks', link: '/tracks/' } /**,
+      { text: 'Tracks', link: '/tracks/' },
+      { text: 'Links', link: '/links/'} /**,
       { text: 'Blog', link: '/blog/' },
       { text: 'Podcasts', link: '/podcasts/' } */
     ],
     displayAllHeaders: true,
     sidebar: [
       {
+        title: 'Links',
+        path: '/links/',
+        collapsable: true,
+        sidebarDepth: -2,
+        initialOpenGroupIndex: -1
+      },
+      {
         title: 'Tracks',
         path: '/tracks/',
         collapsable: true,
         sidebarDepth: -2,
-        initialOpenGroupIndex: -1,
+        initialOpenGroupIndex: 0,
         children: [
           {
             title: 'Contract-First',
             path: '/tracks/contract-first/',
             collapsable: true,
             sidebarDepth: -1,
-            initialOpenGroupIndex: -1,
             children: [
               '/tracks/contract-first/introduction-to-openapi-and-apicurio',
               '/tracks/contract-first/openapi-generator',
@@ -45,7 +52,6 @@ module.exports = {
             title: 'Behavior-Driven Development',
             path: '/tracks/bdd/',
             collapsable: true,
-            initialOpenGroupIndex: -1,
             sidebarDepth: -1
           },
           {
@@ -53,7 +59,6 @@ module.exports = {
             path: '/tracks/serverless/',
             collapsable: true,
             sidebarDepth: -1,
-            initialOpenGroupIndex: -1,
             children: [
               '/tracks/serverless/overview-of-serverless-landscape',
               '/tracks/serverless/intro-to-debezium-cdc',
@@ -67,7 +72,6 @@ module.exports = {
             path: '/tracks/devtools/',
             collapsable: true,
             sidebarDepth: -1,
-            initialOpenGroupIndex: -1,
             children: [
               '/tracks/devtools/owasp-dependency-check',
               '/tracks/devtools/owasp-zap-hud',
