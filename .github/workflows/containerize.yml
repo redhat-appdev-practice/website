@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v2.1.2
 
       - name: Build VuePress Static Content
-        run: npx vuepress src/ -d ./dist
+        run: npx vuepress build src/ -d ./dist
 
       - name: Build container image and push to Quay
         uses: docker/build-push-action@v1.1.1
