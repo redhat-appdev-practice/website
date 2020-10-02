@@ -1,12 +1,10 @@
 module.exports = {
   title: 'Cloud-Native Application Development',
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
-  patterns: [
-    '**/*.md',
+  extraWatchFiles: [
     '.vuepress/config.js',
-    '.vuepress/theme/**/*',
-    '.vuepress/public/**/*',
-    '.vuepress/styles/**/*'
+    '.vuepress/theme/index.js',
+    '.vuepress/theme/components/*.vue'
   ],
   themeConfig: {
     logo: '/Logo.svg',
