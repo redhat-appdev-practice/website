@@ -56,6 +56,28 @@
           }
   ```
 
+### Creating New Articles
+
+Every new article should start with some basic *frontmatter*. Frontmatter is a TOML block at the top of your markdown file which allows you to set some additional metadata about your document. 
+
+```markdown
+---
+title: Behavior-Driven Development
+collasable: true
+tags:
+- gherkin
+- bdd
+- behavior
+- behaviour
+- behavior-driven
+- behaviour-driven
+---
+
+# Behavior-Driven Development  // Markdown starts here
+```
+
+The more and better your titles, tags, etc... - the better the site will index the articles.
+
 ## Publish this site
 
 This has been automated with [GitHub Actions](.github/workflows/main.yml). If you submit a pull-request against this site and that pull-request gets merged to the `trunk` branch, then the automation will compile and publish this site for you.
