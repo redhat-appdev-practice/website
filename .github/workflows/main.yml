@@ -14,3 +14,4 @@ jobs:
       env:
         BUILD_DIR: .vuepress/dist/ # The folder, the action should deploy.
         BUILD_SCRIPT: npx vuepress build
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
