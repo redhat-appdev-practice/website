@@ -5,9 +5,9 @@ module.exports = {
     logo: '/Logo.svg',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Tracks', link: '/tracks/' },
+      { text: 'Tracks', link: '/tracks/' } /**,
       { text: 'Blog', link: '/blog/' },
-      { text: 'Podcasts', link: '/podcasts/' }
+      { text: 'Podcasts', link: '/podcasts/' } */
     ],
     displayAllHeaders: true,
     sidebar: [
