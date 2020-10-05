@@ -31,7 +31,7 @@ jobs:
         with:
           username: ${{ secrets.QUAY_USER }}
           password: ${{ secrets.QUAY_PASS }}
-          repository: josphill/cnd-vuepress
+          repository: cloud-native-runtimes/cnad-vuepress
           registry: 'quay.io'
           push: true
           tags: latest
