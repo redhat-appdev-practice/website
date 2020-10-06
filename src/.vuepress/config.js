@@ -6,6 +6,12 @@ module.exports = {
     '.vuepress/theme/index.js',
     '.vuepress/theme/components/*.vue'
   ],
+  head: [
+    ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/Icon.svg"}],
+    ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
+    ['link', { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: "/Icon.svg"}],
+    ['link', { rel: "shortcut icon", href: "/Icon.svg"}],
+  ],
   themeConfig: {
     logo: '/Icon.svg',
     nextLinks: false,
