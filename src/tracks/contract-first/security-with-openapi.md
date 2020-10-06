@@ -2,6 +2,19 @@
 title: Security with OpenAPI
 initialOpenGroupIndex: -1
 collapsable: true
+tags:
+- openapi
+- oauth2
+- oidc
+- openid
+- security
+- authorization
+- authentication
+- access control
+- auth
+- rest
+- api
+- specification
 ---
 
 # OpenAPI Security
