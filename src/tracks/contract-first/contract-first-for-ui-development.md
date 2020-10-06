@@ -2,6 +2,21 @@
 title: Contract-First With UI Development
 initialOpenGroupIndex: -1
 collapsable: true
+tags:
+- contract-first
+- openapi
+- openapi-generator
+- fakeit
+- api
+- rest
+- vuejs
+- vue
+- automation
+- cloud-native
+- spa
+- single-page app
+- javascript
+- typescript
 ---
 
 # Applying Contract-First Development To UI/UX

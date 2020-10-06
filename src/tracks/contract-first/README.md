@@ -1,11 +1,13 @@
 ---
 title: Contract-First API Development
 collapsable: true
+tags:
+- api
+- openapi
+- contract-first
+- rest
+- cloud-native
 ---
-
-::: slot bottom
-This is a test
-:::
 
 # Contract-First Development
 

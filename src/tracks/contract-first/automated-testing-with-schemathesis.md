@@ -2,6 +2,14 @@
 title: Automated API Testing With Schemathesis
 initialOpenGroupIndex: -1
 collapsable: true
+tags:
+- schemathesis
+- openapi
+- api
+- rest
+- testing
+- test
+- specification
 ---
 
 # OpenApi Testing with Schemathesis

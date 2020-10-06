@@ -2,6 +2,17 @@
 title: OpenAPI Generator
 initialOpenGroupIndex: -1
 collapsable: true
+tags:
+- openapi
+- openapi-generator
+- rest
+- api
+- java
+- spring
+- springboot
+- javascript
+- typescript
+- axios
 ---
 
 # OpenAPI Generator
