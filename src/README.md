@@ -1,6 +1,6 @@
 ---
 home: true
-heroText: Cloud-Native AppDev
+heroText: "  "
 heroImage: /Logo.svg
 features:
 - title: What is this site?
