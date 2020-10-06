@@ -7,7 +7,7 @@ module.exports = {
     '.vuepress/theme/components/*.vue'
   ],
   themeConfig: {
-    logo: '/Logo.svg',
+    logo: '/Icon.svg',
     nextLinks: false,
     prevLinks: false,
     lastUpdated: true,
