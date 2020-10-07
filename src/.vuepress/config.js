@@ -79,6 +79,7 @@ module.exports = {
             collapsable: true,
             sidebarDepth: -1,
             children: [
+              '/tracks/devtools/compose-files-for-local-dev',
               '/tracks/devtools/owasp-dependency-check',
               '/tracks/devtools/owasp-zap-hud',
               '/tracks/devtools/npm-audit-ci-wrapper'
