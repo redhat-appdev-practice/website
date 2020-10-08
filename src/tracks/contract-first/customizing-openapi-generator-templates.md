@@ -2,6 +2,16 @@
 title: Customizing OpenAPI Generator Templates
 initialOpenGroupIndex: -1
 collapsable: true
+tags:
+- openapi
+- openapi-generator
+- mustache
+- spring
+- springboot
+- java
+- template
+- api
+- rest
 ---
 
 # OpenAPI Generator Templating

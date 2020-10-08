@@ -6,8 +6,14 @@ module.exports = {
     '.vuepress/theme/index.js',
     '.vuepress/theme/components/*.vue'
   ],
+  head: [
+    ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/Icon.svg"}],
+    ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
+    ['link', { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: "/Icon.svg"}],
+    ['link', { rel: "shortcut icon", href: "/Icon.svg"}],
+  ],
   themeConfig: {
-    logo: '/Logo.svg',
+    logo: '/Icon.svg',
     nextLinks: false,
     prevLinks: false,
     lastUpdated: true,
@@ -73,6 +79,7 @@ module.exports = {
             collapsable: true,
             sidebarDepth: -1,
             children: [
+              '/tracks/devtools/compose-files-for-local-dev',
               '/tracks/devtools/owasp-dependency-check',
               '/tracks/devtools/owasp-zap-hud',
               '/tracks/devtools/npm-audit-ci-wrapper'
