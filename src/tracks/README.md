@@ -5,6 +5,8 @@ sidebarDepth: 2
 
 # Tracks Overview
 
+<div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://app.lucidchart.com/documents/embeddedchart/77f46b7d-8709-4b64-ab38-1629c0f233b4" id=".n2CSheW2njE"></iframe></div>
+
 ## Contract-First API Development
 
 You’re adopting “DevOps” and “Microservices” because of the promise of delivering value faster to your users/customers. But you are not seeing the gains you want to see. You’ve got CI/CD/Pipelines/Tests/Microservices/etc… But you are still getting bogged down with teams being dependent on the progress of each other. Service A isn’t done, so service B cannot work on integration. The UI requires access to ALL of the services, so it has to wait until the end to be integrated, and integration takes WEEKS because of back-and-forth issues between the frontend and backend and between different dependent services. This is NOT how this is supposed to work!
