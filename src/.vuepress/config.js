@@ -1,11 +1,6 @@
 module.exports = {
-  title: 'Cloud-Native Application Development',
+  title: 'Cloud-Native AppDev',
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
-  extraWatchFiles: [
-    '.vuepress/config.js',
-    '.vuepress/theme/index.js',
-    '.vuepress/theme/components/*.vue'
-  ],
   head: [
     ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/Icon.svg"}],
     ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
@@ -24,20 +19,18 @@ module.exports = {
       { text: 'Blog', link: '/blog/' },
       { text: 'Podcasts', link: '/podcasts/' } */
     ],
-    displayAllHeaders: true,
+    displayAllHeaders: false,
     sidebar: [
       {
-        title: 'Links',
+        title: 'Links We Like',
         path: '/links/',
         collapsable: true,
-        sidebarDepth: -2,
         initialOpenGroupIndex: -1
       },
       {
         title: 'Tracks',
         path: '/tracks/',
         collapsable: true,
-        sidebarDepth: -2,
         initialOpenGroupIndex: 0,
         children: [
           {
@@ -57,14 +50,12 @@ module.exports = {
           {
             title: 'Behavior-Driven Development',
             path: '/tracks/bdd/',
-            collapsable: true,
-            sidebarDepth: -1
+            collapsable: true
           },
           {
             title: 'Serverless',
             path: '/tracks/serverless/',
             collapsable: true,
-            sidebarDepth: -1,
             children: [
               '/tracks/serverless/overview-of-serverless-landscape',
               '/tracks/serverless/intro-to-debezium-cdc',
@@ -77,7 +68,6 @@ module.exports = {
             title: 'Developer Tools',
             path: '/tracks/devtools/',
             collapsable: true,
-            sidebarDepth: -1,
             children: [
               '/tracks/devtools/compose-files-for-local-dev',
               '/tracks/devtools/owasp-dependency-check',

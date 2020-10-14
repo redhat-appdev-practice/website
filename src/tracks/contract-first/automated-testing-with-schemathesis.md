@@ -2,6 +2,7 @@
 title: Automated API Testing With Schemathesis
 initialOpenGroupIndex: -1
 collapsable: true
+sidebarDepth: 1
 tags:
 - schemathesis
 - openapi

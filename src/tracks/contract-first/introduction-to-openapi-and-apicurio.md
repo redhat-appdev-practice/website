@@ -14,8 +14,9 @@ tags:
 - schema
 - types
 - type
-initialOpenGroupIndex: -1
+initialOpenGroupIndex: 0
 collapsable: true
+sidebarDepth: 1
 ---
 # Introduction to OpenAPI with Apicurio
 

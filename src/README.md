@@ -1,6 +1,5 @@
 ---
 home: true
-heroText: "  "
 heroImage: /Logo.svg
 features:
 - title: What is this site?

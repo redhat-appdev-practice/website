@@ -2,6 +2,7 @@
 title: Contract-First With UI Development
 initialOpenGroupIndex: -1
 collapsable: true
+sidebarDepth: 1
 tags:
 - contract-first
 - openapi
