@@ -9,6 +9,7 @@
       <img
         v-if="$site.themeConfig.logo"
         class="logo"
+        :class="{ 'can-hide': $site.themeConfig.logo }"
         :src="$withBase($site.themeConfig.logo)"
         :alt="$siteTitle"
       >
@@ -16,7 +17,6 @@
         v-if="$siteTitle"
         ref="siteName"
         class="site-name"
-        :class="{ 'can-hide': $site.themeConfig.logo }"
       >{{ $siteTitle }}</span>
     </RouterLink>
 

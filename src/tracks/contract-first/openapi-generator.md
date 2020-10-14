@@ -2,6 +2,7 @@
 title: OpenAPI Generator
 initialOpenGroupIndex: -1
 collapsable: true
+sidebarDepth: 1
 tags:
 - openapi
 - openapi-generator
