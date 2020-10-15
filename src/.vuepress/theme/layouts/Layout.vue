@@ -5,6 +5,15 @@
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
   >
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180649557-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-180649557-1');
+    </script>
     <Navbar
       v-if="shouldShowNavbar"
       @toggle-sidebar="toggleSidebar"
