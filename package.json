@@ -7,11 +7,10 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
-    "build": "vuepress build src/ -d ./dist"
+    "build": "vuepress build src/ -d ./dist",
+    "dev": "vuepress dev src/"
   },
   "devDependencies": {
-    "@vuepress/core": "^1.7.0",
-    "@vuepress/plugin-google-analytics": "^1.7.0",
     "vuepress": "^1.7.0"
   }
 }
