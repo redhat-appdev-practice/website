@@ -1,0 +1,16 @@
+{
+  "name": "cloud-native-app-dev",
+  "version": "1.0.0",
+  "description": "VuePress Site For Cloud-Native AppDev",
+  "repository": "git@github.com:redhat-appdev-practice/redhat-appdev-practice.github.io.git",
+  "author": "Deven Phillips <deven.phillips@redhat.com>",
+  "license": "Apache2",
+  "private": false,
+  "scripts": {
+    "build": "vuepress build src/ -d ./dist"
+  },
+  "devDependencies": {
+    "@vuepress/core": "^1.7.0",
+    "@vuepress/plugin-google-analytics": "^1.7.0"
+  }
+}
