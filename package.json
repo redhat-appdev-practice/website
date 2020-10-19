@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
-    "build": "vuepress build src/ -d ./dist",
+    "build": "vuepress build src/ -d ./dist; cp google*html ./dist/",
     "dev": "vuepress dev src/"
   },
   "devDependencies": {
