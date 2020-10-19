@@ -23,7 +23,7 @@ sidebarDepth: 1
 [[toc]]
 
 ## Video
-[![OpenAPI And Apicurio](http://img.youtube.com/vi/byXzRsh5TXE/0.jpg)](http://www.youtube.com/watch?v=byXzRsh5TXE "OpenAPI And Apicurio")
+<iframe width="560" height="315" src="https://www.youtube.com/embed/byXzRsh5TXE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Katacoda Scenario
 
