@@ -15,6 +15,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Tracks', link: '/tracks/' },
+      { text: 'YouTube', link: 'https://www.youtube.com/channel/UCU-S0JPd2cXjUmW-hPZdzqA' },
       { text: 'Links', link: '/links/'} /**,
       { text: 'Blog', link: '/blog/' },
       { text: 'Podcasts', link: '/podcasts/' } */
@@ -23,21 +24,22 @@ module.exports = {
     sidebar: [
       {
         title: 'Links We Like',
-        path: '/links/',
-        collapsable: true,
-        initialOpenGroupIndex: -1
+        sidebarDepth: -1,
+        collapsable: false,
+        path: '/links/'
       },
       {
         title: 'Tracks',
         path: '/tracks/',
-        collapsable: true,
+        sidebarDepth: -1,
+        collapsable: false,
         initialOpenGroupIndex: 0,
         children: [
           {
             title: 'Contract-First',
             path: '/tracks/contract-first/',
-            collapsable: true,
-            sidebarDepth: -1,
+            initialOpenGroupIndex: 1,
+            sidebarDepth: 0,
             children: [
               '/tracks/contract-first/introduction-to-openapi-and-apicurio',
               '/tracks/contract-first/openapi-generator',
@@ -49,25 +51,24 @@ module.exports = {
           },
           {
             title: 'Behavior-Driven Development',
+            sidebarDepth: 0,
             path: '/tracks/bdd/',
-            collapsable: true
           },
-          {
-            title: 'Serverless',
-            path: '/tracks/serverless/',
-            collapsable: true,
-            children: [
-              '/tracks/serverless/overview-of-serverless-landscape',
-              '/tracks/serverless/intro-to-debezium-cdc',
-              '/tracks/serverless/serverless-cloud-native-runtimes',
-              '/tracks/serverless/serverless-deployments',
-              '/tracks/serverless/knative-eventing'
-            ]
-          },
+          // {
+          //   title: 'Serverless',
+          //   path: '/tracks/serverless/',
+          //   children: [
+          //     '/tracks/serverless/overview-of-serverless-landscape',
+          //     '/tracks/serverless/intro-to-debezium-cdc',
+          //     '/tracks/serverless/serverless-cloud-native-runtimes',
+          //     '/tracks/serverless/serverless-deployments',
+          //     '/tracks/serverless/knative-eventing'
+          //   ]
+          // },
           {
             title: 'Developer Tools',
+            sidebarDepth: 0,
             path: '/tracks/devtools/',
-            collapsable: true,
             children: [
               '/tracks/devtools/compose-files-for-local-dev',
               '/tracks/devtools/owasp-dependency-check',
