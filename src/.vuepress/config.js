@@ -15,6 +15,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Tracks', link: '/tracks/' },
+      { text: 'YouTube', link: 'https://www.youtube.com/channel/UCU-S0JPd2cXjUmW-hPZdzqA' },
       { text: 'Links', link: '/links/'} /**,
       { text: 'Blog', link: '/blog/' },
       { text: 'Podcasts', link: '/podcasts/' } */
