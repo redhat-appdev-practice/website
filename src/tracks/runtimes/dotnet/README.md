@@ -316,13 +316,178 @@ The stubbed project created by OpenAPI Generator has given us enough code so tha
 1. Implement the remaining tests, then implement the remaining methods for the controller
 
 ## Implementing Feature Flags
-1. It is often desireable to 
+1. It is often desireable to test out new features with a small sample before making them available to your complete user population. Microsoft has made available [some libraries](https://docs.microsoft.com/en-us/azure/azure-app-configuration/use-feature-flags-dotnet-core#set-up-feature-management) to make this easier.
+1. Start off by adding a `FeatureFlags` key to your `appsettings.json` file:
+   ```json
 
+   ```
 
 ## Logging Best Practices
 
+Logging in ASP.NET applications can be accomplished by modifying the `Program.cs` file. In a containerized and Kubernetes environment, those logs should be output to STDOUT/STDERR via the Console logger.
 
+1. Edit the `<root>/.openapi-generator-ignore` to ignore the `Program.cs` file so that our manual changes will not be overwritten each time we re-generate code from the OpenAPI Specification. Append the following line to the ignore file.
+   ```
+   **/Program.cs
+   ```
+1. Edit the `Program.cs` file to read as follows:
+   ```csharp
+   public static IHostBuilder CreateHostBuilder(string[] args) =>
+      Host.CreateDefaultBuilder(args)
+            .ConfigureLogging((hostingContext, logging) =>
+            {
+               logging.ClearProviders();
+               logging.AddConsole(options => options.IncludeScopes = true);
+               logging.AddDebug();
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+               webBuilder.UseStartup<Startup>()
+                        .UseUrls("http://0.0.0.0:8080/");
+            });
+   ```
+1. Add the `Program.cs` file to version control
+   ```bash
+   git add src/Com.RedHat.TodoList/Program.cs
+   git commit src/Com.RedHat.TodoList/Program.cs -m 'Added logging configuration'
+   ```
+1. Configure your logging levels in the `appsettings.json` file:
+   ```json
+   {
+      "Logging": {
+         "Debug": {
+            "LogLevel": {
+               "Default": "Information"
+            }
+         },
+         "Console": {
+            "IncludeScopes": true,
+            "LogLevel": {
+               "Microsoft": "Warning", // Only output Warning or Higher levels for Packages starting with Microsoft
+               "Npgsql": "Warning",    // Only output Warning or Higher levels for Packages starting with Npgsql
+               "Default": "Information"
+            }
+         },
+         "LogLevel": {
+            "Default": "Debug"
+         }
+      }
+      // SNIP . . . 
+   }
+   ```
+1. Instantiate the Logger instance in your constructors:
+   ```csharp
+   private readonly ILogger _logger;
+
+   public MyConstructor(ILoggerFactory logger)
+   {
+      _logger = logger.CreateLogger("MyClass");
+   }
+   ```
+1. Then you can use your logger anywhere in that class
+   ```csharp
+   _logger.LogInformation("My informational message about {err}", err);
+   _logger.LogWarning("My Warning Message");
+   ```
+### JSON Logging
+
+In order to work best with log aggregators like EFK Stack or Splunk, you might want to output your logs in JSON format for easier indexing.
+
+1. Add [Serilog](https://github.com/serilog/serilog-aspnetcore) to your project
+   ```bash
+   dotnet add package Serilog.AspNetCore
+   ```
+1. Configure the logger in your `Program.cs`
+   ```csharp
+   public static IHostBuilder CreateHostBuilder(string[] args) =>
+      Host.CreateDefaultBuilder(args)
+            .UseSerilog((hostingContext, services, loggerConfiguration) => loggerConfiguration
+               .ReadFrom.Configuration(hostingContext.Configuration)
+               .Enrich.FromLogContext()
+               .WriteTo.Console(new RenderedCompactJsonFormatter()))
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+               webBuilder.UseStartup<Startup>()
+                        .UseUrls("http://0.0.0.0:8080/");
+            });
+   ```
+1. Enable Request Logging in your `Startup.cs`
+   ```csharp
+   public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+   {
+      if (env.IsDevelopment())
+      {
+            app.UseDeveloperExceptionPage();
+      }
+      else
+      {
+            app.UseExceptionHandler("/Home/Error");
+      }
+
+      app.UseSerilogRequestLogging(); // <-- Add this line
+
+      // Other app configuration
+   ```
+1. Initialize your logger instance in your constructor
+   ```csharp
+   namespace Com.RedHat.TodoList.ControllerImpl
+   {
+      public class DefaultApiControllerImpl: DefaultApiController
+      {
+         private ITodoContext dbContext;
+         private readonly ILogger<DefaultApiControllerImpl> _logger;
+
+         public DefaultApiControllerImpl(ILogger<DefaultApiControllerImpl> logger, ITodoContext dbContext)
+         {
+               _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+               this.dbContext = dbContext;
+         }
+   ```
+1. Use your logger instance wherever appropriate
+   ```csharp
+   public override ActionResult<Todo> GetTodo(Guid todoId)
+   {
+      try
+      {
+            return this.dbContext.GetTodo(todoId);
+      }
+      catch (ArgumentException ae)
+      {
+            _logger.LogWarning(ae, "Invalid Todo ID {todoId}", todoId);
+            return new NotFoundResult();
+      }
+   }
+   ```
 
 ## Distributed Tracing
 
+In the Kubernetes/OpenShift world, the de-facto standard for distributed tracing through microservices is [Jaeger](https://www.jaegertracing.io/). Jaeger is available in ASP.NET applications as well.
 
+1. Install the OpenTracing package
+   ```bash
+   dotnet add package OpenTracing.Contrib.NetCore Jaeger.Core
+   ```
+1. Enable OpenTracing in your `Startup.cs` file as follows:
+   ```csharp
+      public void ConfigureServices(IServiceCollection services)
+      {
+
+         // Add framework services.
+         services.AddOpenTracing();
+         // Adds the Jaeger Tracer.
+         services.AddSingleton<ITracer>(serviceProvider =>
+         {
+            string serviceName = serviceProvider.GetRequiredService<IWebHostEnvironment>().ApplicationName;
+
+            // This will log to a default localhost installation of Jaeger.
+            var tracer = new Tracer.Builder(serviceName)
+               .WithSampler(new ConstSampler(true))
+               .Build();
+
+            // Allows code that can't use DI to also access the tracer.
+            GlobalTracer.Register(tracer);
+
+            return tracer;
+         });
+   ```
+1. Now, you can use Environment Variables or settings in `appsettings.json` to [configure](https://github.com/jaegertracing/jaeger-client-csharp#configuration-via-environment) where to send the tracing data
