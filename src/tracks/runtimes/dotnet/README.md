@@ -162,7 +162,8 @@ The stubbed project created by OpenAPI Generator has given us enough code so tha
    ```csharp
    // At the end of the ConfigureServices method
    services
-      .AddEntityFrameworkNpgsql().AddDbContext<TodoListContext>(opt =>
+      .AddEntityFrameworkNpgsql()
+      .AddDbContext<TodoListContext>(opt =>
          opt.UseNpgsql(Configuration.GetConnectionString("TodoListContext")));
    ```
 1. Add the connection string to the `appsettings.json` file
@@ -491,3 +492,22 @@ In the Kubernetes/OpenShift world, the de-facto standard for distributed tracing
          });
    ```
 1. Now, you can use Environment Variables or settings in `appsettings.json` to [configure](https://github.com/jaegertracing/jaeger-client-csharp#configuration-via-environment) where to send the tracing data
+
+## Overriding Configuration At Runtime
+
+ASP.NETCore provides a machanism for overriding the `appsettings.json` at runtime. This provides a simple way to "inject" our runtime configuration from a Kubernetes/OpenShift ConfigMap or Secret.
+
+1. Modify the `Program.cs` to add an optional configuration file to be loaded
+   ```csharp
+   public static IHostBuilder CreateHostBuilder(string[] args) =>
+      Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+               config.AddJsonFile("/tmp/runtimesettings.json", optional: true, reloadOnChange: false);
+            })
+            // SNIP - Remaining Host Builder
+   ```
+1. Now, when we deploy our application on OpenShift, it will look for a file in `/tmp` called `runtimesettings.json` and those settings will override any settings in our `appsettings.json`.
+1. We can define our Deployment or DeploymentConfig such that we mount a ConfigMap or Secret containing that JSON configuration in that location
+
+## Setting Up To Deploy With Helm 3
