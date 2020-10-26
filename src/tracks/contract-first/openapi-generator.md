@@ -2,6 +2,7 @@
 title: OpenAPI Generator
 initialOpenGroupIndex: -1
 collapsable: true
+sidebarDepth: 1
 tags:
 - openapi
 - openapi-generator
@@ -16,6 +17,9 @@ tags:
 ---
 
 # OpenAPI Generator
+
+## Video
+<iframe width="560" height="315" src="https://www.youtube.com/embed/t4jaTC7QjMg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Intro
 

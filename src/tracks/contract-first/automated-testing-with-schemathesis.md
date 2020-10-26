@@ -2,6 +2,7 @@
 title: Automated API Testing With Schemathesis
 initialOpenGroupIndex: -1
 collapsable: true
+sidebarDepth: 1
 tags:
 - schemathesis
 - openapi
@@ -14,6 +15,8 @@ tags:
 
 # OpenApi Testing with Schemathesis
 
+## Video
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4r7OC-lBKMg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Intro
 In this lab we are going to look at testing our application using test cases that are generated using the

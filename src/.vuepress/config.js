@@ -1,11 +1,6 @@
 module.exports = {
-  title: 'Cloud-Native Application Development',
+  title: 'Cloud-Native AppDev',
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
-  extraWatchFiles: [
-    '.vuepress/config.js',
-    '.vuepress/theme/index.js',
-    '.vuepress/theme/components/*.vue'
-  ],
   head: [
     ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/Icon.svg"}],
     ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
@@ -20,31 +15,31 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Tracks', link: '/tracks/' },
+      { text: 'YouTube', link: 'https://www.youtube.com/channel/UCU-S0JPd2cXjUmW-hPZdzqA' },
       { text: 'Links', link: '/links/'} /**,
       { text: 'Blog', link: '/blog/' },
       { text: 'Podcasts', link: '/podcasts/' } */
     ],
-    displayAllHeaders: true,
+    displayAllHeaders: false,
     sidebar: [
       {
-        title: 'Links',
-        path: '/links/',
-        collapsable: true,
-        sidebarDepth: -2,
-        initialOpenGroupIndex: -1
+        title: 'Links We Like',
+        sidebarDepth: -1,
+        collapsable: false,
+        path: '/links/'
       },
       {
         title: 'Tracks',
         path: '/tracks/',
-        collapsable: true,
-        sidebarDepth: -2,
+        sidebarDepth: -1,
+        collapsable: false,
         initialOpenGroupIndex: 0,
         children: [
           {
             title: 'Contract-First',
             path: '/tracks/contract-first/',
-            collapsable: true,
-            sidebarDepth: -1,
+            initialOpenGroupIndex: 1,
+            sidebarDepth: 0,
             children: [
               '/tracks/contract-first/introduction-to-openapi-and-apicurio',
               '/tracks/contract-first/openapi-generator',
@@ -56,23 +51,20 @@ module.exports = {
           },
           {
             title: 'Behavior-Driven Development',
+            sidebarDepth: 0,
             path: '/tracks/bdd/',
-            collapsable: true,
-            sidebarDepth: -1
           },
-          {
-            title: 'Serverless',
-            path: '/tracks/serverless/',
-            collapsable: true,
-            sidebarDepth: -1,
-            children: [
-              '/tracks/serverless/overview-of-serverless-landscape',
-              '/tracks/serverless/intro-to-debezium-cdc',
-              '/tracks/serverless/serverless-cloud-native-runtimes',
-              '/tracks/serverless/serverless-deployments',
-              '/tracks/serverless/knative-eventing'
-            ]
-          },
+          // {
+          //   title: 'Serverless',
+          //   path: '/tracks/serverless/',
+          //   children: [
+          //     '/tracks/serverless/overview-of-serverless-landscape',
+          //     '/tracks/serverless/intro-to-debezium-cdc',
+          //     '/tracks/serverless/serverless-cloud-native-runtimes',
+          //     '/tracks/serverless/serverless-deployments',
+          //     '/tracks/serverless/knative-eventing'
+          //   ]
+          // },
           {
             title: 'Cloud-Native Runtimes',
             path: '/tracks/runtimes/',
@@ -92,9 +84,8 @@ module.exports = {
           },
           {
             title: 'Developer Tools',
+            sidebarDepth: 0,
             path: '/tracks/devtools/',
-            collapsable: true,
-            sidebarDepth: -1,
             children: [
               '/tracks/devtools/compose-files-for-local-dev',
               '/tracks/devtools/owasp-dependency-check',
