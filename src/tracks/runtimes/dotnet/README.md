@@ -84,12 +84,12 @@ tags:
             throw new System.NotImplementedException();
         }
 
-        public override ActionResult DeleteTodo(long todoId)
+        public override ActionResult DeleteTodo(Guid todoId)
         {
             throw new System.NotImplementedException();
         }
 
-        public override ActionResult<Todo> GetTodo(long todoId)
+        public override ActionResult<Todo> GetTodo(Guid todoId)
         {
             throw new System.NotImplementedException();
         }
@@ -99,7 +99,7 @@ tags:
             throw new System.NotImplementedException();
         }
 
-        public override ActionResult UpdateTodo(long todoId, Todo todo)
+        public override ActionResult UpdateTodo(Guid todoId, Todo todo)
         {
             throw new System.NotImplementedException();
         }
@@ -126,59 +126,197 @@ The stubbed project created by OpenAPI Generator has given us enough code so tha
    cd src/Com.Redhat.TodoList.Tests
    dotnet add reference ../Com.Redhat.TodoList/Com.Redhat.TodoList.csproj
    ```
-1. Add TestHost package
-   ```bash
-   dotnet add package Microsoft.AspNetCore.TestHost
-   ```
-2. You can now create your first test as `src/Com.RedHat.Todo.Tests/Controllers/DefaultApiTests.cs`
-   ```csharp
-   using Microsoft.VisualStudio.TestTools.UnitTesting;
-   using Com.RedHat.Todo.Controllers.DefaultApi;
+1. From this point forward, we will attempt to write tests first and then implement our code to satisfy those tests.
 
-   namespace Com.RedHat.Todo.Tests.Controllers
+## Database Access/Data Persistence
+1. Add the following Nuget dependencies to allow us to start creating our data access layer
+   * Npgsql.EntityFrameworkCore.PostgreSQL == 3.1.4
+   * Npgsql.EntityFrameworkCore.PostgreSQL.Design == 1.1.0
+   * Microsoft.EntityFrameworkCore.Tools == 3.1.4
+1. Create a new directory called `DataAccess` under the `Com.Redhat.TodoList` project
+1. Add a new interface `ITodoContext` and class named `TodoListContext` in the `DataAccess` directory
+   ```csharp
+   using Com.RedHat.TodoList.Models;
+   using Microsoft.EntityFrameworkCore;
+
+   namespace Com.RedHat.TodoList.DataAccess
+   {
+      public interface ITodoContext
+      {
+         public ImmutableList<Todo> GetTodos();
+         public Todo UpdateTodo(Guid id, Todo data);
+         public void Delete(Guid id);
+         public Todo AddTodo(Todo newTodo);
+         public Todo GetTodo(Guid id);
+      }
+
+      public class TodoListContext:DbContext, ITodoContext
+      {
+         public TodoListContext(DbContextOptions<TodoListContext> options) : base(options) { }
+
+         public DbSet<Todo> Todos { get; set; }
+      }
+   }
+   ```
+1. Next, we need to add the service to the dependency injection framework of ASP.NET by editing `Startup.cs`
+   ```csharp
+   // At the end of the ConfigureServices method
+   services
+      .AddEntityFrameworkNpgsql().AddDbContext<TodoListContext>(opt =>
+         opt.UseNpgsql(Configuration.GetConnectionString("TodoListContext")));
+   ```
+1. Add the connection string to the `appsettings.json` file
+   ```json
+   {
+      "ConnectionStrings": {
+         "TodoListContext": "User ID=postgresql;Password=postgresql;Server=localhost;Port=5432;Database=todolist"
+      },
+      "Logging": {
+         "LogLevel": {
+            "Default": "Warning"
+         }
+      },
+      "AllowedHosts": "*"
+   }
+   ```
+1. Implement the CRUD operation methods inside of the `TodoListContext` class
+   ```csharp
+      public Todo UpdateTodo(Guid id, Todo data)
+      {
+         var updating = this.Todos.Find(id);
+         updating.Complete = data.Complete;
+         updating.Description = data.Description;
+         updating.Title = data.Title;
+         updating.DueDate = data.DueDate;
+         this.SaveChanges();
+         return updating;
+      }
+      
+      public void Delete(Guid id)
+      {
+         this.Todos.Remove(this.Todos.Find(id));
+         this.SaveChanges();
+      }
+
+      public Todo AddTodo(Todo newTodo)
+      {
+         this.Todos.Add(newTodo);
+         this.SaveChanges();
+         return newTodo;
+      }
+      
+      public Todo GetTodo(Guid id)
+      {
+         return this.Todos.Find(id);
+      }
+   ```
+
+## Finish Controller Implementations
+1. Write a Unit Test for the `GetTodo` method of the `DefaultApiControllerImpl` class
+   ```csharp
+   using System;
+   using Com.RedHat.TodoList.ControllerImpl;
+   using Com.RedHat.TodoList.DataAccess;
+   using Com.RedHat.TodoList.Models;
+   using Microsoft.VisualStudio.TestTools.UnitTesting;
+   using Moq;
+
+   namespace Com.RedHat.TodoList.Tests
    {
       [TestClass]
-      public class DefaultApiTests
+      public class TodoApiTest
       {
-         private TestServer _server;
-         private HttpClient _client;
+         private DefaultApiControllerImpl underTest;
+         private Guid testId = Guid.NewGuid();
+         private string testTitle = "Test Title";
+         private string testDescription = "Test Description";
+         private DateTime testDueDate = DateTime.Now;
 
-         public DefaultApiTests()
+         [TestInitialize]
+         public void TestInit()
          {
-            _server = new TestServer(new WebHostBuilder()
-                           .UseStartup<Startup>());
-            _client = _server.CreateClient();
+            Todo testResult = new Todo
+            {
+               Id = testId, Complete = false, Title = testTitle, Description = testDescription, DueDate = testDueDate
+            };
+            var mock = new Mock<ITodoContext>();
+            mock.Setup(ctx => ctx.GetTodo(testId)).Returns(testResult);
+            underTest = new DefaultApiControllerImpl(mock.Object);
          }
-
+         
          [TestMethod]
-         public async Task GetTodo()
+         public void GetTodo()
          {
-            var response = await _client.GetAsync("/api/v1/todos");
-            response.EnsureSuccessStatusCode();
-
-            var result = await response.Content.ReadAsStringAsync();
-            var todos = JsonConvert.DeserializeObject<List<Todo>>(result);
-
-            Assert.AreEqual(5, todos.length());
+            var response = underTest.GetTodo(testId);
+            Assert.AreEqual(response.Value.Id, testId);
+            Assert.AreEqual(response.Value.Title, testTitle);
+            Assert.AreEqual(response.Value.Description, testDescription);
+            Assert.IsFalse(response.Value.Complete);
          }
       }
    }
    ```
+1. Running this test will fail (as expected) because we have not yet implemented the controller method entirely. Also, we will need to Mock the DbContext for the Controller as well.
+   ```
+   $ dotnet test --filter "FullyQualifiedName=Com.RedHat.TodoList.Tests.TodoApiTest.GetTodo"
+   // SNIP //
+   Failed GetTodo [14 ms]
+   Error Message:
+      Test method Com.RedHat.TodoList.Tests.TodoApiTest.GetTodo threw exception: 
+   System.NotImplementedException: The method or operation is not implemented.
+   Stack Trace:
+         at Com.RedHat.TodoList.ControllerImpl.DefaultApiControllerImpl.GetTodo(Guid todoId) in /home/dphillips/Documents/RedHat/Workspace/CNAD_Enablement/dotnet-openapi-todo/src/Com.RedHat.TodoList/ControllerImpl/DefaultApiImpl.cs:line 23
+      at Com.RedHat.TodoList.Tests.TodoApiTest.GetTodo() in /home/dphillips/Documents/RedHat/Workspace/CNAD_Enablement/dotnet-openapi-todo/src/Com.RedHat.TodoList.Tests/TodoApiTest.cs:line 26
+   ```
+1. Now that we have a failing test, we can implement the Controller method and satisfy the test.
+   ```csharp
+   using System;
+   using System.Collections.Generic;
+   using Com.RedHat.TodoList.Controllers;
+   using Com.RedHat.TodoList.DataAccess;
+   using Com.RedHat.TodoList.Models;
+   using Microsoft.AspNetCore.Mvc;
 
-## Configuration Settings
+   namespace Com.RedHat.TodoList.ControllerImpl
+   {
+      public class DefaultApiControllerImpl: DefaultApiController
+      {
+         private ITodoContext dbContext;
 
+         public DefaultApiControllerImpl(ITodoContext dbContext)
+         {
+               this.dbContext = dbContext;   // Inject the database context
+         }
 
+         public override ActionResult<Todo> GetTodo(Guid todoId)
+         {
+               return this.dbContext.GetTodo(todoId); // Use the database context to implement the method
+         }
+      }
+   }
+   ```
+1. Running the test should now succeed using the Mock DbContext object.
+   ```
+   $ dotnet test --filter "FullyQualifiedName=Com.RedHat.TodoList.Tests.TodoApiTest.GetTodo"
+      Determining projects to restore...
+      Restored /home/dphillips/Documents/RedHat/Workspace/CNAD_Enablement/dotnet-openapi-todo/src/Com.RedHat.TodoList.Tests/Com.RedHat.TodoList.Tests.csproj (in 392 ms).
+      1 of 2 projects are up-to-date for restore.
+      You are using a preview version of .NET. See: https://aka.ms/dotnet-core-preview
+      Com.RedHat.TodoList -> /home/dphillips/Documents/RedHat/Workspace/CNAD_Enablement/dotnet-openapi-todo/src/Com.RedHat.TodoList/bin/Debug/netcoreapp3.1/Com.RedHat.TodoList.dll
+      Com.RedHat.TodoList.Tests -> /home/dphillips/Documents/RedHat/Workspace/CNAD_Enablement/dotnet-openapi-todo/src/Com.RedHat.TodoList.Tests/bin/Debug/netcoreapp3.1/Com.RedHat.TodoList.Tests.dll
+   Test run for /home/dphillips/Documents/RedHat/Workspace/CNAD_Enablement/dotnet-openapi-todo/src/Com.RedHat.TodoList.Tests/bin/Debug/netcoreapp3.1/Com.RedHat.TodoList.Tests.dll (.NETCoreApp,Version=v3.1)
+   Microsoft (R) Test Execution Command Line Tool Version 16.8.0
+   Copyright (c) Microsoft Corporation.  All rights reserved.
 
-## Database Access/Data Persistence
+   Starting test execution, please wait...
+   A total of 1 test files matched the specified pattern.
 
-
-
-## Secure Coding Practices
-
-
+   Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 102 ms - /home/dphillips/Documents/RedHat/Workspace/CNAD_Enablement/dotnet-openapi-todo/src/Com.RedHat.TodoList.Tests/bin/Debug/netcoreapp3.1/Com.RedHat.TodoList.Tests.dll (netcoreapp3.1)
+   ```
+1. Implement the remaining tests, then implement the remaining methods for the controller
 
 ## Implementing Feature Flags
-
+1. It is often desireable to 
 
 
 ## Logging Best Practices
