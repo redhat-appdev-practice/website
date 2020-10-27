@@ -207,39 +207,44 @@ The stubbed project created by OpenAPI Generator has given us enough code so tha
    ```
 1. Implement the CRUD operation methods inside of the `TodoListContext` class
    ```csharp
-      public Todo UpdateTodo(Guid id, Todo data)
-      {
-         var updating = Todos.Find(id);
-         updating.Complete = data.Complete;
-         updating.Description = data.Description;
-         updating.Title = data.Title;
-         updating.DueDate = data.DueDate;
-         SaveChanges();
-         return updating;
-      }
-      
-      public void Delete(Guid id)
-      {
-         Todos.Remove(Todos.Find(id));
-         SaveChanges();
-      }
+   public Todo UpdateTodo(Guid id, Todo data)
+   {
+      var todo = Todos.Find(id);
+      if (todo == null) throw new ArgumentException($"Unable to find Todo with ID: ${id}");
+      todo.Complete = data.Complete;
+      todo.Description = data.Description;
+      todo.Title = data.Title;
+      todo.DueDate = data.DueDate;
+      SaveChanges();
+      return todo;
+   }
 
-      public Todo AddTodo(Todo newTodo)
-      {
-         Todos.Add(newTodo);
-         SaveChanges();
-         return newTodo;
-      }
-      
-      public Todo GetTodo(Guid id)
-      {
-         return Todos.Find(id);
-      }
+   public void Delete(Guid id)
+   {
+      var todo = Todos.Find(id);
+      if (todo == null) throw new ArgumentException($"Unable to find Todo with ID: ${id}");
+      Todos.Remove(todo);
+      SaveChanges();
+   }
 
-      public List<Todo> GetTodos()
-      {
-         return Todos.ToList();
-      }
+   public Todo AddTodo(Todo newTodo)
+   {
+      Todos.Add(newTodo);
+      SaveChanges();
+      return newTodo;
+   }
+
+   public Todo GetTodo(Guid id)
+   {
+      var todo = Todos.Find(id);
+      if (todo == null) throw new ArgumentException($"Unable to find Todo with ID: ${id}");
+      return todo;
+   }
+
+   public List<Todo> GetTodos()
+   {
+      return Todos.ToList();
+   }
    ```
 1. Start the database container
    ```bash
