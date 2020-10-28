@@ -28,6 +28,10 @@ Some may ask "Without a backend, how can I tell if my UI is functional?" That's 
 
 [[toc]]
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RcpmtPmNS2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Prerequisites
 * NodeJS >= 12.x
 * NPM >= 6.14.x
