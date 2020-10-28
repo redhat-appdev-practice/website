@@ -485,7 +485,7 @@ ASP.NETCore provides a machanism for overriding the `appsettings.json` at runtim
       Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
-               config.AddJsonFile("/tmp/runtimesettings.json", optional: true, reloadOnChange: false);
+               config.AddJsonFile("/tmp/config/runtimesettings.json", optional: true, reloadOnChange: false);
             })
             // SNIP - Remaining Host Builder
    ```
