@@ -57,14 +57,14 @@ tags:
    ```
 1. Add some of the generated classes to `.gitignore`
    ```
-   **/Controllers/**
-   **/Attributes/**
-   **/Authentication/**
-   **/Converters/**
-   **/Filters/**
-   **/Models/**
-   **/OpenApi/**
-   **/wwwroot/**
+**/Controllers/**
+**/Attributes/**
+**/Authentication/**
+**/Converters/**
+**/Filters/**
+**/Models/**
+**/OpenApi/**
+**/wwwroot/**
    ```
    * The code created by OpenAPI Generator should never be added to source control. It is meant to be re-generated at *build time*, **every time**. Some files, such as `Startup.cs` or `Program.cs` will probably end up being modified by us, the developers, and as such should be added to the `.openapi-generator-ignore` and never re-generated.
 1. Open the newly created project in your IDE
@@ -381,11 +381,7 @@ In order to work best with log aggregators like EFK Stack or Splunk, you want to
 1. Configure the logger in your `Program.cs`
    ```csharp
    public static IHostBuilder CreateHostBuilder(string[] args) =>
-      Host.CreateDefaultBuilder(args)
-            .UseSerilog((hostingContext, services, loggerConfiguration) => loggerConfiguration
-               .ReadFrom.Configuration(hostingContext.Configuration)
-               .Enrich.FromLogContext()
-               .WriteTo.Console(new RenderedCompactJsonFormatter()))
+      Host.CreateDefaultBuilder(args
             .ConfigureWebHostDefaults(webBuilder =>
             {
                webBuilder.UseStartup<Startup>()
@@ -500,5 +496,10 @@ We do not have the time to completely explain creating a Helm chart for this app
 
 1. Ensure you are logged in to your Kubernetes or OpenShift cluster
    If you are using Minikube or KInD it should log you in on start
-1. Clone the Helm chart for this application from GitHub
-   * `git clone https://
+1. Look at the `values.yaml` file in the `<solution root>/helm` directory
+   * Note the image name/repository and change it to point to where you have published your container
+1. Install the application using the Helm 3 CLI
+   ```bash
+   helm install <identifier> ./
+   ```
+   * The identifier just needs to be unique, but it can be almost any random string. Best practices indicate it should be numerical and probably align with your application version.
