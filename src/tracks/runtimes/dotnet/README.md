@@ -303,10 +303,10 @@ The stubbed project created by OpenAPI Generator has given us enough code so tha
          public void GetTodo()
          {
                var response = underTest.GetTodo(testId);
-               Assert.AreEqual(response.Result.Value.Id, testId);
-               Assert.AreEqual(response.Result.Value.Title, testTitle);
-               Assert.AreEqual(response.Result.Value.Description, testDescription);
-               Assert.IsFalse(response.Result.Value.Complete);
+               Assert.AreEqual(response.Value.Id, testId);
+               Assert.AreEqual(response.Value.Title, testTitle);
+               Assert.AreEqual(response.Value.Description, testDescription);
+               Assert.IsFalse(response.Value.Complete);
          }
       }
    }
