@@ -8,4 +8,4 @@ tags:
 ---
 # Serverless Track
 
-The Serverless track initroduces advanced topics such as Knative Eventing and Debezium, and also provides an introduction to the Serverless landscape and working examples of Cloud native runtimes serverless examples.
+The Serverless track introduces advanced Serveless topics such as Knative Eventing and Debezium, and also provides an introduction to the Serverless landscape and working examples of serverless using Cloud native runtimes.
