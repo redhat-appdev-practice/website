@@ -18,6 +18,10 @@ tags:
 ---
 # OWASP Dependency
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/G9t-HFy4EHs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Intro
 
 ### What is OWASP Dependency Check
