@@ -16,7 +16,12 @@ tags:
 - gradle
 - java
 ---
+
 # OWASP Dependency
+
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/G9t-HFy4EHs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Intro
 
@@ -57,30 +62,29 @@ Dependency Check works by identifying CPEs (Common Platform Enumerations) for ea
         </executions>
       </plugin>
     ```
-  <sub>This a basic setup of the plugin. More setup info such as failing on a specific security score can be found [here](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html)</sub>
+  This a basic setup of the plugin. More setup info such as failing on a specific security score can be found [here](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html)
   
 2. Run the Dependency Check with `mvn verify`
 
-  <sub>Note: The plugin will need to download and process multiple CVE databases on the first run, so this make take a while initially.</sub>
+  Note: The plugin will need to download and process multiple CVE databases on the first run, so this make take a while initially.
 
 3. View the report
   - Open `target/dependency-check-report.html` in a browser
     - Take a look at the Summary info
     ![OWASP Depedency Check Summary](/OwaspDependencyCheckSummary.png)
-    <sub>1. Name of the Dependency</sub><br />
-    <sub>2. Database ID used to find the dependency. More info can be found [here](https://jeremylong.github.io/DependencyCheck/general/internals.html)</sub><br />
-    <sub>3. The highest level of severity on the CVE's associated</sub><br />
-    <sub>4. Number of CVE's associated</sub><br />
-    <sub>5. Confidence level of the plugin that the CPE was identified correctly</sub><br />
-    
+    1. Name of the Dependency
+    2. Database ID used to find the dependency. More info can be found [here](https://jeremylong.github.io/DependencyCheck/general/internals.html)
+    3. The highest level of severity on the CVE's associated
+    4. Number of CVE's associated
+    5. Confidence level of the plugin that the CPE was identified correctly    
     
     
 4. View Dependency Detailed Information
   - Click on the `jackson-databind-2.9.5.jar` link inside the report
   ![OWASP Depedency Check Decription](/OwaspDependencyCheckDescription.png)
-  <sub>1. Basic information on the dependency</sub><br />
-  <sub>2. Expandable list of the evidence used to identify dependency information such as artifact and version</sub><br />
-  <sub>3. The list of vulnerabilities found for the dependencies with a list of references on the issue</sub>
+  1. Basic information on the dependency
+  2. Expandable list of the evidence used to identify dependency information such as artifact and version
+  3. The list of vulnerabilities found for the dependencies with a list of references on the issue
   
 5. "Fix" the jackson-databind vulnerability
   - View the CVE `CVE-2018-1000873`
@@ -98,7 +102,7 @@ Dependency Check works by identifying CPEs (Common Platform Enumerations) for ea
       <version>2.11.1</version>
   </dependency>
   ``` 
-  <sub> 2.11.1 is the latest version as of the creation of this lab. You should use the newest stable version currently out </sub>
+   2.11.1 is the latest version as of the creation of this lab. You should use the newest stable version currently out 
   - Rerun `mvn verify` 
   - Open/Refresh `target/dependency-check-report.html` in a browser
     - You should note that `CVE-2018-1000873` was removed. It is also possible the entire `jackson-databind` dependency was removed if the newest version does not have another vulnerability associated with it.
@@ -128,7 +132,7 @@ Dependency Check works by identifying CPEs (Common Platform Enumerations) for ea
         <suppressionFile>owasp-suppressions.xml</suppressionFile>
       </configuration>
       ```
-      <sub><suppressionFile> can be a local path, an absolute path, or a url location<sub>
+    &lt;suppressionFile&gt; can be a local path, an absolute path, or a url location
  - Rerun `mvn verify` and validate that `CVE-2018-1000632` is no longer being recorded.
  - (Optional) Suppress some of the other CVEs on the page by adding the suppression clips to our XML document
   

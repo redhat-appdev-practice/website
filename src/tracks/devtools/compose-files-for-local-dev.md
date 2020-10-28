@@ -22,6 +22,10 @@ tags:
 
 # Efficient Local Full-Stack Development Using Docker/Podman Compose
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EkUGbqNPMdc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 - [Efficient Local Full-Stack Development Using Docker/Podman Compose](#efficient-local-full-stack-development-using-dockerpodman-compose)
   - [Introduction](#introduction)
   - [Pre-Requisites For This Lab](#pre-requisites-for-this-lab)
