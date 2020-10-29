@@ -1,5 +1,5 @@
 ---
-title: .NET/C# WebAPI With EntityFramework and ASP.NET
+title: Deploying The Application With Helm 3
 initialOpenGroupIndex: -1
 collapsable: true
 tags:
@@ -21,34 +21,9 @@ tags:
 - moq
 - entityframework
 - entityframeworkcores
+- helm
+- kubernetes
 ---
-
-## Preparing Your Development Environment
-
-1. Install the .NET CLI
-   * Red Hat Enterprise Linux: `yum install dotnet-sdk-3.1`
-   * Fedora: `dnf install dotnet-sdk-3.1`
-   * Debian/Ubuntu: `apt install dotnet-sdk-3.1`
-1. Install [Docker](https://www.docker.com/)
-1. Install [docker-compose](https://docs.docker.com/compose/)
-1. Install your preferred IDE for C#/.NET development
-   * [Visual Studio Code](https://code.visualstudio.com/)
-   * [JetBrains Rider](https://www.jetbrains.com/rider/)
-   * [Visual Studio](https://visualstudio.microsoft.com/)
-1. Install [OpenAPI Generator](https://openapi-generator.tech/) Version 5.0.0 (Currently in Beta as of Oct. 2020)
-   * `npm install -g @openapitools/openapi-generator-cli@cli-5.0.0-beta2`
-1. [OPTIONAL] A Kubernetes Environment To Experiment With
-   * Install [Minikube](https://minikube.sigs.k8s.io/docs/start/)
-     * Uses VMs or Docker to create a single node Kubernetes cluster
-
-## [Step 2](/tracks/runtimes/dotnet/bootstrap.html)
-## [Step 3](/tracks/runtimes/dotnet/mstest.html)
-## [Step 4](/tracks/runtimes/dotnet/entityframework.html)
-## [Step 5](/tracks/runtimes/dotnet/first-api-endpoint.html)
-## [Step 6](/tracks/runtimes/dotnet/json-logging.html)
-## [Step 7](/tracks/runtimes/dotnet/distributed-tracing.html)
-## [Step 8](/tracks/runtimes/dotnet/configuration.html)
-## [Step 9](/tracks/runtimes/dotnet/helm-deployment.html)
 
 ## Setting Up To Deploy With Helm 3
 
