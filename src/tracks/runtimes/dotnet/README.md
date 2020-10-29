@@ -57,14 +57,14 @@ tags:
    ```
 1. Add some of the generated classes to `.gitignore`
    ```
-**/Controllers/**
-**/Attributes/**
-**/Authentication/**
-**/Converters/**
-**/Filters/**
-**/Models/**
-**/OpenApi/**
-**/wwwroot/**
+   **/Controllers/**
+   **/Attributes/**
+   **/Authentication/**
+   **/Converters/**
+   **/Filters/**
+   **/Models/**
+   **/OpenApi/**
+   **/wwwroot/**
    ```
    * The code created by OpenAPI Generator should never be added to source control. It is meant to be re-generated at *build time*, **every time**. Some files, such as `Startup.cs` or `Program.cs` will probably end up being modified by us, the developers, and as such should be added to the `.openapi-generator-ignore` and never re-generated.
 1. Open the newly created project in your IDE
@@ -382,6 +382,7 @@ In order to work best with log aggregators like EFK Stack or Splunk, you want to
    ```csharp
    public static IHostBuilder CreateHostBuilder(string[] args) =>
       Host.CreateDefaultBuilder(args
+            .UseSerilog()
             .ConfigureWebHostDefaults(webBuilder =>
             {
                webBuilder.UseStartup<Startup>()
@@ -407,33 +408,34 @@ In order to work best with log aggregators like EFK Stack or Splunk, you want to
    ```
 1. Initialize your logger instance in your constructor
    ```csharp
-   namespace RedHat.TodoList.ControllerImpl
+   public class TodoListContext : DbContext, ITodoContext
    {
-      public class DefaultApiControllerImpl: DefaultApiController
-      {
-         private readonly ITodoContext _dbContext;
-         private readonly ILogger<DefaultApiControllerImpl> _logger;
+      private readonly ILogger<TodoListContext> _logger;
 
-         public DefaultApiControllerImpl(ILogger<DefaultApiControllerImpl> logger, ITodoContext dbContext)
-         {
-               _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-               _dbContext = dbContext;
-         }
+      public TodoListContext(ILogger<TodoListContext> logger, DbContextOptions<TodoListContext> options) :
+         base(options)
+      {
+         _logger = logger;
+      }
    ```
    * **NOTE** - You will need to also update your Unit Test to make the signature match the updated constructor here!!!!
 1. Use your logger instance wherever appropriate
    ```csharp
-   public override ActionResult<Todo> GetTodo(Guid todoId)
+   public Todo UpdateTodo(Guid id, Todo data)
    {
-      try
+      var todo = Todos.Find(id);
+      if (todo == null)
       {
-            return this.dbContext.GetTodo(todoId);
+            var ae = new ArgumentException($"Unable to find Todo with ID: ${id}");
+            _logger.LogWarning(ae, "Unable to find Todo with Id {id}", id);
+            throw ae;
       }
-      catch (ArgumentException ae)
-      {
-            _logger.LogWarning(ae, "Invalid Todo ID {todoId}", todoId);
-            return new NotFoundResult();
-      }
+      todo.Complete = data.Complete;
+      todo.Description = data.Description;
+      todo.Title = data.Title;
+      todo.DueDate = data.DueDate;
+      SaveChanges();
+      return todo;
    }
    ```
 
@@ -496,6 +498,7 @@ We do not have the time to completely explain creating a Helm chart for this app
 
 1. Ensure you are logged in to your Kubernetes or OpenShift cluster
    If you are using Minikube or KInD it should log you in on start
+1. Ensure you are currently associated with a namespace where you can deploy resources (kubectl use &lt;namespace&gt; or oc project &lt;namespace&gt;)
 1. Look at the `values.yaml` file in the `<solution root>/helm` directory
    * Note the image name/repository and change it to point to where you have published your container
 1. Install the application using the Helm 3 CLI
@@ -503,3 +506,4 @@ We do not have the time to completely explain creating a Helm chart for this app
    helm install <identifier> ./
    ```
    * The identifier just needs to be unique, but it can be almost any random string. Best practices indicate it should be numerical and probably align with your application version.
+1. Take a look at your namespace and you should see the ASP.NET application running and the PostgreSQL StatefulSet running as well.
