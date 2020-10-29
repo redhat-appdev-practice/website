@@ -507,3 +507,15 @@ We do not have the time to completely explain creating a Helm chart for this app
    ```
    * The identifier just needs to be unique, but it can be almost any random string. Best practices indicate it should be numerical and probably align with your application version.
 1. Take a look at your namespace and you should see the ASP.NET application running and the PostgreSQL StatefulSet running as well.
+
+**NOTE**: Something to be aware of is that when you deploy your application, the database may not have been initialized. You will need to manually initialize the database using your schema migrations or some other mechanism. Here's how one **COULD** do it in OpenShift:
+
+```bash
+cd <solution root>/src/RedHat.TodoList
+oc port-forward pod/<db pod> 5432  // Forwards the PostgreSQL port from the cluster to this local machine
+```
+
+### In another terminal, because the port-forward has to remain running
+```bash
+dotnet ef database update
+```
