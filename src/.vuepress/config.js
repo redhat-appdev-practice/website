@@ -54,17 +54,6 @@ module.exports = {
             sidebarDepth: 0,
             path: '/tracks/bdd/',
           },
-          // {
-          //   title: 'Serverless',
-          //   path: '/tracks/serverless/',
-          //   children: [
-          //     '/tracks/serverless/overview-of-serverless-landscape',
-          //     '/tracks/serverless/intro-to-debezium-cdc',
-          //     '/tracks/serverless/serverless-cloud-native-runtimes',
-          //     '/tracks/serverless/serverless-deployments',
-          //     '/tracks/serverless/knative-eventing'
-          //   ]
-          // },
           {
             title: 'Cloud-Native Runtimes',
             path: '/tracks/runtimes/',
@@ -99,6 +88,18 @@ module.exports = {
               '/tracks/devtools/owasp-dependency-check',
               '/tracks/devtools/owasp-zap-hud',
               '/tracks/devtools/npm-audit-ci-wrapper'
+            ]
+          },          {
+            title: 'Serverless',
+            initialOpenGroupIndex: 1,
+            sidebarDepth: 0,
+            path: '/tracks/serverless/',
+            children: [
+              '/tracks/serverless/overview-of-serverless-landscape',
+              '/tracks/serverless/intro-to-debezium-cdc',
+              '/tracks/serverless/serverless-cloud-native-runtimes',
+              '/tracks/serverless/serverless-deployments',
+              '/tracks/serverless/knative-eventing',
             ]
           }
         ]
