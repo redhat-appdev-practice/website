@@ -37,7 +37,10 @@ In order to work best with log aggregators like EFK Stack or Splunk, you want to
    ```csharp
    public static IHostBuilder CreateHostBuilder(string[] args) =>
       Host.CreateDefaultBuilder(args
-            .UseSerilog()
+            .UseSerilog((hostingContext, services, loggerConfiguration) => loggerConfiguration
+               .ReadFrom.Configuration(hostingContext.Configuration)
+               .Enrich.FromLogContext()
+               .WriteTo.Console())
             .ConfigureWebHostDefaults(webBuilder =>
             {
                webBuilder.UseStartup<Startup>()
