@@ -1,0 +1,106 @@
+openapi: 3.0.2
+info:
+  title: Todo
+  version: 1.0.0
+  description: My simple Todo list application
+paths:
+  /todos:
+    summary: Path used to manage the list of todos.
+    description: >-
+      The REST endpoint/path used to list and create zero or more `Todo` entities.  This path contains a
+      `GET` and `POST` operation to perform the list and create tasks, respectively.
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+          description: Successful response - returns an array of `Todo` entities.
+      operationId: gettodos
+      summary: List All todos
+      description: Gets a list of all `Todo` entities.
+    post:
+      requestBody:
+        description: A new `Todo` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Todo'
+        required: true
+      responses:
+        '201':
+          description: Successful response.
+      operationId: createTodo
+      summary: Create a Todo
+      description: Creates a new instance of a `Todo`.
+  '/todos/{todoId}':
+    summary: Path used to manage a single Todo.
+    description: >-
+      The REST endpoint/path used to get, update, and delete single instances of an `Todo`.  This path
+      contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks,
+      respectively.
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+          description: Successful response - returns a single `Todo`.
+      operationId: getTodo
+      summary: Get a Todo
+      description: Gets the details of a single instance of a `Todo`.
+    put:
+      requestBody:
+        description: Updated `Todo` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Todo'
+        required: true
+      responses:
+        '202':
+          description: Successful response.
+      operationId: updateTodo
+      summary: Update a Todo
+      description: Updates an existing `Todo`.
+    delete:
+      responses:
+        '204':
+          description: Successful response.
+      operationId: deleteTodo
+      summary: Delete a Todo
+      description: Deletes an existing `Todo`.
+    parameters:
+      -
+        name: todoId
+        description: A unique identifier for a `Todo`.
+        schema:
+          type: integer
+          format: int64
+        in: path
+        required: true
+components:
+  schemas:
+    Todo:
+      title: Todo
+      description: ''
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        complete:
+          type: boolean
+        dueDate:
+          format: date-time
+          type: string
+      example:
+        title: The title of the Todo
+        description: Details for the Todo
+        complete: false
+        dueDate: '2019-12-22T09:00:00Z'
