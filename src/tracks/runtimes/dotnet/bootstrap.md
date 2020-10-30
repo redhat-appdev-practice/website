@@ -27,15 +27,17 @@ tags:
 
 ## Bootstrapping A Project Using OpenAPI Generator
 
-1. Save **[THIS](/support_docs/todo_openapi.yaml)** OpenAPI Specification somewhere you will be able to easily access it from the command-line
 1. Clone our starter repository from GitHub:
    ```bash
    git clone --recursive https://github.com/redhat-appdev-practice/runtimes-dotnet-ef6-openapi.git
    ```
    * This starter repo will have:
-     * OpenAPI Specification for our Todo API
-     * A script to launch OpenAPI Generator
-     * Customized Generator Templates for ASP.NETCore 3.1 Development
+     * OpenAPI Specification for our Todo API (`todo_openapi.yaml`)
+     * A script to launch OpenAPI Generator (`generate.sh`)
+     * Customized Generator Templates for ASP.NETCore 3.1 Development (`openapi-generator-aspnetcore3-templates`)
+     * A Compose file to launching all of the components together locally (`docker-compose.yaml`)
+     * A Helm Chart for deploying the application to OpenShift or another Kubernetes platform (`helm`)
+1. The API Specification we are using is for a TodoList application and the API Docs can be seen [HERE](https://studio-ws.apicur.io/sharing/811c0087-c112-4afe-ae97-da45ac1aef4d)
 1. Change into the cloned directory (which will from here on be referred to as &lt;solution root&gt;) and generate the solution
    ```bash
    ./generate.sh
