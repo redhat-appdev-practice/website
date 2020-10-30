@@ -40,7 +40,7 @@ In order to work best with log aggregators like EFK Stack or Splunk, you want to
             .UseSerilog((hostingContext, services, loggerConfiguration) => loggerConfiguration
                .ReadFrom.Configuration(hostingContext.Configuration)
                .Enrich.FromLogContext()
-               .WriteTo.Console())
+               .WriteTo.Console(new RenderedCompactJsonFormatter()))
             .ConfigureWebHostDefaults(webBuilder =>
             {
                webBuilder.UseStartup<Startup>()
