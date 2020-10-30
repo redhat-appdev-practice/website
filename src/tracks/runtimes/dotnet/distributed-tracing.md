@@ -30,10 +30,11 @@ tags:
 
 ## Distributed Tracing
 
-In the Kubernetes/OpenShift world, the de-facto standard for distributed tracing through microservices is [Jaeger](https://www.jaegertracing.io/). Jaeger is available in ASP.NET applications as well.
+In the Kubernetes/OpenShift world, the de-facto standard for distributed tracing through microservices is [OpenTracing](https://opentracing.io/) and [Jaeger](https://www.jaegertracing.io/). Jaeger and OpenTracing are available as libraries for ASP.NET applications as well.
 
 1. Install the OpenTracing package
    ```bash
+   cd <solution root>/src/RedHat.TodoList
    dotnet add package OpenTracing.Contrib.NetCore
    dotnet add package Jaeger.Core
    ```
@@ -62,6 +63,3 @@ In the Kubernetes/OpenShift world, the de-facto standard for distributed tracing
    ```
 1. Now, you can use Environment Variables or settings in `appsettings.json` to [configure](https://github.com/jaegertracing/jaeger-client-csharp#configuration-via-environment) where to send the tracing data
 
-
-## [Step 8](/tracks/runtimes/dotnet/configuration.html)
-## [Step 9](/tracks/runtimes/dotnet/helm-deployment.html)

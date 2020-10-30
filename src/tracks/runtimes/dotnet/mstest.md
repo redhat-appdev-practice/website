@@ -44,10 +44,3 @@ The stubbed project created by OpenAPI Generator has given us enough code so tha
    dotnet add package Moq
    ```
 1. From this point forward, we will attempt to write tests first and then implement our code to satisfy those tests.
-
-## [Step 4](/tracks/runtimes/dotnet/entityframework.html)
-## [Step 5](/tracks/runtimes/dotnet/first-api-endpoint.html)
-## [Step 6](/tracks/runtimes/dotnet/json-logging.html)
-## [Step 7](/tracks/runtimes/dotnet/distributed-tracing.html)
-## [Step 8](/tracks/runtimes/dotnet/configuration.html)
-## [Step 9](/tracks/runtimes/dotnet/helm-deployment.html)

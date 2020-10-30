@@ -149,8 +149,3 @@ tags:
    dotnet ef migrations add InitialCreate
    dotnet ef database update
    ```
-
-## [Step 5](/tracks/runtimes/dotnet/first-api-endpoint.html)
-## [Step 6](/tracks/runtimes/dotnet/json-logging.html)
-## [Step 7](/tracks/runtimes/dotnet/distributed-tracing.html)
-## [Step 8](/tracks/runtimes/dotnet/configuration.html)

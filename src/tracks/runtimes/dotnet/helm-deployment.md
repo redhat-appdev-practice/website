@@ -23,6 +23,7 @@ tags:
 - entityframeworkcores
 - helm
 - kubernetes
+- openshift
 ---
 
 ## Setting Up To Deploy With Helm 3
@@ -38,6 +39,7 @@ We do not have the time to completely explain creating a Helm chart for this app
    * Note the image name/repository and change it to point to where you have published your container
 1. Install the application using the Helm 3 CLI
    ```bash
+   cd <solution root>/helm
    helm install <identifier> ./
    ```
    * The identifier just needs to be unique, but it can be almost any random string. Best practices indicate it should be numerical and probably align with your application version.

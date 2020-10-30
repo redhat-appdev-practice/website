@@ -72,12 +72,20 @@ module.exports = {
             sidebarDepth: -1,
             children: [
               {
-                title: '.NET, C#, ASP.NET, & EntityFramework',
+                title: 'ASP.NET',
                 path: '/tracks/runtimes/dotnet/',
                 collapsable: true,
                 sidebarDepth: 0,
                 children: [
-                  '/tracks/runtimes/dotnet/'
+                  '/tracks/runtimes/dotnet/',
+                  '/tracks/runtimes/dotnet/bootstrap',
+                  '/tracks/runtimes/dotnet/mstest',
+                  '/tracks/runtimes/dotnet/entityframework',
+                  '/tracks/runtimes/dotnet/first-api-endpoint',
+                  '/tracks/runtimes/dotnet/json-logging',
+                  '/tracks/runtimes/dotnet/distributed-tracing',
+                  '/tracks/runtimes/dotnet/configuration',
+                  '/tracks/runtimes/dotnet/helm-deployment'
                 ]
               }
             ]

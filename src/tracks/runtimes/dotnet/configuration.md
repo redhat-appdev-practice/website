@@ -40,7 +40,5 @@ ASP.NETCore provides a machanism for overriding the `appsettings.json` at runtim
             })
             // SNIP - Remaining Host Builder
    ```
-1. Now, when we deploy our application on OpenShift, it will look for a file in `/tmp` called `runtimesettings.json` and those settings will override any settings in our `appsettings.json`.
+1. Now, when we deploy our application on OpenShift, it will look for a file in `/tmp/config` called `runtimesettings.json` and those settings will override any settings in our `appsettings.json`.
 1. We can define our Deployment or DeploymentConfig such that we mount a ConfigMap or Secret containing that JSON configuration in that location
-
-## [Step 9](/tracks/runtimes/dotnet/helm-deployment.html)

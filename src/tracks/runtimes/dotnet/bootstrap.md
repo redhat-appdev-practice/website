@@ -36,7 +36,7 @@ tags:
      * OpenAPI Specification for our Todo API
      * A script to launch OpenAPI Generator
      * Customized Generator Templates for ASP.NETCore 3.1 Development
-1. Change into the cloned directory (which will from here on be referred to as <solution root>) and generate the solution
+1. Change into the cloned directory (which will from here on be referred to as &lt;solution root&gt;) and generate the solution
    ```bash
    ./generate.sh
    ```
@@ -97,11 +97,3 @@ tags:
    ```
    * Open A Browser and point it to http://localhost:8080/
    * You should see the Swagger/OpenAPI Documentation, but any attempt to use the API should return a `NotImplementedException`.
-
-## [Step 3](/tracks/runtimes/dotnet/mstest.html)
-## [Step 4](/tracks/runtimes/dotnet/entityframework.html)
-## [Step 5](/tracks/runtimes/dotnet/first-api-endpoint.html)
-## [Step 6](/tracks/runtimes/dotnet/json-logging.html)
-## [Step 7](/tracks/runtimes/dotnet/distributed-tracing.html)
-## [Step 8](/tracks/runtimes/dotnet/configuration.html)
-## [Step 9](/tracks/runtimes/dotnet/helm-deployment.html)

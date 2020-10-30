@@ -140,8 +140,3 @@ Following Test-Driven Development practices, we will now implement our first API
    Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 102 ms - /home/dphillips/Documents/RedHat/Workspace/CNAD_Enablement/dotnet-openapi-todo/src/RedHat.TodoList.Tests/bin/Debug/netcoreapp3.1/RedHat.TodoList.Tests.dll (netcoreapp3.1)
    ```
 1. Implement the remaining tests, then implement the remaining methods for the controller
-
-## [Step 6](/tracks/runtimes/dotnet/json-logging.html)
-## [Step 7](/tracks/runtimes/dotnet/distributed-tracing.html)
-## [Step 8](/tracks/runtimes/dotnet/configuration.html)
-## [Step 9](/tracks/runtimes/dotnet/helm-deployment.html)

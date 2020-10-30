@@ -61,7 +61,8 @@ In order to work best with log aggregators like EFK Stack or Splunk, you want to
 
       // Other app configuration
    ```
-1. Initialize your logger instance in your constructor
+   * This will ensure that all requests handled by the ASP.NET WebAPI Router will be logged
+1. Add logging to one of your implementation classes be *injecting* it using an **`ILogger`** interface
    ```csharp
    public class TodoListContext : DbContext, ITodoContext
    {
@@ -93,7 +94,3 @@ In order to work best with log aggregators like EFK Stack or Splunk, you want to
       return todo;
    }
    ```
-
-## [Step 7](/tracks/runtimes/dotnet/distributed-tracing.html)
-## [Step 8](/tracks/runtimes/dotnet/configuration.html)
-## [Step 9](/tracks/runtimes/dotnet/helm-deployment.html)
