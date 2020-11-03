@@ -84,5 +84,5 @@ Images can be placed in `src/.vuepress/public/` and everything in that directory
 
 ## Publishing this site
 
-This has been automated with [GitHub Actions](.github/workflows/main.yml). If you submit a pull-request against this site and that pull-request gets merged to the `trunk` branch, then the automation will compile and publish this site for you.
+This has been automated with [GitHub Actions](.github/workflows/containerize.yml). If you submit a pull-request against this site and that pull-request gets merged to the `trunk` branch, then the automation will compile and publish this site for you.
 
