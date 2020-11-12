@@ -25,6 +25,10 @@ tags:
 - openshift
 ---
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OVNA4HOAGDI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Test-Driven Development Of An API Endpoint
 
 Following Test-Driven Development practices, we will now implement our first API endpoint by preparing to write a test and then coding to that test.

@@ -25,6 +25,10 @@ tags:
 - openshift
 ---
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Aq5SFDAJc3M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Database Access/Data Persistence
 1. Add the following Nuget dependencies to allow us to start creating our data access layer
    * Npgsql.EntityFrameworkCore.PostgreSQL == 3.1.4

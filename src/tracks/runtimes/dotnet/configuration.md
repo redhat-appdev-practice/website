@@ -25,6 +25,10 @@ tags:
 - openshift
 ---
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/byHM2L3Wyak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Overriding Configuration At Runtime
 
 ASP.NETCore provides a machanism for overriding the `appsettings.json` at runtime. This provides a simple way to "inject" our runtime configuration from a Kubernetes/OpenShift ConfigMap or Secret.

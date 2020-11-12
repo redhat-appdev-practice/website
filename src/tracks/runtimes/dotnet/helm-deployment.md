@@ -26,6 +26,11 @@ tags:
 - openshift
 ---
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pWTQDAQfb80" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 ## Setting Up To Deploy With Helm 3
 
 Helm helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.

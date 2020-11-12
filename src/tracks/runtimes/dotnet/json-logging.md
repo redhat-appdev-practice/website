@@ -25,6 +25,10 @@ tags:
 - openshift
 ---
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hU-h2trXQok" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Logging Best Practices
 
 In order to work best with log aggregators like EFK Stack or Splunk, you want to output your logs in JSON format for easier indexing.
