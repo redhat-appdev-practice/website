@@ -25,6 +25,10 @@ tags:
 - openshift
 ---
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HwJs0EijeUo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Bootstrapping A Project Using OpenAPI Generator
 
 1. Clone our starter repository from GitHub:

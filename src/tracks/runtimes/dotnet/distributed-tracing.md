@@ -28,6 +28,10 @@ tags:
 - openshift
 ---
 
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jO3h_C2siYE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Distributed Tracing
 
 In the Kubernetes/OpenShift world, the de-facto standard for distributed tracing through microservices is [OpenTracing](https://opentracing.io/) and [Jaeger](https://www.jaegertracing.io/). Jaeger and OpenTracing are available as libraries for ASP.NET applications as well.
