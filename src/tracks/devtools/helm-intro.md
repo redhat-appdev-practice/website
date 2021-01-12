@@ -12,6 +12,7 @@ tags:
 - continuous integration
 - automation
 ---
+::: v-pre
 # Introduction to Helm
 
 ## What is Helm?
@@ -167,10 +168,9 @@ test-release	test-project	1       	2021-01-04 11:39:41.51673257 -0500 EST	deploy
 
 Next, let's look at our templates, currently we only have `deployment.yaml`. As you may remember, in order to create this template we simply copied a Kubernetes resource from our OpenShift UI into our deployment.yaml. This is because when we do a Helm install it simply takes the post processed files inside of your templates directory and runs them against the Kubernetes API. This effectively means if you can run `kubectl apply` or `oc apply` against a file then it can be used as a valid Helm template file. 
 
-While using static template files in Helm is a perfectly valid and a great starting point, you'll probably want to add some templating to allow more reusability in your chart. In the rest of this section we will take a look at some how to do some very basic templating but Helm contains hundreds of [template functions](https://helm.sh/docs/chart_template_guide/function_list/). We recommend skimming over them so that you have an idea of Helm's capabilities as you create your future charts. We especially recommend taking some time to look at the [flow control fucntions](https://helm.sh/docs/chart_template_guide/control_structures/) as these tend to be the functions that are the most used.
+While using static template files in Helm is a perfectly valid and a great starting point, you'll probably want to add some templating to allow more reusability in your chart. In the rest of this section we will take a look at some how to do some very basic templating but Helm contains hundreds of [template functions](https://helm.sh/docs/chart_template_guide/function_list/). We recommend skimming over them so that you have an idea of Helm's capabilities as you create your future charts. We especially recommend taking some time to look at the [flow control functions](https://helm.sh/docs/chart_template_guide/control_structures/) as these tend to be the functions that are the most used.
 
 In our chart we modified our deployment's replicas to have the value `{{ $.Values.replicaCount }}`. While it may be pretty obvious what this is doing, let's break it down to make sure we understand exactly what is going on.
-
 * `{{ }}` denotes this is a templatized value
 * `$` specifies we want to start at the root context. You can think of `$` as pre-pending `/` to a cd command.
   * Note you may also see other charts just using `.` rather than `$.`. Most of the time these are functionally equivalent, unless using functions that change the current context such as [with and range](https://helm.sh/docs/chart_template_guide/control_structures/)
@@ -330,7 +330,7 @@ Finally add the following line to our `values.yaml`:
 response: "Hello Helm"
 ```
 
-Now, let's hit our endpoint by getting the url from the OpenShift UI, or you can run the command `oc get route example --template='{{ .spec.host }}'`. When you run it inside of your browser you should see our `Hello Helm` webpage!
+Now, let's hit our endpoint by getting the url from the OpenShift UI, or you can run the command  `oc get route example --template='{{ .spec.host }}'`. When you run it inside of your browser you should see our `Hello Helm` webpage!
 
 ### Extra Credit
 
@@ -367,3 +367,4 @@ Hints:
 ## Wrap Up
 
 This lab focused primarily on the fundamentals of creating and using a Helm chart. Obviously, there is a lot more you can learn and do with Helm but hopefully this helped you get started. We are planning to create another lab to cover more advance topics such as dependencies and template helper files. Until then the official [documentation](https://helm.sh/docs/), is great for answering specific questions.
+:::
