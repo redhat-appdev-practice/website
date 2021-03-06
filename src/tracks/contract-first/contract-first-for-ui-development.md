@@ -28,10 +28,6 @@ tags:
 
 ::: tab "Angular + Prism"
 
-## Video
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RcpmtPmNS2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 In most of the other segments we have focused on applying contracts to the creation of the API server or the backend. I would like to state that I feel that is far **more** important to apply contracts to the development of a UI. Why? Generally, user interfaces are what stakeholders need to see in order to determine product-market fit. In other words, if they cannot see and interact with the user interface, they cannot tell if the application we are developing solves the problem it is meant to solve. In my experience, that means that showing a UI which is at least somewhat functional is far more important that a completed or functional backend/API.
 
 Some may ask "Without a backend, how can I tell if my UI is functional?" That's the key goal of this segment. Showing you how you can build, test, and validate a UI and the associated user experience without having an API at all. By leveraging tools available via Contract-First techniques.
@@ -44,8 +40,6 @@ Some may ask "Without a backend, how can I tell if my UI is functional?" That's 
 * NPM >= 6.14.x
 * Java JRE >= 1.8.x
 * An IDE, preferably one with support for TypeScript
-* Ruby >= 2.6.x
-* Gem (Ruby Gem) >= 3.0.x
 * Git
 
 ## Setting Up
