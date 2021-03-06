@@ -84,5 +84,24 @@ Images can be placed in `src/.vuepress/public/` and everything in that directory
 
 ## Publishing this site
 
+### Test Locally
+
+Run and validate there are no errors:
+`yarn install: yarn build`
+
+Run:
+```
+docker build -t cloudnative-local:latest .
+docker run  -p 127.0.0.1:80:8080/tcp cloudnative-local:latest
+```
+
+Validate locally against `127.0.0.1`
+
 This has been automated with [GitHub Actions](.github/workflows/containerize.yml). If you submit a pull-request against this site and that pull-request gets merged to the `trunk` branch, then the automation will compile and publish this site for you.
 
+If you do not see your changes after a few minutes verify the [build](https://github.com/redhat-appdev-practice/redhat-appdev-practice.github.io/actions) was successful
+
+
+## Known Issues
+
+Any `{{ }}` must be escaped, see the helm-intro project or [here](https://vuepress.vuejs.org/guide/using-vue.html#escaping)

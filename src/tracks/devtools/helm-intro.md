@@ -12,6 +12,7 @@ tags:
 - continuous integration
 - automation
 ---
+::: v-pre
 # Introduction to Helm
 
 ## What is Helm?
@@ -23,7 +24,7 @@ tags:
 ## Prerequisites
 
 * OpenShift 3.11+ Cluster
-	* [Minishift](https://www.okd.io/minishift/) can be used locally if you do not have access to a lab environment
+	* [CodeReady Containers](https://developers.redhat.com/products/codeready-containers/getting-started/) can be used locally if you do not have access to a lab environment
 
 ### Installing Helm:
 
@@ -55,7 +56,7 @@ Now if we navigate inside of `example` and run `tree` we should see the followin
 └── values.yaml
 ```
 
-As you can probably guess by the file names, when deployed this chart will create a `Deployment` with a `HorizontalPodScaler` and a `ServiceAccount`. We will expose the `Deployment` using a `Service` and `Ingress` controller. Under normal circumstances this is a good starting point for creating a new chart. For the purposes of this lab we want to keep our chart extremely simple, so we are going to remove all of our template files and clear our `values.yaml`.
+Best practices when creating a Helm chart is to break each Kubernetes resource you are trying to deploy into it's own file and give it a name based on the resources's type. So as you can probably guess by the file names, when deployed this chart will create a `Deployment` with a `HorizontalPodScaler` and a `ServiceAccount`. We will expose the `Deployment` using a `Service` and `Ingress` controller. Under normal circumstances this is a good starting point for creating a new chart. For the purposes of this lab we want to keep our chart extremely simple, so we are going to remove all of our template files and clear our `values.yaml`.
 
 To do this:
 * Remove all the files in our template folder with `rm -r templates/*`
@@ -104,7 +105,7 @@ Next, let's add some basic [templating](https://helm.sh/docs/chart_template_guid
 * Add `replicaCount: 3` to the `values.yaml` file.\
 <sub>Note: We will go further into depth on templating later in our lab</sub>
 
-Finally, let's deploy our chart. Validate that you are inside of the `example` directory then run:
+Finally, let's deploy our chart. Validate that you are inside of the `example` directory. Make sure you are logged into your cluster with `oc login` then run:
 ```
 helm install test-release .
 ```
@@ -167,10 +168,9 @@ test-release	test-project	1       	2021-01-04 11:39:41.51673257 -0500 EST	deploy
 
 Next, let's look at our templates, currently we only have `deployment.yaml`. As you may remember, in order to create this template we simply copied a Kubernetes resource from our OpenShift UI into our deployment.yaml. This is because when we do a Helm install it simply takes the post processed files inside of your templates directory and runs them against the Kubernetes API. This effectively means if you can run `kubectl apply` or `oc apply` against a file then it can be used as a valid Helm template file. 
 
-While using static template files in Helm is a perfectly valid and a great starting point, you'll probably want to add some templating to allow more reusability in your chart. In the rest of this section we will take a look at some how to do some very basic templating but Helm contains hundreds of [template functions](https://helm.sh/docs/chart_template_guide/function_list/). We recommend skimming over them so that you have an idea of Helm's capabilities as you create your future charts. We especially recommend taking some time to look at the [flow control fucntions](https://helm.sh/docs/chart_template_guide/control_structures/) as these tend to be the functions that are the most used.
+While using static template files in Helm is a perfectly valid and a great starting point, you'll probably want to add some templating to allow more reusability in your chart. In the rest of this section we will take a look at some how to do some basic templating. In addition, Helm contains hundreds of [template functions](https://helm.sh/docs/chart_template_guide/function_list/). We recommend skimming over them so that you have an idea of Helm's capabilities as you create your future charts. We especially recommend taking some time to look at the [flow control functions](https://helm.sh/docs/chart_template_guide/control_structures/) as these tend to be the functions that are the most used.
 
 In our chart we modified our deployment's replicas to have the value `{{ $.Values.replicaCount }}`. While it may be pretty obvious what this is doing, let's break it down to make sure we understand exactly what is going on.
-
 * `{{ }}` denotes this is a templatized value
 * `$` specifies we want to start at the root context. You can think of `$` as pre-pending `/` to a cd command.
   * Note you may also see other charts just using `.` rather than `$.`. Most of the time these are functionally equivalent, unless using functions that change the current context such as [with and range](https://helm.sh/docs/chart_template_guide/control_structures/)
@@ -184,7 +184,7 @@ Finally, let's take a quick look at our `values.yaml` file, which currently just
 
 At this point we have built and deployed a very basic Helm chart and have taken a closer look at the different components. In this section we are going to see how to actually consume these charts.
 
-Firstly, I mentioned briefly in the intro that Helm is a package manager. It is worth noting that while you may never need to to create and deploy your own Helm repository, there are a ton of charts already in existence. This means there is probably already a chart that meets your requirements so try not to reinvent the wheel.
+Firstly, we mentioned briefly in the intro that Helm is a package manager. It is worth noting that while you may never need to to create and deploy your own Helm repository, there are a ton of charts already in existence. This means there is probably already a chart that meets your requirements so try not to reinvent the wheel.
 
 
 #### Finding and Downloading Existing Charts
@@ -196,7 +196,7 @@ helm search repo
 <sub>If you are not seeing any charts, your Helm distribution may not have come with the default repository installed. Do not worry we will be installing a new repo in the next few steps.</sub>  
 
 Here you should see a huge list of charts for all sorts of databases, webservers, etc.
-You may also notice that most of the Helm charts included inside of the default repository are "DEPRECATED." I have found the bitnami repository contains a lot of charts that are well documented for most of your basic installations.
+You may also notice that most of the Helm charts included inside of the default repository are "DEPRECATED." we have found the bitnami repository contains a lot of charts that are well documented for most of your basic installations.
 
 In order to add our new repository just run the following command:
 ```
@@ -330,7 +330,7 @@ Finally add the following line to our `values.yaml`:
 response: "Hello Helm"
 ```
 
-Now, let's hit our endpoint by getting the url from the OpenShift UI, or you can run the command `oc get route example --template='{{ .spec.host }}'`. When you run it inside of your browser you should see our `Hello Helm` webpage!
+Now, let's hit our endpoint by getting the url from the OpenShift UI, or you can run the command  `oc get route example --template='{{ .spec.host }}'`. When you run it inside of your browser you should see our `Hello Helm` webpage!
 
 ### Extra Credit
 
@@ -366,4 +366,5 @@ Hints:
 
 ## Wrap Up
 
-This lab focused primarily on the fundamentals of creating and using a Helm chart. Obviously, there is a lot more you can learn and do with Helm but hopefully this helped you get started. We are planning to create another lab to cover more advance topics such as dependencies and template helper files. Until then the official [documentation](https://helm.sh/docs/), is great for answering specific questions.
+This lab focused primarily on the fundamentals of creating and using a Helm chart. Obviously, there is a lot more you can learn and do with Helm but hopefully this helped you get started. We are planning to create another lab to cover more advance topics such as dependencies and template helper files. Until then the official [documentation](https://helm.sh/docs/) is great for answering specific questions.
+:::
