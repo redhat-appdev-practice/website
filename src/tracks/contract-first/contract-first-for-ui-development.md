@@ -12,6 +12,8 @@ tags:
 - rest
 - vuejs
 - vue
+- angular
+- prism
 - automation
 - cloud-native
 - spa
@@ -19,9 +21,307 @@ tags:
 - javascript
 - typescript
 ---
-
 # Applying Contract-First Development To UI/UX
 
+
+:::: tabs cache-lifetime="10" :options="{ useUrlFragment: false }"
+
+::: tab "Angular + Prism"
+
+## Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RcpmtPmNS2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+In most of the other segments we have focused on applying contracts to the creation of the API server or the backend. I would like to state that I feel that is far **more** important to apply contracts to the development of a UI. Why? Generally, user interfaces are what stakeholders need to see in order to determine product-market fit. In other words, if they cannot see and interact with the user interface, they cannot tell if the application we are developing solves the problem it is meant to solve. In my experience, that means that showing a UI which is at least somewhat functional is far more important that a completed or functional backend/API.
+
+Some may ask "Without a backend, how can I tell if my UI is functional?" That's the key goal of this segment. Showing you how you can build, test, and validate a UI and the associated user experience without having an API at all. By leveraging tools available via Contract-First techniques.
+
+[[toc]]
+
+## Prerequisites
+
+* NodeJS >= 12.x
+* NPM >= 6.14.x
+* Java JRE >= 1.8.x
+* An IDE, preferably one with support for TypeScript
+* Ruby >= 2.6.x
+* Gem (Ruby Gem) >= 3.0.x
+* Git
+
+## Setting Up
+
+We're going to start with the beginnings of a user interface created using [Angular 11](https://angular.io/) & [Angular Material](https://material.angular.io/). The choice of the framework/toolkit for the UI is not really important. What is important is the workflow of how we implement the UI, update the API Spec, interface with the API, and do development using a Mock API server.
+
+### Install The Tools
+* prism - A Mock API server which generates "fake" responses based on the definitions in an OpenAPI Specification
+  * `npm install -g @stoplight/prism-cli`
+* Angular CLI - The CLI tool for creating and building Angular applications
+  * `npm install -g @angular/cli`
+* OpenAPI Generator CLI - A CLI tool for generating code from an OpenAPI Specification file
+  * `npm install -g @openapitools/openapi-generator-cli`
+
+### Clone The Repo
+
+```
+git clone https://github.com/redhat-appdev-practice/angular-material-prism-openapi.git
+cd angular-material-prism-openapi
+```
+
+## Developing An Angular UI Using Contract-First Tooling
+
+### Set up our build environment
+1. Open the source directory in your favorite IDE
+1. Open the `openapi.yml` file in the root of the project. You will notice that there is currently only a single operation defined for a "health check" endpoint.
+1. In a terminal, run `npm i` to install the required dependencies
+1. You may note, if you are familiar with Angular, that routing and a Material navigation component have already been created and configured. The example project also already has 2 stubbed components for the Todo List and for creating a New Todo item.
+1. Add *npm-watch* as a "dev" dependency. We will use it to "watch" for changes to files and restart certain tools.
+   * `yarn add -D npm-watch`
+1. Add new "script"s to the `package.json` file as shown:
+   ```json
+   "watch": "npm-watch",
+   "prism": "prism mock -d --cors openapi.yml",
+   "openapi": "rm -f src/sdk; mkdir src/sdk; openapi-generator-cli generate -g typescript-angular -i openapi.yml -o src/sdk/",
+   ```
+1. Add a new "watch" section to your `package.json` after the "scripts" section.
+   ```json
+   "watch": {
+       "openapi": "openapi.yml",
+       "prism": {
+           "patterns": ["openapi.yml"],
+           "inherit": true
+       },
+       "start": "yarn.lock"
+   },
+   ```
+   * This is allows us to (re)start components automatically as needed while we develop
+   * Each time the OpenAPI Spec file changes, the Angular Services will be regenerated and the Prism mock server will be updated. The Angular Dev server will only restart if we change our underlying libraries.
+1. Start all of our tooling using the command `npm run watch`
+   * Prism will start a Mock API server on port 4010
+   * OpenAPI Generate will output a set of Angular Services based on the contents of the `openapi.yml` file
+   * Angular dev server will start running on port 4200
+
+### Create Models In The API Specification
+
+Before we can start using the API to perform CRUD operations, we need to know the data types we will be operating on. In our imaginary situation, we need a **Todo** model. We can add this model to the `openapi.yml` file in a new section as shown:
+
+```yaml
+components:
+  schemas:
+    NewTodo:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        id:
+          type: string
+          format: uuid
+```
+
+If we add this to the bottom of our `openapi.yml` file and save the file, we should see the `openapi-generator-cli` regenerate our code under `src/sdk/model` and we'll now see a `newTodo.ts` file. That models is perfect for when we **POST** a new todo item to our API. Let's create another model for all other use cases.
+
+```yaml
+    Todo:
+      type: object
+      required:
+      - id
+      allOf:
+      - $ref: '#/components/schemas/NewTodo'
+```
+
+This will define a new Model called **Todo**, which inherits all of the properties of **NewTodo**, but also sets an extra constraint which requires the `id` field to be set.
+
+### Define CRUD Operations In The OpenAPI Specification File
+
+Now that we have the models defined, we can use those models to define API CRUD operations:
+
+#### Get All Todos
+
+```yaml
+paths:
+  /todos:
+    get:
+      description: Get all todos
+      operationId: getAllTodos
+      tags:
+        - todos
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+```
+
+#### Add New Todo
+
+```yaml
+    post:
+      description: 'Add new Todo'
+      operationId: addNewTodo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTodo'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+```
+
+#### Get Todo By ID
+
+```yaml
+  /todo/{id}:
+    parameters:
+    - in: path
+        name: id
+        required: true
+        schema:
+        type: string
+        format: uuid
+    get:
+      operationId: getTodoById
+      tags:
+        - todos
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+```
+
+#### Delete Todo By Id
+
+Place this just after the `get` operation defined above an at the same indentation level
+
+```yaml
+    delete:
+      operationId: deleteTodoById
+      tags:
+        - todos
+      responses:
+        '204':
+          description: 'No content'
+```
+
+#### Update Todo By Id
+
+```yaml
+    put:
+      operationId: updateTodoById
+      tags:
+        - todos
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+```
+
+### Add The Generated Angular Services In Our TodoListComponent
+
+1. Open `src/app/todo-list/todo-list.component.ts`
+1. Import `HttpClient`, `Todo`, `TodosService`, and the `Configuration` types.
+   ```typescript
+   import { HttpClient } from '@angular/common/http';
+   import { Configuration } from 'src/sdk';
+   import { TodosService } from '../../sdk/api/todo.service.ts';
+   import { Todo } from '../../sdk/model/todo';
+   ```
+1. Add new fields and constants to the `TodoListComponent` class as follows:
+   ```typescript
+   export class TodoListComponent implements OnInit {
+
+     API_BASE_URL = 'http://localhost:4010';
+
+     todoService: TodosService;
+
+     todos: Todo[] = [];
+
+     // SNIP....
+   ```
+1. Instantiate/Create the todoService in the constructor, then configure it to update the Todo list
+   ```typescript
+   constructor(private httpClient: HttpClient) {
+     this.todoService = new TodosService(httpClient, this.API_BASE_URL, new Configuration({
+       basePath: this.API_BASE_URL
+     }));
+     this.todoService.getAllTodos().subscribe({
+       next: todos => this.todos = todos,
+       complete: () => console.log('End of todos observable'),
+       error: err => console.error(err)
+     });
+   }
+   ```
+
+### Use The Todos Array In The HTML Template
+
+We now will have a component which will load our Mock Todos from our Mock API automatically when it is loaded. We can then implement HTML Template code which will take advantage of that.
+
+1. Install the Angular Flex Layout module
+   * `ng add @angular/flex-layout`
+1. Add FlexLayoutModule to `src/app/app.modules.ts`
+   ```typescript
+   import { FlexLayoutModule } from '@angular/flex-layout';
+
+   // SNIP
+
+   @NgModule({
+   declarations: [
+     // SNIP
+   ],
+   imports: [
+     // SNIP
+     FlexLayoutModule
+   ],
+   ```
+1. Open the file `src/app/todo-list/todos-list.component.html`
+1. Add the following structure:
+   ```html
+   <div>
+     <div fxLayout="row" fxLayoutAlign="start start">
+       <div class="header" fxFlex="25%">Title</div>
+       <div class="header" fxFlex="75%">Description</div>
+     </div>
+     <div *ngFor="let todo of todos" fxLayout="row" fxLayoutAlign="start start">
+       <div fxFlex="25%">{{ todo.title }}</div>
+       <div fxFlex="75%">{{ todo.description }}</div>
+     </div>
+   </div>
+   ```
+1. Open the file `src/app/todo-list/todos-list.component.css`
+1. Add the following to implement our FlexBox arrangement:
+   ```css
+   .header {
+     background-color: #EAEAEA;
+     border-left: 1px solid #6A6A6A;
+     color: black;
+     font-size: 2rem;
+     text-align: center;
+     height: 2.4rem;
+     padding: 0.3rem;
+   }
+   ```
+1. View the updated page and you should see something like:
+   ![Rendered Angular Grid With Prism Data](/angular-prism-rendered-table.png)
+
+:::
+
+::: tab "VueJS + FakeIt" id="first-tab"
 ## Video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RcpmtPmNS2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -61,7 +361,7 @@ git clone git@github.com:redhat-appdev-practice/contract-first-ui.git
 cd contract-first-ui
 ```
 
-## Developing A UI With Contract-First
+## Developing A VueJS UI Using Contract-First Tooling
 
 ### Set up our build environment
 1. Open the source directory in your IDE
@@ -347,3 +647,5 @@ At this point, I hope that it's obvious how quickly your UI can evolve and still
 
 ### Extra Credit
 1. See if you can implement the 2 new fields in the `EditTodo` component!
+:::
+::::
