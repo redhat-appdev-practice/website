@@ -95,7 +95,7 @@ h1, h2, h3, h4
   margin 2em 0
 
 .tabs-component-tabs
-  border solid 1px #ddd
+  border solid 1px #6c6c6c
   border-radius 6px
   margin-bottom 5px
   padding-left 0
@@ -134,19 +134,21 @@ h1, h2, h3, h4
 
   .tabs-component-tab
     background-color #000
-    border solid 1px #ddd
+    border solid 1px #6c6c6c
     border-radius 3px 3px 0 0
     margin-right .25em
     transition transform .3s ease
+    background-color: rgba(180,180,180,0)
   &.is-active
-    border-bottom solid 1px #ddd
+    border-bottom solid 1px #6c6c6c
+    background-color: rgba(180,180,180,0.2)
     z-index 2
     transform translateY(0)
 
   .tabs-component-panels
     border-top-left-radius 0
-    background-color #000
-    border solid 1px #ddd
+    background-color rgba(180,180,180,0.2)
+    border solid 1px #6c6c6c
     border-radius 0 6px 6px 6px
     box-shadow 0 0 10px rgba(0, 0, 0, .05)
     padding 1em 1em

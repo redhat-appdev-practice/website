@@ -4,7 +4,7 @@
     padding 0.25rem 0.5rem
     margin 0
     font-size 0.85em
-    background-color rgba(27,31,35,0.2)
+    background-color $codeBgColor
     border-radius 3px
     .token
       &.deleted
@@ -23,7 +23,7 @@
     code
       color #fff
       padding 0
-      background-color transparent
+      background-color $codeBgColor
       border-radius 0
 
 div[class*="language-"]
@@ -39,9 +39,9 @@ div[class*="language-"]
     width 100%
     line-height 1.4
     .highlighted
-      background-color rgba(0, 0, 0, 66%)
+      background-color $codeBgColor
   pre, pre[class*="language-"]
-    background transparent
+    background $codeBgColor
     position relative
     z-index 1
   &::before
@@ -66,7 +66,7 @@ div[class*="language-"]
           display block
           width $lineNumbersWrapperWidth
           height 100%
-          background-color rgba(0, 0, 0, 66%)
+          background-color $codeBgColor
     pre
       padding-left $lineNumbersWrapperWidth + 1 rem
       vertical-align middle
