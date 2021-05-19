@@ -26,7 +26,7 @@ tags:
 
 :::: tabs cache-lifetime="10" :options="{ useUrlFragment: false }"
 
-::: tab "Angular + Prism"
+::: tab "Angular + Prism" id="first-tab"
 
 ## Video
 **COMING SOON**
@@ -318,7 +318,7 @@ We now will have a component which will load our Mock Todos from our Mock API au
 
 :::
 
-::: tab "VueJS + FakeIt" id="first-tab"
+::: tab "VueJS + FakeIt" id="second-tab"
 ## Video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RcpmtPmNS2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -645,4 +645,476 @@ At this point, I hope that it's obvious how quickly your UI can evolve and still
 ### Extra Credit
 1. See if you can implement the 2 new fields in the `EditTodo` component!
 :::
+
+::: tab "React + Prism" id="third-tab"
+
+
+## Prerequisites
+
+* NodeJS >= 12.x
+* NPM >= 6.14.x
+* Yarn
+* Java JRE >= 11
+* An IDE, preferably one with support for TypeScript
+* Git
+
+## Setting Up
+
+We're going to start with the beginnings of a user interface created using [React](https://reactjs.org) & [Material UI]https://material-ui.com/). The choice of the framework/toolkit for the UI is not really important. What is important is the workflow of how we implement the UI, update the API Spec, interface with the API, and do development using a Mock API server.
+
+### Install The Tools
+* prism - A Mock API server which generates "fake" responses based on the definitions in an OpenAPI Specification
+  * `npm install -g @stoplight/prism-cli`
+* OpenAPI Generator CLI - A CLI tool for generating code from an OpenAPI Specification file
+  * `npm install -g @openapitools/openapi-generator-cli`
+
+## Developing A React UI Using Contract-First Tooling
+
+### Set up our build environment
+1. Create a new React application:
+   * `npx create-react-app --template cra-template-typescript react-todo`
+   * `cd todo`
+1. Install Material UI and some additional tools
+   * `yarn add @material-ui/core`
+   * `yarn add @fontsource/roboto`
+   * `yarn add @material-ui/icons`
+   * `yarn add @material-ui/lab`
+   * `yarn add npm-watch`
+1. Add the Roboto font to your `index.tsx`
+   * Add this line to the top of your `src/index.tsx` file. 
+     ```
+     import '@fontsource/roboto';
+     ```
+
+### Configure The OpenAPI Tooling
+
+1. Create a new `openapi.yml` file in the root of your project.
+   ```yaml
+   ---
+   openapi: 3.0.2
+   info:
+     title: Todo
+     version: 1.0.0
+     description: My Todo list API
+     contact:
+       url: "https://github.com/redhat-appdev-practice"
+       email: deven.phillips@redhat.com
+     license:
+       name: Apache 2.0
+       url: "https://www.apache.org/licenses/LICENSE-2.0"
+   servers:
+     - url: "http://{domain}:{port}{base_path}"
+       description: "Todo API URL"
+       variables:
+         base_path:
+           enum:
+             - /
+             - /api/v1
+           default: /
+         domain:
+           enum:
+             - localhost
+             - todo
+             - todo.example.com
+           default: localhost
+         port:
+           enum:
+             - '443'
+             - '80'
+             - '8080'
+             - '4010'
+           default: '4010'
+   tags:
+     - name: todos
+     - name: health
+   paths:
+     /health:
+       get:
+         operationId: getHealth
+         tags:
+         - health
+         responses:
+           '200':
+             description: 'OK'
+             content:
+               text/plain:
+                 schema:
+                   type: string
+   ```
+1. Create `generator-config.yaml` for the OpenAPI generator
+    ```yaml
+    ---
+    nullSafeAdditionalProps: true
+    supportsES6: true
+    withInterfaces: true
+    withSeparateModelsAndApi: true
+    apiPackage: "api"
+    modelPackage: "model"
+    ```
+1. Add the following scripts to your `package.json`:
+   ```json
+   "prism": "prism mock -d --cors openapi.yml",
+   "openapi": "openapi-generator-cli generate -g typescript-fetch -c generator-config.yaml -o src/sdk -i openapi.yml",
+   "watch": "npm-watch" 
+   ```
+1. Add the following `watch` configuration after the `scripts` section in `package.json`:
+    ```json
+    "watch": {
+      "openapi": {
+        "patterns": ["openapi.yml", "generator-config.yaml"]
+      },
+      "prism": {
+        "patterns": ["openapi.yml"],
+        "inherit": true
+      },
+      "start": "yarn.lock"
+    },
+    ```
+   * This configures `npm-watch` to watch the `openapi.yml` and `yarn.lock` files for changes and (re)run the associated scripts when those files change.
+1. Start your application in **Dev** mode using npm watch:
+   ```bash
+   npm run watch
+   ```
+
+### Add data types for the API to the OpenAPI specification
+
+1. Create a new section at the bottom of the `openapi.yml`
+    ```yaml
+    components:
+      schemas:
+        NewTodo:
+          type: object
+          required:
+          - title
+          - isComplete
+          properties:
+           title:
+             type: string
+             maxLength: 255
+           description:
+             type: string
+           id:
+             type: string
+             format: uuid
+           isComplete:
+             type: boolean
+             default: false
+        Todo:
+          type: object
+          required:
+            - id
+          allOf:
+            - $ref: '#/components/schemas/NewTodo'
+    ```
+   * The `NewTodo` type will be used when we have not yet persisted the object and do not yet have a unique ID for the object
+   * The `Todo` type inherits `allOf` it's fields from `NewTodo` but makes the `id` field `required`
+1. Add a new REST path for the `GET` (Retrieve) and `POST` (Create) verbs:
+    ```yaml
+    paths:
+      /todos:
+        get:
+          description: Get all todos
+          operationId: getAllTodos
+          tags:
+            - todos
+          responses:
+            '200':
+              description: 'OK'
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Todo'
+        post:
+          description: 'Add new Todo'
+          operationId: addNewTodo
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/NewTodo'
+          responses:
+            '200':
+              description: 'OK'
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Todo'
+    ```
+    * Notice that we can `POST` a `NewTodo` without an `id` field
+1. Add a nested endpoint for the `GET`, `PUT` (Update) and `DELETE` (Delete) operations by `id`:
+    ```yaml
+    paths:
+      /todos:
+      ## ... SNIP ...
+      /todo/{id}:
+        parameters:
+          - in: path
+            name: id
+            required: true
+            schema:
+              type: string
+              format: uuid
+        get:
+          operationId: getTodoById
+          tags:
+            - todos
+          responses:
+            '200':
+              description: 'OK'
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Todo'
+        delete:
+          operationId: deleteTodoById
+          tags:
+            - todos
+          responses:
+            '204':
+              description: 'No content'
+        put:
+          operationId: updateTodoById
+          tags:
+            - todos
+          responses:
+            '200':
+              description: 'OK'
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Todo'
+    ```
+1. Confirm that `prism` is presenting a mock API by making a request:
+    ```bash
+    curl -s http://localhost:4010/todos
+
+    [
+      {
+        "id": "40881aa7-8558-462a-5da2-ee7058fd2dff",
+        "title": "incid",
+        "isComplete": false,
+        "description": "tempor incididunt occaecat"
+      },
+      {
+        "id": "917fa5d9-d54a-a580-8dfb-e24f3fc632cc",
+        "title": "do",
+        "isComplete": true,
+        "description": "officia dolor amet cillum ut"
+      },
+      // ... SNIP ... //
+      {
+        "id": "d7d1b112-897a-b01d-fb13-f8e039f1df4b",
+        "title": "ea quis",
+        "isComplete": false,
+        "description": "in quis ullamco eiusmod sed"
+      }
+    ]
+    ```
+
+### Use the generated API SDK to create a Context/Reducer/Provider
+
+1. Create a new React component in `src/components/LoadingIndicator.tsx`
+    ```tsx
+    import React from 'react';
+    import CircularProgress from '@material-ui/core/CircularProgress';
+    import CSS from 'csstype';
+
+    export default function AsyncOperationIndicator(props: { indicatorStatus: boolean }): React.ReactElement {
+        let visString = 'hidden';
+        let displayStatus = 'none';
+        if (props.indicatorStatus) {
+            visString = 'visible';
+            displayStatus = 'block';
+        }
+
+        const indicatorStyle: CSS.Properties = {
+            zIndex: 10,
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.3)',
+            visibility: visString as VisibilityState,
+            display: displayStatus,
+        };
+
+        const circlePosition: CSS.Properties = {
+            position: "relative",
+            margin: '0px',
+            left: '50%',
+            top: '50%'
+        }
+
+        return (
+            <div style={indicatorStyle}>
+                <CircularProgress style={circlePosition} />
+            </div>
+        );
+    }
+    ```
+    * We will use this component in our Provider to allow for showing a loading indicator whenever we access the API
+1. Create a new React component in `src/components/ApplicationState.tsx`
+    ```tsx
+    import React, { createContext, useReducer, useState, useEffect, PropsWithChildren, ReactElement } from 'react';
+    import { Todo } from '../sdk/models/Todo';
+    import { NewTodo } from '../sdk/models/NewTodo';
+    import AsyncOperationIndicator from './AsyncOperationIndicator';
+    import { Snackbar } from '@material-ui/core';
+    import MuiAlert from '@material-ui/lab/Alert';
+
+    /**
+     * Interface definition for this component's child components and initial state value
+     */
+    interface AppProviderInterface {
+        children?: ReactElement;
+        value?: ContextType;
+    }
+
+    /*
+     * Used by the Snakbar component to show error, warning, and success messages
+     */
+    interface Notification {
+        message?: string;
+        open: boolean;
+        severity: "success" | "info" | "warning" | "error" | undefined;
+    }
+
+    /*
+     * Type definition for the logged in User
+     */
+    interface User {
+      id?: string;
+      name?: string;
+      username?: string;
+    }
+
+    /*
+     * Used with the reducer to define what can be stored in the global state
+     */
+    export interface ApplicationState {
+        userProfile?: User | {};
+        todos?: Todo[];
+        newTodoForm: NewTodo;
+    }
+
+    /*
+     * Defines the actions which can be sent to the reducer
+     */
+    type ReducerAction = 
+      | { type: 'UPDATE_USER_PROFILE', profile: User }
+      | { type: 'LOAD_TODOS', todos: Todo[] }
+      | { type: 'STORE_FORM_STATE', newTodo: NewTodo }
+
+    /*
+     * Used to define the methods associated with the Context/Provider
+     */
+    export interface ContextType {
+      state: ApplicationState;
+      login: (user: User) => void;
+      saveForm: ( newTodo: NewTodo) => void;
+    }
+
+    /*
+     * Creates an instance of the Context to be used with the reducer and provider
+     */
+    const ApplicationContext = createContext<ContextType>({
+      state: {},
+      login: (user: User) => null,
+      saveForm: ( newTodo: NewTodo) => null
+    });
+
+    /*
+     * Implement the reducer
+     */
+    const appReducer = (state: ApplicationState, action: ReducerAction): ApplicationState => {
+      switch(action.type) {
+        case 'UPDATE_USER_PROFILE':
+          return {
+            ...state,
+            userProfile: action.profile
+          }
+        case 'LOAD_TODOS':
+          return {
+            ...state,
+            todos: action.todos
+          }
+        case 'STORE_FORM_STATE':
+          return {
+            ...state,
+            newTodo: action.newTodo
+          }
+        default:
+          return state;
+      }
+    }
+
+    /*
+     * Define the provider component which exposes the Context and Reducer to the child components
+     */
+    const AppProvider: React.FC<AppProviderInterface> = ({ children, value }: PropsWithChildren<AppProviderInterface>) => {
+      const [snackbarState, setSnackbarState] = useState<Notification>({ message: '', open: false, severity: undefined });
+
+      const curriedReducer = (state, action: ReducerAction): ApplicationState => appReducer(state, action);
+
+      const [state, dispatch] = useReducer(curriedReducer, {} as ApplicationState);
+
+      const initialState = new ApiCallWrappers(api, state, dispatch, setSnackbarState);
+
+      return (
+          <ApplicationContext.Provider value={value? value: initialState}>
+              <AsyncOperationIndicator indicatorStatus={state.isLoading} />
+              <Snackbar
+                  anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'center'
+                  }}
+                  open={snackbarState.open}
+                  message={snackbarState.message}
+                  autoHideDuration={5000}
+              >
+                  <MuiAlert variant="filled" severity={snackbarState.severity}>
+                      {snackbarState.message}
+                  </MuiAlert>
+              </Snackbar>
+              {children}
+          </ApplicationContext.Provider>
+      )
+    }
+
+    export {ApplicationContext, AppProvider};
+    export type { Notification, AppProviderInterface, ReducerAction};
+    ```
+1. Create a new TypeScript class `ApiCallWrappers` in `src/ApiCallWrappers.ts`:
+    ```typescript
+    import {
+      ApplicationState,
+      ContextType,
+      Notification,
+      ReducerAction
+    } from './components/ApplicationState';
+    import {
+      DeleteTodoByIdRequest,
+      GetTodoByIdRequest,
+      UpdateTodoByIdRequest,
+      TodosApi
+    } from './sdk/apis/TodosApi';
+
+    export interface ApiWrapper {
+
+    }
+
+    export class ApiCallWrappers implements ContextType {
+
+      constructor (
+        private api: ApiWrapper,
+        private state: ApplicationState,
+        private dispatch: React.Dospatch<ReducerAction>,
+        private setSnackbarState: React.Dispatch<React.SetStateAction<Notification>>
+      )
+    ```
+:::
+
 ::::
