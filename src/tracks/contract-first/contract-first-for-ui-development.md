@@ -805,9 +805,16 @@ We're going to start with the beginnings of a user interface created using [Reac
             - id
           allOf:
             - $ref: '#/components/schemas/NewTodo'
+          example:
+            title: Do the laundry
+            description: Be sure to separate the undyed clothes from the dyed clothes
+            id: 9cd22dfc-b910-11eb-8025-cfb9dd434d99
+            isComplete: false
     ```
    * The `NewTodo` type will be used when we have not yet persisted the object and do not yet have a unique ID for the object
    * The `Todo` type inherits `allOf` it's fields from `NewTodo` but makes the `id` field `required`
+   * You can also add more specific pattern attributes to your property settings and those will be used by Prism to provide more useful mocking while doing development
+   * You can also provide example responses which Prism will periodically use
 1. Add a new REST path for the `GET` (Retrieve) and `POST` (Create) verbs:
     ```yaml
     paths:
@@ -824,6 +831,7 @@ We're going to start with the beginnings of a user interface created using [Reac
                 application/json:
                   schema:
                     type: array
+                    maxItems: 10
                     items:
                       $ref: '#/components/schemas/Todo'
         post:
