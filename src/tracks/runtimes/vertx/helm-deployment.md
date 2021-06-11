@@ -1,5 +1,5 @@
 ---
-title: Generate a new Quarkus application using OpenAPI Generator
+title: Deploy Your Vert.x App To Kubernetes With Helm
 initialOpenGroupIndex: -1
 collapsable: true
 tags:

@@ -1,5 +1,5 @@
 ---
-title: Generate a new Quarkus application using OpenAPI Generator
+title: Implement Your First API Endpoint
 initialOpenGroupIndex: -1
 collapsable: true
 tags:

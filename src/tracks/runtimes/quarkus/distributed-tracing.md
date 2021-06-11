@@ -1,5 +1,5 @@
 ---
-title: Generate a new Quarkus application using OpenAPI Generator
+title: Add Distributed Tracing With OpenTracing
 initialOpenGroupIndex: -1
 collapsable: true
 tags:
@@ -7,8 +7,8 @@ tags:
 - graalvm
 - graal
 - native-image
-- vertx
-- reactive
+- quarkus
+- panache
 - openapi
 - api
 - rest
@@ -17,8 +17,7 @@ tags:
 - unit testing
 - testing
 - junit
-- vertx-unit
 - mocking
+- panache
 - hibernate
-- jooq
 ---

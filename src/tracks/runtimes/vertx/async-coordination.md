@@ -1,5 +1,5 @@
 ---
-title: Generate a new Quarkus application using OpenAPI Generator
+title: Asynchronous Coordination In Vert.x
 initialOpenGroupIndex: -1
 collapsable: true
 tags:
@@ -21,4 +21,8 @@ tags:
 - mocking
 - hibernate
 - jooq
+- reactivex
+- streams
+- mutiny
+- concurrency
 ---

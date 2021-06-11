@@ -64,6 +64,23 @@ module.exports = {
             sidebarDepth: -1,
             children: [
               {
+                title: 'Quarkus',
+                path: '/tracks/runtimes/quarkus/',
+                collapsable: true,
+                sidebarDepth: 0,
+                children: [
+                  '/tracks/runtimes/quarkus/',
+                  '/tracks/runtimes/quarkus/bootstrap',
+                  '/tracks/runtimes/quarkus/junit',
+                  '/tracks/runtimes/quarkus/panache',
+                  '/tracks/runtimes/quarkus/first-api-endpoint',
+                  '/tracks/runtimes/quarkus/json-logging',
+                  '/tracks/runtimes/quarkus/distributed-tracing',
+                  '/tracks/runtimes/quarkus/configuration',
+                  '/tracks/runtimes/quarkus/helm-deployment'
+                ]
+              },
+              {
                 title: 'ASP.NET',
                 path: '/tracks/runtimes/dotnet/',
                 collapsable: true,

@@ -1,5 +1,5 @@
 ---
-title: Generate a new Quarkus application using OpenAPI Generator
+title: Cloud-Native Configuration
 initialOpenGroupIndex: -1
 collapsable: true
 tags:

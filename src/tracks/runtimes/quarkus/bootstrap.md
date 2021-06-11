@@ -7,8 +7,8 @@ tags:
 - graalvm
 - graal
 - native-image
-- vertx
-- reactive
+- quarkus
+- panache
 - openapi
 - api
 - rest
@@ -17,8 +17,9 @@ tags:
 - unit testing
 - testing
 - junit
-- vertx-unit
 - mocking
+- panache
 - hibernate
-- jooq
 ---
+
+## Bootstrapping A Project Using OpenAPI Generator
