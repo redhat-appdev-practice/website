@@ -1,5 +1,5 @@
 ---
-title: Generate a new Quarkus application using OpenAPI Generator
+title: Generate a new Vert.x application using OpenAPI Generator
 initialOpenGroupIndex: -1
 collapsable: true
 tags:
