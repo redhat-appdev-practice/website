@@ -344,7 +344,7 @@ Anything that we can do with Groovy scripting can be manipulated in this script,
                            -DartifactId=springboot-from-archetype \
                            -Dversion=1.0.0-SNAPSHOT \
                            -Dpackage=com.redhat.runtimes.springboot \
-                           -DadditionalDependencies=org.slf4j:slf4j-api:1.7.31,org.apache.logging.log4j:log4j-to-slf4j:2.14.1 \
+                           -DadditionalDependencies=org.slf4j:slf4j-api:1.7.31,org.apache.logging.log4j:log4j-to-slf4j:2.14.1:runtime \
                            -Denable_pitest=true \
                            -DinteractiveMode=false
     ```
