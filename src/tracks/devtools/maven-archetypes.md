@@ -40,7 +40,7 @@ From the Maven web site:
 
 ## Sounds Complicated!
 
-Actually, you can create an archetype very quickly and easily with a single command! Maven provide the ability to create an Archetype
+Actually, you can create an archetype very quickly and easily with a single command! Maven provides the ability to create an Archetype
 from an existing Maven project by running `mvn archetype:create-from-project`. It will analyze your project `pom.xml` and all of the source code
 files and do a pretty good job of creating a working archetype, though you will likely want to customize and clean up your archetypes. 
 
