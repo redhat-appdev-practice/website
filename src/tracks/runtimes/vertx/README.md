@@ -1,5 +1,5 @@
 ---
-title: Generate a new Vert.x application using OpenAPI Generator
+title: Getting Started - Pre-requisites
 initialOpenGroupIndex: -1
 collapsable: true
 tags:
@@ -24,7 +24,7 @@ tags:
 ---
 ## Preparing Your Development Environment
 
-1. Install the [.NET CLI](https://dotnet.microsoft.com/download)
+1. Install OpenJDK 11
    * Red Hat Enterprise Linux: 
       ```
       yum install java-11-openjdk-headless maven
@@ -44,8 +44,6 @@ tags:
    * [JetBrains IntelliJ](https://www.jetbrains.com/idea/download/)
    * [NetBeans](https://netbeans.apache.org/)
    * [CodeReady Studio/Eclipse](https://developers.redhat.com/products/codeready-studio/download)
-1. Install [OpenAPI Generator](https://openapi-generator.tech/) Version 5.1.1
-   * `npm install -g @openapitools/openapi-generator-cli`
 1. **[OPTIONAL]** A Kubernetes Environment To Experiment With
    * Install [Minikube](https://minikube.sigs.k8s.io/docs/start/)
      * Uses VMs or Docker to create a single node Kubernetes cluster

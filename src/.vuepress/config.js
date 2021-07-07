@@ -63,43 +63,43 @@ module.exports = {
             collapsable: true,
             sidebarDepth: -1,
             children: [
-              {
-                title: 'Quarkus',
-                path: '/tracks/runtimes/quarkus/',
-                collapsable: true,
-                sidebarDepth: 0,
-                children: [
-                  '/tracks/runtimes/quarkus/',
-                  '/tracks/runtimes/quarkus/bootstrap',
-                  '/tracks/runtimes/quarkus/junit',
-                  '/tracks/runtimes/quarkus/panache',
-                  '/tracks/runtimes/quarkus/first-api-endpoint',
-                  '/tracks/runtimes/quarkus/json-logging',
-                  '/tracks/runtimes/quarkus/distributed-tracing',
-                  '/tracks/runtimes/quarkus/configuration',
-                  '/tracks/runtimes/quarkus/helm-deployment'
-                ]
-              },
               // {
-              //   title: 'Vert.x',
-              //   path: '/tracks/runtimes/vertx/',
+              //   title: 'Quarkus',
+              //   path: '/tracks/runtimes/quarkus/',
               //   collapsable: true,
               //   sidebarDepth: 0,
               //   children: [
-              //     '/tracks/runtimes/vertx/',
-              //     '/tracks/runtimes/vertx/bootstrap',
-              //     '/tracks/runtimes/vertx/async-coordination',
-              //     '/tracks/runtimes/vertx/testing',
-              //     '/tracks/runtimes/vertx/hibernate-reactive',
-              //     '/tracks/runtimes/vertx/jooq-vertx',
-              //     '/tracks/runtimes/vertx/first-api-endpoint',
-              //     '/tracks/runtimes/vertx/json-logging',
-              //     '/tracks/runtimes/vertx/distributed-tracing',
-              //     '/tracks/runtimes/vertx/configuration',
-              //     '/tracks/runtimes/vertx/clustering',
-              //     '/tracks/runtimes/vertx/helm-deployment'
+              //     '/tracks/runtimes/quarkus/',
+              //     '/tracks/runtimes/quarkus/bootstrap',
+              //     '/tracks/runtimes/quarkus/junit',
+              //     '/tracks/runtimes/quarkus/panache',
+              //     '/tracks/runtimes/quarkus/first-api-endpoint',
+              //     '/tracks/runtimes/quarkus/json-logging',
+              //     '/tracks/runtimes/quarkus/distributed-tracing',
+              //     '/tracks/runtimes/quarkus/configuration',
+              //     '/tracks/runtimes/quarkus/helm-deployment'
               //   ]
               // },
+              {
+                title: 'Vert.x',
+                path: '/tracks/runtimes/vertx/',
+                collapsable: true,
+                sidebarDepth: 0,
+                children: [
+                  '/tracks/runtimes/vertx/',
+                  '/tracks/runtimes/vertx/bootstrap',
+                  '/tracks/runtimes/vertx/async-coordination',
+                  '/tracks/runtimes/vertx/testing',
+                  '/tracks/runtimes/vertx/hibernate-reactive',
+                  '/tracks/runtimes/vertx/jooq-vertx',
+                  '/tracks/runtimes/vertx/first-api-endpoint',
+                  '/tracks/runtimes/vertx/json-logging',
+                  '/tracks/runtimes/vertx/distributed-tracing',
+                  '/tracks/runtimes/vertx/configuration',
+                  '/tracks/runtimes/vertx/clustering',
+                  '/tracks/runtimes/vertx/helm-deployment'
+                ]
+              },
               {
                 title: 'ASP.NET',
                 path: '/tracks/runtimes/dotnet/',
