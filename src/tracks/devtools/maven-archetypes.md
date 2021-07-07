@@ -28,7 +28,7 @@ From the Maven web site:
 > all other things of the same kind are made. The name fits as we are trying to provide a system that provides a consistent means 
 > of generating Maven projects. Archetype will help authors create Maven project templates for users, and provides users with the 
 > means to generate parameterized versions of those project templates.
-> 
+> <br /><br />
 > Using archetypes provides a great way to enable developers quickly in a way consistent with best practices employed by your project or 
 > organization. Within the Maven project, we use archetypes to try and get our users up and running as quickly as possible by providing a sample 
 > project that demonstrates many of the features of Maven, while introducing new users to the best practices employed by Maven. In a matter of 
