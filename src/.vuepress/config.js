@@ -91,7 +91,8 @@ module.exports = {
               '/tracks/devtools/owasp-dependency-check',
               '/tracks/devtools/owasp-zap-hud',
               '/tracks/devtools/npm-audit-ci-wrapper',
-              '/tracks/devtools/helm-intro'
+              '/tracks/devtools/helm-intro',
+              '/tracks/devtools/maven-archetypes'
             ]
           },          {
             title: 'Serverless',
