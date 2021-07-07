@@ -254,7 +254,7 @@ Start with a Maven project generated using the [OpenShift Launcher](https://laun
                            -Denable_pitest=true \
                            -DinteractiveMode=false
     ```
-   * This will generated while disabling interactive mode, so we have to pass the required properties on the command-line
+   * This will generate a project while disabling interactive mode, so we have to pass the required properties on the command-line
 1. Open the generated project and note the differences after our changes
 1. Both the `src/main/java` and `src/test/java` classes are in their proper package directories
    ![OpenShift Launcher](/mvn-archetype-customized-test-18.png)
@@ -348,7 +348,7 @@ Anything that we can do with Groovy scripting can be manipulated in this script,
                            -Denable_pitest=true \
                            -DinteractiveMode=false
     ```
-   * This will generated while disabling interactive mode, so we have to pass the required properties on the command-line
+   * This will generate a project while disabling interactive mode, so we have to pass the required properties on the command-line
 1. Check the `pom.xml` file and see that at the top of the `<dependencies>` section, you should see:
     ```xml
     <dependency>
