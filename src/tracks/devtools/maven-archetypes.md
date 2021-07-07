@@ -42,7 +42,7 @@ From the Maven web site:
 
 Actually, you can create an archetype very quickly and easily with a single command! Maven provide the ability to create an Archetype
 from an existing Maven project by running `mvn archetype:create-from-project`. It will analyze your project `pom.xml` and all of the source code
-files and do a pretty good job of creating a working archetype, so you will likely want to customize and clean up your archetypes. 
+files and do a pretty good job of creating a working archetype, though you will likely want to customize and clean up your archetypes. 
 
 Let's say you have a project which is for SpringBoot. Sure, you can use [Spring Initializr](https://start.spring.io/) and that will give you the
 basics, but perhaps your organization has other standards they would like to include? Imagine that you could bootstrap a Spring app with the normal
@@ -55,9 +55,9 @@ Start with a Maven project generated using the [OpenShift Launcher](https://laun
 
 1. Click on **Start**
    ![OpenShift Launcher](/mvn-archetype-launcher-step-01.png)
-1. Click on **Deploy and Example Application**
+1. Click on **Deploy an Example Application**
    ![OpenShift Launcher](/mvn-archetype-launcher-step-02.png)
-1. Click **Select and Example**
+1. Click **Select an Example**
    ![OpenShift Launcher](/mvn-archetype-launcher-step-03.png)
 1. Select **REST API Level 0** and choose the **SpringBoot** runtime
    ![OpenShift Launcher](/mvn-archetype-launcher-step-04.png)
