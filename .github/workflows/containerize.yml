@@ -42,3 +42,4 @@ jobs:
           push: true
           tags: |
             quay.io/cloud-native-runtimes/cnad-vuepress:latest
+            quay.io/cloud-native-runtimes/cnad-vuepress:${{ github.run_id }}
