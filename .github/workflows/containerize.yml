@@ -38,6 +38,6 @@ jobs:
       - name: Build container image and push to Quay
         uses: docker/build-push-action@v2.6.1
         with:
-          repository: quay.io/cloud-native-runtimes/cnad-vuepress
           push: true
-          tags: latest
+          tags: |
+            quay.io/cloud-native-runtimes/cnad-vuepress:latest
