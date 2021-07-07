@@ -26,12 +26,18 @@ jobs:
       - name: Build VuePress Static Content
         run: yarn install; yarn run build
 
+      - name: Docker Login
+        # You may pin to the exact commit or the version.
+        # uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        uses: docker/login-action@v1.10.0
+        with:
+          registry: 'quay.io'
+          username: ${{ secrets.QUAY_USER }}
+          password: ${{ secrets.QUAY_PASS }}
+
       - name: Build container image and push to Quay
         uses: docker/build-push-action@v2.6.1
         with:
-          username: ${{ secrets.QUAY_USER }}
-          password: ${{ secrets.QUAY_PASS }}
-          repository: cloud-native-runtimes/cnad-vuepress
-          registry: 'quay.io'
+          repository: quay.io/cloud-native-runtimes/cnad-vuepress
           push: true
           tags: latest
