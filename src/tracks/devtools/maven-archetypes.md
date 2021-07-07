@@ -265,7 +265,7 @@ Start with a Maven project generated using the [OpenShift Launcher](https://laun
 ## Going To The Next Level
 
 Velocity templates and variables combined with the `archetype-metadata.xml` configurations is quite powerful
-for simple customization and allows you to accomplish quite a bit, but what if you need to customize even further? Maven archetypes have you covered with the capability to add a [Groovy](https://groovy.apache.org) script as a post-processing step when you generate a new project from an Archetype. Let's imagine that we would like to be able to add a list of additional dependencies to our generated `pom.xml`. We could do this by adding the following Groovy script to our archetype.
+for simple customization and allows you to accomplish quite a bit, but what if you need to customize even further? Maven archetypes have you covered with the capability to add a [Groovy](https://groovy.apache.org) script as a post-processing step when you generate a new project from an Archetype. Let's imagine that we would like to be able to add a list of additional dependencies to our generated `pom.xml`. We could do this by adding the following Groovy script to our archetype at `src/main/resources/META-INF/archetype-post-generate.groovy`.
 
 ```groovy
 import java.nio.file.Path
