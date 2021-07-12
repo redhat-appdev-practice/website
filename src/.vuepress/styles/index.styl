@@ -23,25 +23,23 @@
 }
 
 html, body
-  background-color black
-  background-image url('/bgtile.png')
-  background-repeat repeat
+  background-color white
   font-family RedHatText
 
 code, kbd, .line-number
-  background-color #343434
+  background-color black
+  color white
   font-family 'Overpass Mono', monospace
 
 pre
   font-family 'Overpass Mono', monospace
-  background-color #252525
+  background-color black
+  color white
 
 aside.sidebar
-    background rgba(255,255,255,0.25)
-    border-radius 0.8rem 2.2rem
+    background black
+    color white
     border none
-    margin 0.5rem
-    box-shadow 0.35rem 0.35rem 0.2rem rgba(255,255,255,0.15)
 
 @media (max-width: $MQMobile)
   aside.sidebar
@@ -75,18 +73,16 @@ aside.sidebar
   border: 0px;
 
 .nav-links
-  color: $textColor
+  color: white
 
 .nav-link:hover
-    color: white
-    text-shadow: 0.05rem 0.05rem 0.02rem white
+    color: $accentColor
+    text-shadow: 0.05rem 0.05rem 0.02rem #252525
 
 .navbar
-    background: transparent
-    background-color: transparent
+  background-color black
 
 h1, h2, h3, h4
-  color: white
   font-family: RedHatDisplay
   &:hover
       color: $accentColor

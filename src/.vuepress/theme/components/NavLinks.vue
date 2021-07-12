@@ -124,10 +124,11 @@ export default {
 
 <style lang="stylus">
 .nav-links
+  color white
   display inline-block
   a
     line-height 1.4rem
-    color inherit
+    color white
     &:hover, &.router-link-active
       color $accentColor
   .nav-item
@@ -148,7 +149,7 @@ export default {
 @media (min-width: $MQMobile)
   .nav-links a
     &:hover, &.router-link-active
-      color $textColor
+      color $accentColor
   .nav-item > a:not(.external)
     &:hover, &.router-link-active
       margin-bottom -2px
