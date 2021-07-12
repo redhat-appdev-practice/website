@@ -130,7 +130,7 @@ export default {
     line-height 1.4rem
     color white
     &:hover, &.router-link-active
-      color $accentColor
+      color green
   .nav-item
     position relative
     display inline-block

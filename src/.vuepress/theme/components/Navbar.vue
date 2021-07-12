@@ -109,8 +109,10 @@ $navbar-horizontal-padding = 1.5rem
   .site-name
     font-size 1.3rem
     font-weight 600
-    color $textColor
+    color white
     position relative
+    &:hover
+      color $accentColor
   .links
     padding-left 1.5rem
     box-sizing border-box
