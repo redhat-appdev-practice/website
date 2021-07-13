@@ -7,8 +7,8 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
-    "build": "npx vuepress@1.8.2 build src/ -d ./dist && cp google*html ./dist/",
-    "dev": "npx vuepress@1.8.2 dev src/"
+    "build": "vuepress build src/ -d ./dist && cp google*html ./dist/",
+    "dev": "vuepress dev --host 0.0.0.0 src/"
   },
   "devDependencies": {
     "vuepress": "^1.8.2",
