@@ -35,6 +35,13 @@ header
 aside.sidebar
   background-color black
 
+a.active
+  color white!important
+
+ul.sidebar-sub-headers
+  color white!important
+  border-top 2px solid $accentColor
+
 .page
   background-color white
   color black
@@ -42,8 +49,11 @@ aside.sidebar
 .theme-default-content code
   background-color $codeBgColor
 
-.theme-default-content:not(.custom)
-  max-width: 100%!important
-
 a.router-link-active
   color $accentColor!important
+
+.theme-default-content
+  max-width: inherit!important
+
+img
+  display block
