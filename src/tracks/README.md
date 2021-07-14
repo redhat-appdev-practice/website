@@ -5,7 +5,7 @@ sidebarDepth: 2
 
 # Tracks Overview
 
-<div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://app.lucidchart.com/documents/embeddedchart/77f46b7d-8709-4b64-ab38-1629c0f233b4" id=".n2CSheW2njE"></iframe></div>
+<div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://lucid.app/documents/embeddedchart/74fe4c6a-a778-4b96-961a-2af86a36326e" id="5nRU_fEEtHD."></iframe></div>
 
 ## Contract-First API Development
 
