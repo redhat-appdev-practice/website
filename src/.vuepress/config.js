@@ -9,6 +9,7 @@ module.exports = {
     ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
     ['link', { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: "/Icon.svg"}],
     ['link', { rel: "shortcut icon", href: "/Icon.svg"}],
+    ['meta', { name: "viewport", property: "viewport", content: "width=device-width, initial-scale=0.9"}]
   ],
   themeConfig: {
     logo: '/Icon.svg',

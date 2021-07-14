@@ -3,7 +3,7 @@
 $mobileSidebarWidth = $sidebarWidth * 0.82
 
 // narrow desktop / iPad
-@media (max-width: $MQNarrow)
+@media (min-resolution: 150dpi) and (pointer: coarse)
   .sidebar
     font-size 15px
     width $mobileSidebarWidth
@@ -11,7 +11,7 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     padding-left $mobileSidebarWidth
 
 // wide mobile
-@media (max-width: $MQMobile)
+@media (min-resolution: 300dpi) and (pointer: coarse)
   .sidebar
     top 0
     padding-top $navbarHeight
@@ -28,7 +28,7 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
         padding-top: 0
 
 // narrow mobile
-@media (max-width: $MQMobileNarrow)
+@media (min-resolution: 450dpi) and (pointer: coarse)
   h1
     font-size 1.9rem
   {$contentClass}
