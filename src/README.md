@@ -1,5 +1,6 @@
 ---
 home: true
+title: Cloud-Native AppDev
 heroImage: /Logo.svg
 features:
 - title: What is this site?
