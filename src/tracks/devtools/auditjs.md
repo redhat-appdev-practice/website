@@ -22,7 +22,7 @@ tags:
 
 For NodeJS/Yarn projects, there exists a tool within NPM to perform an Audit of the dependencies in the project. That tool, `npm audit`, is fairly effective but not very flexible or granular. For example, it cannot differentiate between dev dependencies and production dependencies. It cannot set thresholds based on severity. And up until recently, it would never return a non-zero exit status when there was a problem and as such it was not very useful in CI/CD pipelines.
 
-Then came [audit.js](https://github.com/sonatype-nexus-community/auditjs#readme). This tool leverages [Sonatype]()'s security scanning capabilities to analyze your dependencies for vulnerabilities. This allows for greater flexibility and granularity. In this lab we will get to see how it can be leveraged in a CI/CD pipeline in order to break a build when an appropriate issue is found.
+Then came [audit.js](https://github.com/sonatype-nexus-community/auditjs#readme). This tool leverages [Sonatype](https://www.sonatype.com/)'s security scanning capabilities to analyze your dependencies for vulnerabilities. This allows for greater flexibility and granularity. In this lab we will get to see how it can be leveraged in a CI/CD pipeline in order to break a build when an appropriate issue is found.
 
 ## Create A New NodeJS Project Using 
 
