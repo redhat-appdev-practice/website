@@ -26,7 +26,7 @@ Then came [audit.js](https://github.com/sonatype-nexus-community/auditjs#readme)
 
 ## Create A New NodeJS Project Using 
 
-We will start off by creating a new [Node](https://nodejs.org/en/) application and adding some dependencies.
+We will start off by creating a new [Node](https://nodejs.org/) application and adding some dependencies.
 
 ```bash
 mkdir vulnerable-project
