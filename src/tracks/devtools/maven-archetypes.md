@@ -270,7 +270,6 @@ for simple customization and allows you to accomplish quite a bit, but what if y
 ```groovy
 import java.nio.file.Path
 import java.nio.file.Paths
-import groovy.xml.XmlParser
 
 Properties properties = request.properties
 
