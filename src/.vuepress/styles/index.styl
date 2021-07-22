@@ -98,3 +98,21 @@ a.router-link-active
 img
   display block
 // END
+
+@media print
+  div
+    break-inside: avoid
+  .sidebar-button
+    display: none!important
+  .sidebar
+    display none!important
+  .page
+    padding-left 0px!important
+  iframe
+    visibility hidden
+    display: none
+  @page
+    size: auto
+    margin: 0px
+  header
+    display: none!important
