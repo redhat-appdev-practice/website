@@ -20,6 +20,9 @@ talk to development teams that avoid ever modifying anything in their `pom.xml` 
 tutorial will show you how you can leverage [Maven Archetypes](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html) to simplify bootstrapping projects with the features that you use and the
 development standards you wish to enforce.
 
+## Video
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U3AvNVT5j8w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## What is an Archetype?
 
 From the Maven web site:
