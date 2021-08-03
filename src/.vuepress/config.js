@@ -2,7 +2,13 @@ module.exports = {
   title: 'Cloud-Native AppDev',
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
   plugins: [
-    'tabs'
+    'tabs',
+    [
+      '@vuepress/google-analytics',
+      {
+        'ga': 'UA-180649557-1'
+      }
+    ]
   ],
   head: [
     ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/Icon.svg"}],
