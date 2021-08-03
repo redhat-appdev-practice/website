@@ -11,8 +11,9 @@
     "dev": "vuepress dev --host 0.0.0.0 src/"
   },
   "devDependencies": {
-    "vuepress": "^1.8.2",
+    "@vuepress/plugin-google-analytics": "^1.8.2",
     "vue-tabs-component": "^1.5.0",
+    "vuepress": "^1.8.2",
     "vuepress-plugin-tabs": "^0.3.0"
   }
 }
