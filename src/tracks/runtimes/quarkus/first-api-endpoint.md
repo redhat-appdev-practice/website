@@ -34,8 +34,21 @@ tags:
     ```
 1. Start with writing a test under the `com.redhat.runtimes.api` package
     ```java
+    package com.redhat.runtimes.api;
+
+    import com.redhat.runtimes.data.TodosRepository;
+    import com.redhat.runtimes.models.Todo;
+    import io.quarkus.test.junit.QuarkusMock;
+    import io.quarkus.test.junit.QuarkusTest;
+    import org.junit.jupiter.api.BeforeAll;
+    import org.junit.jupiter.api.DisplayName;
+    import org.junit.jupiter.api.Test;
+    import org.mockito.Mockito;
+
     import javax.inject.Inject;
     import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.UUID;
 
     import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,9 +69,33 @@ tags:
 
         @Test
         public void testGetTodosNoResults() {
+            // Given
             Mockito.when(repo.listAll()).thenReturn(new ArrayList<>());
+            
+            // When
             var result = underTest.gettodos();
+            
+            // Then
             assertEquals(0, result.size(), "Without prepared data, we expect 0 results");
+        }
+
+        @Test
+        public void testGetTodosOneResult() {
+            // Given
+            Todo todo = new Todo().author("dphillips").complete(false).title("My test todo")
+                    .description("A much longer description of my test Todo item").id(UUID.randomUUID());
+            Mockito.when(repo.listAll()).thenReturn(Arrays.asList(todo));
+            
+            // When
+            var result = underTest.gettodos();
+            
+            // Then
+            assertEquals(1, result.size(), "With prepared data, we expect 1 results");
+            assertEquals("dphillips", result.get(0).getAuthor(), "The author name should be 'dphillips'");
+            assertFalse(result.get(0).getComplete(), "The complete flag should be false");
+            assertEquals("My test todo", result.get(0).getTitle(), "The title should be 'My test todo'");
+            assertEquals("A much longer description of my test Todo item", result.get(0).getDescription(),
+                    "The description should be 'A much longer description of my test Todo item'");
         }
     }
     ```
