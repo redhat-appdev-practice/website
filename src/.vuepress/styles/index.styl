@@ -1,154 +1,132 @@
-@font-face {
-  font-family: 'RedHatDisplay';
-  src: url('/fonts/RedHatDisplay-Regular.woff');
-  font-weight: 300;
-  font-style: normal;
-}
+/**
+ * Custom Styles here.
+ *
+ * ref：https://v1.vuepress.vuejs.org/config/#index-styl
+ */
 
-@font-face {
-  font-family: 'RedHatText';
-  src: url('/fonts/RedHatText-Regular.woff');
-  font-weight: 300;
-  font-style: normal;
-}
+// Add the styles required for the tabs plugin
+@require '~vuepress-plugin-tabs/dist/themes/default.styl'
+// END
 
-/* latin-ext */
-@font-face {
-  font-family: 'Overpass Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Overpass Mono Regular'), local('OverpassMono-Regular'), url(https://fonts.gstatic.com/s/overpassmono/v6/_Xmq-H86tzKDdAPa-KPQZ-AC1iG0ts-2.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
+// Override the default colors for the Hero page
+.home .hero img
+  max-width 450px!important
+  color black
 
-html, body
-  background-color black
-  background-image url('/bgtile.png')
-  background-repeat repeat
-  font-family RedHatText
+.description
+  color black!important
 
-code, kbd, .line-number
-  background-color #343434
-  font-family 'Overpass Mono', monospace
+.home .feature h2
+  color black!important
 
-pre
-  font-family 'Overpass Mono', monospace
-  background-color #252525
+.home .feature p
+  color black!important
+// END
 
+
+// Force the top-left logo to overflow to "break the box" in order
+// to improve visual appeal
+img.logo
+    height 4.8rem!important
+// END
+
+// Override default colors for the nav/horizontal bar
+header
+  color black
+  &.navbar
+    background-color black
+    color white
+    .site-name
+      background-color black
+      color white
+    .links
+      color white
+      background-color black
+// END
+
+// This is to make the search box input and suggestions visible
+.search-box input
+  color black!important
+
+ul > li > a > span.page-title
+  color black!important
+  &:hover
+    color $accentColor!important
+// END
+
+
+&.navbar
+  border 0px
+
+// Improve navigation with highlight border on sidebar
 aside.sidebar
-    background rgba(255,255,255,0.25)
-    border-radius 0.8rem 2.2rem
-    border none
-    margin 0.5rem
-    box-shadow 0.35rem 0.35rem 0.2rem rgba(255,255,255,0.15)
+  background-color black
 
-@media (max-width: $MQMobile)
-  aside.sidebar
-    margin 0
-    background #5B5B5B;
-    border none
-    border-radius 0 1.5rem 0 0
-    box-shadow none
+a.active
+  color white!important
 
-.search-box
-    &.focused
-        color black
+ul.sidebar-sub-headers
+  color white!important
+  border-top 2px solid $accentColor
 
-.suggestions
-    color black
+a.sidebar-link.active
+  color white!important
+  border 0px!important
+  border-bottom 2px solid $accentColor
 
-.custom-block-title
-    font-family 'RedHatDisplay', 'sans-serif'
-    font-size 1.5rem
-    text-decoration underline
+a.router-link-active
+  color $accentColor!important
+// END
 
-.custom-block
-    &.tip
-        color black
-    &.warning
-        background-color: #f3f5f7
+// Set the default page background and text colors
+.page
+  background-color white
+  color black
+// END
 
-.navbar
-  .links
-    background: transparent
-  border: 0px;
+// Set the background color for code blocks
+.theme-default-content code
+  background-color $codeBgColor
+// END
 
-.nav-links
-  color: $textColor
+// Allow main are content to expand to fit available space
+.theme-default-content
+  max-width: inherit!important
+// END
 
-.nav-link:hover
-    color: white
-    text-shadow: 0.05rem 0.05rem 0.02rem white
+// Force images to not wrap with text and show up below the last line of text
+img
+  display block
+// END
 
-.navbar
-    background: transparent
-    background-color: transparent
+div.last-updated
+  position: fixed
+  bottom: 10px
+  right: 200px
+  z-index: 5
+  border: 2px solid black !important
+  border-radius: 7px !important
+  background-color: white
+  padding: 4px
 
-h1, h2, h3, h4
-  color: white
-  font-family: RedHatDisplay
-  &:hover
-      color: $accentColor
+span.prefix
+  color: black !important
 
-.tabs-component
-  margin 2em 0
 
-.tabs-component-tabs
-  border solid 1px #6c6c6c
-  border-radius 6px
-  margin-bottom 5px
-  padding-left 0
-
-.tabs-component-tab
-  color #999
-  font-size 14px
-  font-weight 600
-  margin-right 0
-  list-style none
-  &:hover
-    color: #666
-  &.is-active
-    color $accentColor
-  &.is-disabled *
-    color #cdcdcd
-    cursor not-allowed !important
-
-.tabs-component-tab-a
-  align-items center
-  color inherit
-  display flex
-  padding .25em .5em
-  text-decoration none
-
-.tabs-component-panels
-  padding 1em 0
-
-@media (min-width: 700px)
-  .tabs-component-tabs
-    border 0
-    align-items stretch
-    display flex
-    justify-content flex-start
-    margin-bottom -1px
-
-  .tabs-component-tab
-    background-color #000
-    border solid 1px #6c6c6c
-    border-radius 3px 3px 0 0
-    margin-right .25em
-    transition transform .3s ease
-    background-color: rgba(180,180,180,0)
-  &.is-active
-    border-bottom solid 1px #6c6c6c
-    background-color: rgba(180,180,180,0.2)
-    z-index 2
-    transform translateY(0)
-
-  .tabs-component-panels
-    border-top-left-radius 0
-    background-color rgba(180,180,180,0.2)
-    border solid 1px #6c6c6c
-    border-radius 0 6px 6px 6px
-    box-shadow 0 0 10px rgba(0, 0, 0, .05)
-    padding 1em 1em
+@media print
+  div
+    break-inside: avoid
+  .sidebar-button
+    display: none!important
+  .sidebar
+    display none!important
+  .page
+    padding-left 0px!important
+  iframe
+    visibility hidden
+    display: none
+  @page
+    size: auto
+    margin: 0px
+  header
+    display: none!important

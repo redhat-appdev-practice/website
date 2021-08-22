@@ -5,7 +5,7 @@ sidebarDepth: 2
 
 # Tracks Overview
 
-<div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://app.lucidchart.com/documents/embeddedchart/77f46b7d-8709-4b64-ab38-1629c0f233b4" id=".n2CSheW2njE"></iframe></div>
+<div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://lucid.app/documents/embeddedchart/74fe4c6a-a778-4b96-961a-2af86a36326e" id="5nRU_fEEtHD."></iframe></div>
 
 ## Contract-First API Development
 
@@ -17,6 +17,9 @@ If you have ever written an API or service which is consumed by others, even ins
 
 ## Serverless
 
+The Serverless track introduces advanced Serveless topics such as Knative Eventing and Debezium, and also provides an introduction to the Serverless landscape and working examples of serverless using Cloud native runtimes.
 ## Behavior-Driven Development
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Behavior-driven_development): Behavior-driven Development (BDD) is an agile software development process that encourages collaboration among developers, quality assurance testers, and customer representatives in a software project. It encourages teams to use conversation and concrete examples to formalize a shared understanding of how the application should behave. It emerged from test-driven development (TDD). Behavior-driven development combines the general techniques and principles of TDD with ideas from domain-driven design and object-oriented analysis and design to provide software development and management teams with shared tools and a shared process to collaborate on software development.
 
 ## Developer Tools
