@@ -16,10 +16,10 @@ tags:
 - contract-first
 - unit testing
 - testing
-- junit
-- mocking
-- panache
-- hibernate
+- json
+- logging
+- EFK
+- splunk
 ---
 
 ## JSON Logging From Quarkus
