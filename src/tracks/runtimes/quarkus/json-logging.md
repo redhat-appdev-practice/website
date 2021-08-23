@@ -38,4 +38,4 @@ In order to work best with log aggregators like EFK Stack or Splunk, you want to
     quarkus.log.console.json=false
     %prod.quarkus.log.console.json=true
     ```
-1. That's it! We are done here!
+1. We can further customize the JSON logging output by configuring the underlying logging provider as documented [HERE](https://quarkus.io/guides/logging#logging-adapters)
