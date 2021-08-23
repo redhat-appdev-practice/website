@@ -38,7 +38,7 @@ As you have likely already noticed in previous parts of this track, Quarkus is o
             scan:
                 disable: 'true'
 
-    %test:
+    '%test':
         quarkus:
             datasource:
                 db-kind: h2
@@ -67,7 +67,7 @@ As you have likely already noticed in previous parts of this track, Quarkus is o
         oidc:
             auth-sever-url: https://oidc.example.com/auth/realm/client
 
-    %prod:
+    '%prod':
         quarkus:
             log:
                 console:
