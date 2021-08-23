@@ -96,4 +96,5 @@ In order to simplify adopting a Contract-First API Development approach, we have
    * `maven-clean-plugin` is configured to delete the generated sources
    * `openapi-generator-maven-plugin` is attached to the `generate-sources` phase to generate our stubbed JAX-RS Server and Models
    * `formatter-maven-plugin` is attached to the `process-sources` phase to format and clean-up the generated code
+   * `kubernetes-maven-plugin` and `openshift-maven-plugin` from Eclipse JKube - Used to deploy the application to Kubernetes/OpenShift
 1. Create the subdirectory `src/main/java` as we will be creating our implementations in there starting with the next segement
