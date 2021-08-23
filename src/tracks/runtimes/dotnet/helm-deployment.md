@@ -35,7 +35,7 @@ tags:
 
 Helm helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
 
-We do not have the time to completely explain creating a Helm chart for this application, and besides we want you to come back in couple of weeks when I colleague Jamie Land will be telling you ALL ABOUT Helm. In this case, we're just going to customized some values in a chart to deploy our application.
+We do not have the time to completely explain creating a Helm chart for this application, and besides we want you to come back in couple of weeks when my colleague Jamie Land will be telling you [about Helm](/tracks/devtools/helm-intro.html). In this case, we're just going to customized some values in a chart to deploy our application.
 
 1. Ensure you are logged in to your Kubernetes or OpenShift cluster
    If you are using Minikube or KInD it should log you in on start
