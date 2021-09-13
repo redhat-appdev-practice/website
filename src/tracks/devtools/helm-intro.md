@@ -17,7 +17,7 @@ tags:
 
 
 ## Videos 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=2jEPTw_UJPk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2jEPTw_UJPk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ## What is Helm?
