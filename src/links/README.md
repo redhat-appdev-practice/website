@@ -36,6 +36,7 @@ sidebar: auto
 * [OpenAPI Generator](https://openapi-generator.tech/)
 * [Apicurio](https://www.apicur.io/)
 * [Schemathesis](https://github.com/schemathesis/schemathesis)
+* [Prism](https://stoplight.io/open-source/prism/)
 * [FakeIt](https://github.com/JustinFeng/fakeit)
 
 ## Tools, Languages, & Frameworks

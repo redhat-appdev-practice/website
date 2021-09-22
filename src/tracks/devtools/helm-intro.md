@@ -15,6 +15,11 @@ tags:
 ::: v-pre
 # Introduction to Helm
 
+
+## Videos 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2jEPTw_UJPk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 ## What is Helm?
 
 [Helm](https://helm.sh) is a Kubernetes package manager that is quickly becoming one of the go-to methods for infrastructure-as-code in the cloud. Helm uses a templating language based on Golang in order to deploy and track user created templates known as "Charts" using the Kubernetes API. In this lab we are going to look at some of the basic concepts of creating and deploying a Helm chart.

@@ -2,13 +2,20 @@ module.exports = {
   title: 'Cloud-Native AppDev',
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
   plugins: [
-    'tabs'
+    'tabs',
+    [
+      '@vuepress/google-analytics',
+      {
+        'ga': 'UA-180649557-1'
+      }
+    ]
   ],
   head: [
     ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/Icon.svg"}],
     ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
     ['link', { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: "/Icon.svg"}],
     ['link', { rel: "shortcut icon", href: "/Icon.svg"}],
+    ['meta', { name: "viewport", property: "viewport", content: "width=device-width, initial-scale=0.9"}]
   ],
   themeConfig: {
     logo: '/Icon.svg',
@@ -64,6 +71,43 @@ module.exports = {
             sidebarDepth: -1,
             children: [
               {
+                title: 'Quarkus',
+                path: '/tracks/runtimes/quarkus/',
+                collapsable: true,
+                sidebarDepth: 0,
+                children: [
+                  '/tracks/runtimes/quarkus/',
+                  '/tracks/runtimes/quarkus/bootstrap',
+                  '/tracks/runtimes/quarkus/junit',
+                  '/tracks/runtimes/quarkus/panache',
+                  '/tracks/runtimes/quarkus/first-api-endpoint',
+                  '/tracks/runtimes/quarkus/json-logging',
+                  '/tracks/runtimes/quarkus/distributed-tracing',
+                  '/tracks/runtimes/quarkus/configuration',
+                  '/tracks/runtimes/quarkus/helm-deployment'
+                ]
+              },
+              // {
+              //   title: 'Vert.x',
+              //   path: '/tracks/runtimes/vertx/',
+              //   collapsable: true,
+              //   sidebarDepth: 0,
+              //   children: [
+              //     '/tracks/runtimes/vertx/',
+              //     '/tracks/runtimes/vertx/bootstrap',
+              //     '/tracks/runtimes/vertx/async-coordination',
+              //     '/tracks/runtimes/vertx/testing',
+              //     '/tracks/runtimes/vertx/hibernate-reactive',
+              //     '/tracks/runtimes/vertx/jooq-vertx',
+              //     '/tracks/runtimes/vertx/first-api-endpoint',
+              //     '/tracks/runtimes/vertx/json-logging',
+              //     '/tracks/runtimes/vertx/distributed-tracing',
+              //     '/tracks/runtimes/vertx/configuration',
+              //     '/tracks/runtimes/vertx/clustering',
+              //     '/tracks/runtimes/vertx/helm-deployment'
+              //   ]
+              // },
+              {
                 title: 'ASP.NET',
                 path: '/tracks/runtimes/dotnet/',
                 collapsable: true,
@@ -90,8 +134,9 @@ module.exports = {
               '/tracks/devtools/compose-files-for-local-dev',
               '/tracks/devtools/owasp-dependency-check',
               '/tracks/devtools/owasp-zap-hud',
-              '/tracks/devtools/npm-audit-ci-wrapper',
-              '/tracks/devtools/helm-intro'
+              '/tracks/devtools/auditjs',
+              '/tracks/devtools/helm-intro',
+              '/tracks/devtools/maven-archetypes'
             ]
           },          {
             title: 'Serverless',
