@@ -1,5 +1,19 @@
 # This is a [VuePress](https://vuepress.vuejs.org/) site for [Cloud-Native AppDev](https://appdev.consulting.redhat.com/).
 
+## Hacktoberfest Participants
+
+If you would like to submit a pull against this repository and have it count toward Hacktoberfest, please be aware that this is what we are looking for:
+
+* Improvements to one of the existing track pages:
+  * Better or more idomatic workflow (Subjective and at the discretion of our team to decide if wanted)
+  * Fixes to spelling
+  * Updated or improved tooling
+* New track pages which align with our [Journey Map](https://lucid.app/documents/embeddedchart/74fe4c6a-a778-4b96-961a-2af86a36326e)
+
+In order to avoid wasting your time and ours, it is recommended that you submit an issue describing your contribution first.
+
+**Thank you! And happy hacking!!**
+
 ## Prerequisites
 * NodeJS >= 12
 * NPM >= 6
