@@ -15,6 +15,9 @@ module.exports = {
     ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
     ['link', { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: "/Icon.svg"}],
     ['link', { rel: "shortcut icon", href: "/Icon.svg"}],
+    ['link', {rel: "shortcut icon", type: "image/png", href: "/favicon.png"}],
+    ['link', {rel: "stylesheet", type: "text/css", href:"/player/asciinema-player.css"}],
+    ['script', {src: "/player/asciinema-player.js"}],
     ['meta', { name: "viewport", property: "viewport", content: "width=device-width, initial-scale=0.9"}]
   ],
   themeConfig: {

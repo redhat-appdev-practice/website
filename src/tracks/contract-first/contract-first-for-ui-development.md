@@ -97,6 +97,8 @@ cd angular-material-prism-openapi
    * OpenAPI Generate will output a set of Angular Services based on the contents of the `openapi.yml` file
    * Angular dev server will start running on port 4200
 
+<asciinema :src="$withBase('/casts/angular-openapi-prism-watch.cast')" cols=120 rows=30 />
+
 ### Create Models In The API Specification
 
 Before we can start using the API to perform CRUD operations, we need to know the data types we will be operating on. In our imaginary situation, we need a **Todo** model. We can add this model to the `openapi.yml` file in a new section as shown:

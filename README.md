@@ -96,6 +96,20 @@ The more and better your titles, tags, etc... - the better the site will index t
 
 Images can be placed in `src/.vuepress/public/` and everything in that directory will be relative to the web root. For example, if you place an image in `src/.vuepress/public/devtools/my-cool-image.svg`, it's relative path would be `https://<site>/devtools/my-cool-image.svg`.
 
+### Adding asciinema recordings/playback
+
+[ASCIInema](https://asciinema.org/) is a great tool for recording command-line screencasts which remain "just text" and as such have the following benefits:
+
+* You can copy and paste content from the cast
+* It's more accessible to people with visual impairment
+* It's lighter than a video stream
+
+1. Add your `cast` file to the `src/.vuepress/public/casts` folder
+1. Add the **asciinema** component to your page
+   ```asciidoc
+   <asciinema :src="$withBase('/casts/my-recording.cast')" cols=120 rows=30 />
+   ```
+
 ## Publishing this site
 
 ### Test Locally
