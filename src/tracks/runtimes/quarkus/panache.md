@@ -41,7 +41,7 @@ within Quarkus to allow for simple integration with a PostgreSQL database.
     [INFO] JDBC Driver - Oracle                               quarkus-jdbc-oracle                               
     [INFO] JDBC Driver - PostgreSQL                           quarkus-jdbc-postgresql                           
     [INFO] Camel JDBC                                         camel-quarkus-jdbc                             
-    $ ./mvnw quarkus:add-extensions -Dextensions=quarkus-jdbc-postgresql,quarkus-test-h2
+    $ ./mvnw quarkus:add-extensions -Dextensions=quarkus-jdbc-postgresql,quarkus-jdbc-h2
     // SNIP
     [INFO] --- quarkus-maven-plugin:2.0.0.Final:add-extensions (default-cli) @ quarkus-todo ---
     [INFO] [SUCCESS] ✅  Extension io.quarkus:quarkus-jdbc-postgresql has been installed
