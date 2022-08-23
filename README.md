@@ -1,7 +1,7 @@
 # This is a [VuePress](https://vuepress.vuejs.org/) site for [Cloud-Native AppDev](https://appdev.consulting.redhat.com/).
 
 ## Hacktoberfest Participants
-
+   
 If you would like to submit a pull against this repository and have it count toward Hacktoberfest, please be aware that this is what we are looking for:
 
 * Improvements to one of the existing track pages:
