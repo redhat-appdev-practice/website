@@ -1,13 +1,13 @@
 module.exports = {
   title: 'Cloud-Native AppDev',
-  base: "/redhat-appdev-practice-website/",
+  base: "/website/",
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
   plugins: [
     'tabs',
     [
-      '@vuepress/google-analytics',
+      'google-analytics-4',
       {
-        'ga': 'UA-180649557-1'
+        'gtag': 'G-ZHB4V54LWR'
       }
     ]
   ],
