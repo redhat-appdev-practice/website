@@ -7,7 +7,7 @@ module.exports = {
     [
       'google-analytics-4',
       {
-        'gtag': ' G-9QY7W4KN44'
+        'gtag': 'G-ZHB4V54LWR'
       }
     ]
   ],
