@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Cloud-Native AppDev',
-  base: "/redhat-appdev-practice-website/",
+  base: "/website/",
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
   plugins: [
     'tabs',
