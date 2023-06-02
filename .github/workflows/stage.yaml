@@ -30,6 +30,8 @@ jobs:
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.5.2
+        with:
+          node-version: 'v16.20.0'
 
       # Our staging config is slightly different than our normal config
       - name: Setup Staging Config 
