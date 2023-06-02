@@ -29,18 +29,18 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
+        uses: actions/setup-node@v2.5.2
 
       # Our staging config is slightly different than our normal config
       - name: Setup Staging Config 
         run: cp src/.vuepress/config-staging.js src/.vuepress/config.js 
 
       - name: Build VuePress Static Content
-        run: yarn install; yarn run build
+        run: npm install; npm run build
 
       # Push our site up so it can be used in GitHub Pages
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v1.0.8
         with:
           # Upload entire repository
           path: 'dist'
@@ -48,4 +48,4 @@ jobs:
       # Deploy our uploaded artifact to pages
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2.0.1
