@@ -5,9 +5,9 @@ module.exports = {
   plugins: [
     'tabs',
     [
-      '@vuepress/google-analytics',
+      'google-analytics-4',
       {
-        'ga': 'UA-180649557-1'
+        'gtag': ' G-9QY7W4KN44'
       }
     ]
   ],
