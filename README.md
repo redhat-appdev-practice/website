@@ -27,6 +27,8 @@ In order to avoid wasting your time and ours, it is recommended that you submit 
 * Change to the `src` directory
 * Run `npx vuepress dev --no-cache`
 
+> Note: Depending on yoru version of node at this point you may need to run the command `NODE_OPTIONS=--openssl-legacy-provider npx vuepress dev --no-cache`
+
 ### Add new track to sidebar navigation
 
 * Open the `src/.vuepress/config.js` file
@@ -116,6 +118,8 @@ Images can be placed in `src/.vuepress/public/` and everything in that directory
 
 Run and validate there are no errors:
 `yarn install: yarn build`
+
+> Note: For the build may need to run `NODE_OPTIONS=--openssl-legacy-provider yarn build`
 
 Run:
 ```
