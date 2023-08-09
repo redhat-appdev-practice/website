@@ -132,6 +132,14 @@ module.exports = {
             ]
           },
           {
+            title: 'DevOps Tools',
+            sidebarDepth: 0,
+            path: '/tracks/devops/',
+            children: [
+              '/tracks/devops/tekton-task'
+            ]
+          },
+          {
             title: 'Developer Tools',
             sidebarDepth: 0,
             path: '/tracks/devtools/',

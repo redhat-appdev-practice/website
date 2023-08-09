@@ -3,7 +3,7 @@ module.exports = {
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
   plugins: [
     'tabs',
-    'vuepress-plugin-code-copy',
+    ['vuepress-plugin-code-copy', true],
     [
       'google-analytics-4',
       {
