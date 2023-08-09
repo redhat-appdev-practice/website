@@ -4,6 +4,7 @@ module.exports = {
   description: 'Cloud-Native Application Development tutorials, tricks, tips, and methods.',
   plugins: [
     'tabs',
+    ['vuepress-plugin-code-copy', true],
     [
       'google-analytics-4',
       {
@@ -128,6 +129,14 @@ module.exports = {
                   '/tracks/runtimes/dotnet/helm-deployment'
                 ]
               }
+            ]
+          },
+          {
+            title: 'DevOps Tools',
+            sidebarDepth: 0,
+            path: '/tracks/devops/',
+            children: [
+              '/tracks/devops/tekton-task'
             ]
           },
           {
