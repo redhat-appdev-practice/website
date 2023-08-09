@@ -17,7 +17,7 @@ tags:
 
 ## Video
 
-<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/G9t-HFy4EHs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3Yy2QsSfflk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Intro
 
@@ -195,6 +195,10 @@ When you install the Openshift Pipeline operator it comes with a basic set of Cl
 ## RBAC
 
 One last thing to note is when the Pipeline Operator is installed a service account name `pipeline` is created in every namespace. This is the default service account in which all of the task are run. Meaning any required credentials such as those to fetch git repositories or docker images should be attached to the `pipeline` service account, *or* the [custom service account](https://tekton.dev/docs/pipelines/pipelineruns/#specifying-custom-serviceaccount-credentials) specified under the TaskRun/PipelineRun.
+
+::: tip Adding Credentials
+Credential secrets that are added to the service account [require an annotation](https://tekton.dev/docs/pipelines/auth/#understanding-credential-selection) in order to allow tekton to use that credential when fetching a resource such as a source repository or docker image.
+:::
 
 ::: details
 Vanilla Tekton uses the `default` service account by default, rather than the pipeline service account.
