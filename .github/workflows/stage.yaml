@@ -28,6 +28,7 @@ jobs:
       contents: read
       issues: write
       pull-requests: write
+      pages: write      # to deploy to Pages
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
