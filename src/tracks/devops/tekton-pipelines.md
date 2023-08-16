@@ -1,5 +1,5 @@
 ---
-title: Tekton Task
+title: Tekton Pipelines
 initialOpenGroupIndex: -1
 collapsable: true
 tags:
@@ -10,30 +10,19 @@ tags:
 - ci/cd
 - deployment
 - build
-- task
 - pipeline
 ---
 
-# Tekton Task
+# Tekton Pipeline
 
 ## Video
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3Yy2QsSfflk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Intro
 
-### What is Tekton
+### Pipelines
 
-Tekton is a Kubernetes native CI/CD solution. What that means from a practical sense is that it is a set of tools that allow you to build, deploy, and test your applications on Kubernetes using the resources provided by your Kubernetes Cluster.
-
-Tekton is made up of two main components: tasks and pipelines.
-
-- [Tasks](https://tekton.dev/docs/pipelines/tasks) are the basic building blocks of Tekton. They are Kubernetes resources that define a single unit of work. A task usually consist of running a shell script to do anything from cloning a Git repository, to running unit test, to building a Docker image.
-- [Pipelines](https://tekton.dev/docs/pipelines/pipelines) are a collection of tasks that are run in a specific order. Pipelines can be used to automate complex CI/CD workflows
-
-The actual running instance of of both of these components are also captured with the Kubernetes CRDs [TaskRun](https://tekton.dev/docs/pipelines/taskruns/) and  [PipelineRun](https://tekton.dev/docs/pipelines/pipelineruns/).
-
-In this lab we will be taking a look at creating and running a Tekton Task, and in the next lab we will look at putting together a set of task in order to run a Tekton pipeline.
+In the previous lab we gave an introduction to Tekton and created at Tekton Task. In this lab we are going to string together a series of task in order to create a full [Tekton Pipeline](https://tekton.dev/docs/pipelines/pipelines).
 
 # Lab
 
@@ -46,11 +35,7 @@ In this lab we will be taking a look at creating and running a Tekton Task, and 
 * [tkn cli](https://tekton.dev/docs/cli/)
   * If using the CLI with Openshift it is highly recommended you download the tkn cli through the Openshift console to insure you have the correct version. Cli can be found under `'?' -> Command Line Tools`
 
-::: tip Note
-This lab was written using Openshift 4.11 but you should be able to follow most of it using base Kubernetes with Tekton Pipelines installed as well.
-:::
-
-## Create a task
+## Load Task
 
 First lets create a basic [Tekton Task](https://tekton.dev/docs/pipelines/tasks/), the task below will download code from a git repository. In order to install this task copy the following code into a `task.yml` file then run either `oc apply -f task.yml` or `kubctl apply -f task.yml`
 
@@ -76,7 +61,7 @@ spec:
       image: alpine/git
       script: |
         # Clone Git Repo into `output` workspace
-        git clone $(inputs.params.repo-url) $(workspaces.output.path)/$(inputs.params.destination-path)
+        git clone $(inputs.params.repo-url) $(workspaces.output.path)/$(inputs.destination-path)
         cd $(workspaces.output.path)
 
         #Save Git Commit's Short Sha and push it to the results

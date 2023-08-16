@@ -10,6 +10,8 @@
 
 ## Introduction
 
+<iframe src="https://drive.google.com/file/d/1CbOOInA3EhOHFse-eOvwMhDqyW_3yV9C/preview" width="640" height="480" allow="autoplay"></iframe>
+
 The website appdev.consulting.redhat.com is an initiative undertaken by consultants from the AppDev Community of Practice (CoP). Its purpose is to provide practical examples of various technologies and techniques that can greatly benefit our clients and fellow consultants. These examples cover areas not directly addressed by the official Red Hat learning resources.
 
 This platform enables the creation of uncomplicated and free lab exercises. These labs serve as valuable tools to assist customers in comprehending different technologies. Furthermore, they contribute to raising awareness about the services offered by Red Hat's organization.
@@ -28,7 +30,7 @@ The biggest contribution you can make is more content. We want you to create con
 
 But if you do not have the time or are not yet comfortable contributing an entire article we are more than happy to take other contributions such as:
 
-* Grammer/Spelling mistake fixes
+* Grammar/Spelling mistake fixes
 * Improved tooling to help with
   * Website look/feel
   * Developer or DevOps tooling
@@ -77,6 +79,8 @@ A set of useful links when writing articles or making changes to this repository
 > **Note:** Depending on your version of node you may need to set the openssl-legacy-provider option so use this command: `NODE_OPTIONS=--openssl-legacy-provider npx vuepress dev --no-cache`
 
 ### Creating New Articles
+
+<iframe src="https://drive.google.com/file/d/1CbOOInA3EhOHFse-eOvwMhDqyW_3yV9C/preview" width="640" height="480"></iframe>
 
 To create a new article first create a new markdown(.md) file inside of `src/tracks/<TRACK FOLDER>`
 
@@ -274,3 +278,12 @@ If you would like to submit a pull against this repository and have it count tow
 In order to avoid wasting your time and ours, it is recommended that you submit an issue describing your contribution first.
 
 **Thank you! And happy hacking!!**
+
+## Other Recommendations
+
+This section is for folks to recommend tools they find useful.
+
+### VS Code Plugins
+
+- [Markdown Linter](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+- 
