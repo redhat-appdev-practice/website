@@ -10,7 +10,7 @@
 
 ## Introduction
 
-[![Introduction to Code](https://drive.google.com/file/d/1CbOOInA3EhOHFse-eOvwMhDqyW_3yV9C/preview)](.assets/thumbnails/CodeIntro.png)
+[![Introduction to Code](.assets/thumbnails/CodeIntro.png)](https://drive.google.com/file/d/1CbOOInA3EhOHFse-eOvwMhDqyW_3yV9C/preview)
 
 The website appdev.consulting.redhat.com is an initiative undertaken by consultants from the AppDev Community of Practice (CoP). Its purpose is to provide practical examples of various technologies and techniques that can greatly benefit our clients and fellow consultants. These examples cover areas not directly addressed by the official Red Hat learning resources.
 
@@ -80,7 +80,7 @@ A set of useful links when writing articles or making changes to this repository
 
 ### Creating New Articles
 
-[![Contributing](https://drive.google.com/file/d/1CbOOInA3EhOHFse-eOvwMhDqyW_3yV9C/preview)](.assets/thumbnails/contributing.png)
+[![Contributing](.assets/thumbnails/contributing.png)](https://drive.google.com/file/d/1CbOOInA3EhOHFse-eOvwMhDqyW_3yV9C/preview)
 
 To create a new article first create a new markdown(.md) file inside of `src/tracks/<TRACK FOLDER>`
 
