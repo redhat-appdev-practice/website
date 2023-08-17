@@ -50,9 +50,13 @@ In this lab we will be taking a look at creating and running a Tekton Task, and 
 This lab was written using Openshift 4.11 but you should be able to follow most of it using base Kubernetes with Tekton Pipelines installed as well.
 :::
 
+## Kubernetes Setup
+
+To begin, we need to log into our Kubernetes cluster and establish a namespace. I've named mine `pipeline-example`.
+
 ## Create a task
 
-First lets create a basic [Tekton Task](https://tekton.dev/docs/pipelines/tasks/), the task below will download code from a git repository. In order to install this task copy the following code into a `task.yml` file then run either `oc apply -f task.yml` or `kubctl apply -f task.yml`
+Now lets create a basic [Tekton Task](https://tekton.dev/docs/pipelines/tasks/), the task below will download code from a git repository. In order to install this task copy the following code into a `task.yml` file then run either `oc apply -f task.yml` or `kubctl apply -f task.yml`
 
 ```yaml
 apiVersion: tekton.dev/v1
