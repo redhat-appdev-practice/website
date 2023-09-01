@@ -136,7 +136,7 @@ module.exports = {
             path: '/tracks/devops/',
             children: [
               '/tracks/devops/tekton-task',
-              '/tracks/devops/my-devops-tools.md'
+              '/tracks/devops/tekton-pipelines.md'
             ]
           },
           {

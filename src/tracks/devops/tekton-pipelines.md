@@ -18,11 +18,9 @@ tags:
 ## Video
 
 
-## Intro
+# Intro
 
-### Pipelines
-
-In the previous lab we gave an introduction to Tekton and created at Tekton Task. In this lab we are going to string together a series of pre created task in order to create a full [Tekton Pipeline](https://tekton.dev/docs/pipelines/pipelines) that builds a Quarkus Java application, creates a Container Image, and deploys that image.
+In the previous lab, we introduced Tekton and created a Tekton `Task`. In this session, our objective is to link a sequence of pre-existing tasks to form a comprehensive [Tekton Pipeline](https://tekton.dev/docs/pipelines/pipelines). This pipeline will encompass the entire process of building a Quarkus Java application, generating a container image, and subsequently deploying the image to our cluster.
 
 # Lab
 
@@ -43,10 +41,10 @@ First lets clone our example application:
 git clone https://github.com/redhat-appdev-practice/tekton-lab
 ```
 
-This repo contains a basic Quarkus application that you are welcome to explore but the files we care about live under the `.infra` folder, which contains two subfolders. The *chart* folder which contains a helm chart we will use to deploy our application. And the *pipeline* folder which contains our pipeline related Kubernetes objects.
+This repository houses a contains Quarkus application that you're encouraged to delve into. However, our focus centers on the contents within the .infra directory, encompassing two subdirectories. The **chart** folder holds a `Helm chart` designated for our deployment purposes. And the **pipeline** which houses the Kubernetes objects directly associated with our pipeline.
 
 ::: details
-These task are mostly simplified versions of the `ClusterTask` included with Openshift Pipelines.
+The `task` created for this demo are mostly simplified versions of the `ClusterTask` included with Openshift Pipelines. The existing `ClusterTask` are good starting points for`
 
 One thing you may notice that was not covered in the previous lab is the use of `env:` to convert task parameters into environment variables. This is a best practice that makes it much easier to test scripts outside of your Kubernetes Cluster.
 :::
@@ -69,11 +67,9 @@ Lets create our pipeline!
 In the video I ues the Openshift UI to build out the pipeline. I highly recommend checking it out as the UI vastly simplifies the inital creation of a pipeline.
 :::
 
-### One Two Step
-
 To start with lets create a two step pipeline. Step 1 will clone our code. Step two will deploy a simple helm chart stored inside of that code.
 
-In order to install this task copy the following code into a `pipeline.yml` file then run either `oc apply -f pipeline.yml` or `kubctl apply -f pipeline.yml`
+In order to install this task copy the following into a `pipeline.yml` file then run either `oc apply -f pipeline.yml` or `kubctl apply -f pipeline.yml`
 
 ```yaml
 apiVersion: tekton.dev/v1beta1
@@ -118,15 +114,22 @@ If the apply worked, and you navigate to `Pipelines -> Pipeline` there should be
 
 ![example pipeline](/devops/simple-example-pipeline.png)
 
-Now lets break this pipeline down
+Now lets examine each of the section in our input yaml
 
 ### Params
 
-Similar to to our Tekton `Task` pipelines have a parameters section allowing different input on each pipeline run
+Similar to Tekton's `Task` pipelines, our pipelines include a parameters section that enables us to define distinct values at the beginning of each execution.
+
+``` yaml
+  params:
+    - description: Repository Url
+      name: repo-url
+      type: string
+```
 
 ### Workspaces
 
-One more workspaces are defined at the `Pipeline` level and created during the `PipelineRun`. You will also notice the workspace is assigned inside of each of our steps `Task`:
+Mandatory workspaces are specified at the `Pipeline` level and generated during the `PipelineRun` phase. This allows the transfer of data, such as our source code, across `Task`. Note that the workspace is also invoked within the `Task` component. By specifying the same workspace in `git-clone` and `helm-deploy` we allow the source code cloned by the `git-clone` task to be utilized within the `helm-deploy` task.
 
 ``` yaml
 - name: git-clone-task
@@ -140,8 +143,6 @@ One more workspaces are defined at the `Pipeline` level and created during the `
     - name: source
       workspace: source-repo
 ```
-
-This is how we are able to pass our source code between our `git-clone` and `helm-deploy` task.
 
 ### Steps
 
@@ -166,11 +167,11 @@ Finally we have the steps to make up our pipeline:
 
 Each step can consist of:
 
-* `name` used to identify the step's goal
-* `taskRef` specifying the task you want to use (or a [taskSpec](https://tekton.dev/docs/pipelines/taskruns/#specifying-the-target-task))
-* `runAfter` to specify that step's dependent task (if there is no run after task it will be run first)
-* `params` parameters passed into the task
-* `workspace` assigns the pipeline level workspace(s) to the task level workspace(s)
+* `name` Utilized for defining the objective of the step.
+* `taskRef` Designating the desired task for use ([taskSpec](https://tekton.dev/docs/pipelines/taskruns/#specifying-the-target-task) can also be used directly)
+* `runAfter` Specifies the task on which the step is reliant (if absent, the step will be executed initially).
+* `params` Parameters transmitted to the task.
+* `workspace` Assigns the workspace(s) defined at the `Pipeline` level to the workspace(s) used inside of the `Task`.
 
 :::tip Note
 The order in which the steps run in are determined by the steps in `runAfter`, **not** the order in which the steps are listed.
@@ -184,27 +185,33 @@ Before running the pipeline the `pipeline-scc` account may need additional permi
 This can be given with an admin account running: `oc patch scc pipelines-scc --type merge -p '{"allowedCapabilities":["SETFCAP"]}'`
 :::
 
-The pipeline can be run using the Openshift UI or through the `tkn pipeline start example-pipeline`. Regardless of the method it requires two values, the **repo-url** which can be set to `https://github.com/redhat-appdev-practice/tekton-lab.git` and the **workspace**, explained below.
+The pipeline can be initiated using either the Openshift UI or the command `tkn pipeline start example-pipeline`. Regardless of the method it requires two values:
 
-In order for us to pass the code between our two task we need to use persistent storage in our workspace.
+* **repo-url**: `https://github.com/redhat-appdev-practice/tekton-lab.git`
+* **workspace**: Explained Below
 
-The easiest way to do this is by creating a `PersistentVolumeClaim` and running the pipeline using that claim. **BUT** this can cause future issues. For one multiple pipelines using the same `PVC` could conflict with one another. But the bigger problem is that a `PVC` is associated with a specific node, meaning that every task using that `PVC` will be force to run on that node which could cause major performance issues or even overload a node.
+To facilitate the passage of code between the two tasks, persistent storage within the workspace is employed. The simplest approach involves creating a `PersistentVolumeClaim` and executing the pipeline using that claim. However, this approach can introduce potential complications. Firstly, multiple pipelines utilizing the same PVC could encounter conflicts. Moreover, a PVC is tied to a specific node, mandating that every task using that PVC runs on the associated node, which might lead to significant performance issues or node overload.
 
-Another option offered by Tekton is a [VolumeClaimTemplate](https://tekton.dev/docs/pipelines/workspaces/#volumeclaimtemplate) (note this option is not present in the `tkn cli` currently but can be used by creating the `PipelineRun` later in this lab). `VolumeClaimTemplates` create a new `PVC` and bind it to each `PipelineRun` based on a given spec. This does require either a `PV` exist that matches each newly created `PipelineRun.workspace.volumeClaimTemplate` spec or the cluster is setup for [dynamic provisioning](https://docs.openshift.com/container-platform/4.12/storage/dynamic-provisioning.html).
+An alternative provided by Tekton is the use of a [VolumeClaimTemplate](https://tekton.dev/docs/pipelines/workspaces/#volumeclaimtemplate) (note that this option is not currently present in the `tkn cli`, but can be employed by creating the `PipelineRun` subsequently in this lab). The `VolumeClaimTemplates` generate fresh PVCs and bind them to each PipelineRun, based on a specified specification. This does necessitate the existence of either matching PVs for each newly created `PipelineRun.workspace.volumeClaimTemplate` specification, or a cluster configuration enabling [dynamic provisioning](https://docs.openshift.com/container-platform/4.12/storage/dynamic-provisioning.html).
 
-Regardless of the route you choose create a workspace with at least 1 GB of memory and start the pipeline:
+Irrespective of the chosen approach, it is recommended to create a workspace with a minimum of 1 GB memory and initiate the pipeline:
 
 ![Start Simple Pipeline](/devops/start-simple-pipeline.png)
 
-If run successfully you should see a newly created `Deployment` and `ImageStream`! Although the pod in that Deployment will be getting an `ImagePullBackOff` error, which we will fix in the next section.
+Upon successful execution, you should observe the creation of a fresh `Deployment` and `ImageStream`. However, it's important to note that the pod within that `Deployment` might encounter an `ImagePullBackOff` error, which will be addressed in the subsequent section.
 
 ::: details Automated Cleanup
 The `PVCs` created by VolumeClaimTemplates will stay as long as the `PipelineRun` objects exist. The Openshift Pipeline Operator includes a configuration option that allows for [the cleanup of taskruns and pipelineruns for a certain time period and/or number of resources](https://docs.openshift.com/container-platform/4.12/cicd/pipelines/customizing-configurations-in-the-tektonconfig-cr.html#default-pruner-configuration_customizing-configurations-in-the-tektonconfig-cr). It is recommended that you setup this auto-pruning
+The `PVCs` generated through `VolumeClaimTemplates` persist as long as the corresponding `PipelineRun` instances endure. The Openshift Pipeline Operator incorporates a configuration parameter that permits the automatic removal of taskruns and pipelineruns based on a specified time period and/or resource count. It is advisable to configure this auto-pruning feature to ensure efficient resource management.
 :::
 
 ## Expanding The Pipeline
 
-In order to complete the pipeline we need to add the two task for building and deploying an image to our `ImageStream`. Since these steps are note dependent on our `helm-deploy` step to run we will allow for them to run in parallel by connecting them directly to our `git-clone-task`. Add the following steps to our `example-pipeline`
+To finalize the pipeline, we must incorporate two `Task` for image building and deployment to our `ImageStream`. As these actions are independent of the `helm-deploy` step, we can enable parallel execution by directly linking them to our `git-clone`-task. Please include the following steps into our `example-pipeline`:
+
+:::details Correction
+This section lied a little, since our steps are both dependent on the same PVC the task will not actually run in parallel by default. There are work around such as using multiple PVCs but that will be beyond the scope of this lab.
+:::
 
 ```yaml
     - name: maven-build
@@ -235,7 +242,7 @@ In order to complete the pipeline we need to add the two task for building and d
           workspace: source-repo
 ```
 
-<sub>Make sure to modify the `namespace` parameter in the `build-and-push` step if you did not deploy to pipeline-example</sub>
+<sub>Make sure to modify the `namespace` parameter in the `build-and-push` step if you did not deploy to `pipeline-example`</sub>
 
 :::tip
 The [example repo](https://github.com/redhat-appdev-practice/tekton-lab) cloned at the start of the lab contain the completed pipeline under `.infra/pipeline` if you are having trouble
@@ -274,15 +281,23 @@ spec:
   #         volumeMode: Filesystem
 ```
 
-Once your pipeline has successfully run congratulations we will have built our Java code, created a Container Image from the Jar, and Deployed that container onto our openshift environment.
+Upon the successful completion of your pipeline, congratulations are in order. At this point, we will have accomplished the following: built our Java code, generated a Container Image from the Jar file, and orchestrated the deployment of this container within our Openshift environment.
 
-To validate the Deployment should be up (you may need to delete the pod in order to trigger an image repull) and the application should be accessible at `echo http://$(oc get route/example-deployment -o jsonpath={.spec.host})`
+To verify this deployment, ensure that it's active (you might need to remove the pod to initiate a re-pull of the image). Furthermore, you can access the application via the route output by `echo http://$(oc get route/example-deployment -o jsonpath={.spec.host})` or found under `Routes` in the Openshift UI.
 
 ## Conditional Task
 
-One last useful trick to know in Tekton is the use of the `when` condition on task. This allows us to conditionally run a task based on either user input or the results of a preceding task. For example on a "production" run of the pipeline above we may want to include a conditional task for deploying our image to an external image repository.
+A final valuable technique within Tekton involves utilizing the when condition on tasks. This empowers us to execute a task conditionally, dependent on user input or the outcomes of preceding tasks. To illustrate, in a "production" run of the aforementioned pipeline, it might be beneficial to incorporate a conditional task for deploying the image to an external repository.
 
-In we are going to give a simple example of integrating a conditional task. In your example pipeline add a new task and set the `when` condition so that the task only runs when `$(params.run-conditional)` contains the value `true`:
+Let's provide a basic illustration of incorporating a conditional task. Within your example pipeline, append a new task and configure the `when` condition to trigger the task solely when `$(params.run-conditional)` holds the value true:
+
+Add the following under the `params` section:
+``` yaml
+    - description: Run my conditional step?
+      name: run-conditional
+      type: string
+```
+
 
 ```yaml
     - name: conditional-task
@@ -306,7 +321,7 @@ You will notice in the Openshift UI that when the parameter is not set you see `
 
 # Extra Credit
 
-Tekton Pipelines have many more features we do not have time to cover in this lab. One of which is the use of `finally` to create task that always run. For extra credit add a cleanup task to remove our helm deployment upon completions of the pipeline.
+Tekton Pipelines have many more features we do not have time to cover. One more useful feature to know are tasking using the [finally](https://tekton.dev/docs/pipelines/pipelines/#adding-finally-to-the-pipeline) subsection. For extra credit add a cleanup task to remove our helm deployment upon completion of the pipeline.
 
 # Wrap Up
 
