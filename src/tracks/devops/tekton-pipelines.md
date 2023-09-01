@@ -318,7 +318,7 @@ Now rerun the pipeline with/without the `run-conditional` parameter set to `true
 
 You will notice in the Openshift UI that when the parameter is not set you see `>>` on the task indicating that the `conditional-task` step was skipped.
 
-![/devops/conditional-task]
+![Conditional Task](/devops/conditional-task.png)
 
 # Extra Credit
 
