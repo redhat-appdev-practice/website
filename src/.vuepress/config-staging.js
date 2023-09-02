@@ -136,7 +136,8 @@ module.exports = {
             sidebarDepth: 0,
             path: '/tracks/devops/',
             children: [
-              '/tracks/devops/tekton-task'
+              '/tracks/devops/tekton-task',
+              '/tracks/devops/tekton-pipelines.md'
             ]
           },
           {
