@@ -45,7 +45,7 @@ git clone https://github.com/redhat-appdev-practice/tekton-lab
 This repository houses a contains Quarkus application that you're encouraged to delve into. However, our focus centers on the contents within the .infra directory, encompassing two subdirectories. The **chart** folder holds a `Helm chart` designated for our deployment purposes. And the **pipeline** which houses the Kubernetes objects directly associated with our pipeline.
 
 ::: details
-The `task` created for this demo are mostly simplified versions of the `ClusterTask` included with Openshift Pipelines. The existing `ClusterTask` are good starting points for`
+The `Tasks` created for this demo are mostly simplified versions of the `ClusterTasks` included with Openshift Pipeline Operator. The existing `ClusterTasks` are good starting points for creating the `Task` specific to your team.
 
 One thing you may notice that was not covered in the previous lab is the use of `env:` to convert task parameters into environment variables. This is a best practice that makes it much easier to test scripts outside of your Kubernetes Cluster.
 :::
