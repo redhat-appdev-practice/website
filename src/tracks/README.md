@@ -5,7 +5,7 @@ sidebarDepth: 2
 
 # Tracks Overview
 
-<div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://lucid.app/documents/embeddedchart/74fe4c6a-a778-4b96-961a-2af86a36326e" id="5nRU_fEEtHD."></iframe></div>
+<img src="/Cloud-Native_Journey_Map.svg" width="80%" />
 
 ## Contract-First API Development
 
