@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 
+const base = '/website';
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Cloud-Native AppDev",
@@ -10,18 +12,18 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin)
     }
   },
-  base: '/website/',
+  base: `${base}/`,
   ignoreDeadLinks: 'localhostLinks',
   head: [
-    ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/Icon.svg"}],
-    ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
-    ['link', { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: "/Icon.svg"}],
-    ['link', { rel: "shortcut icon", href: "/Icon.svg"}],
-    ['link', {rel: "shortcut icon", type: "image/png", href: "/favicon.png"}],
-    ['link', {rel: "stylesheet", type: "text/css", href:"/player/asciinema-player.css"}],
-    ['script', {src: "/player/asciinema-player.js"}],
-    ['meta', { name: "viewport", property: "viewport", content: "width=device-width, initial-scale=0.9"}],
-    ['script', {src: 'https://www.googletagmanager.com/gtag/js?id=G-2P1GY1ZQ3B'}],
+    ['link',   { rel: "apple-touch-icon", sizes: "180x180", href: `${base}/Icon.svg`}],
+    ['link',   { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: `${base}/Icon.svg`}],
+    ['link',   { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: `${base}/Icon.svg`}],
+    ['link',   { rel: "shortcut icon", href: `${base}/Icon.svg`}],
+    ['link',   { rel: "shortcut icon", type: "image/png", href: `${base}/favicon.png`}],
+    ['link',   { rel: "stylesheet", type: "text/css", href: `${base}/player/asciinema-player.css`}],
+    ['script', { src: `${base}/player/asciinema-player.js`}],
+    ['meta',   { name: "viewport", property: "viewport", content: "width=device-width, initial-scale=0.9"}],
+    ['script', { src: 'https://www.googletagmanager.com/gtag/js?id=G-2P1GY1ZQ3B'}],
     ['script', {}, "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-2P1GY1ZQ3B');"]
   ],
   themeConfig: {
