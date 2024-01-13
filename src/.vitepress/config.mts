@@ -10,6 +10,7 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin)
     }
   },
+  ignoreDeadLinks: 'localhostLinks',
   head: [
     ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/Icon.svg"}],
     ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
