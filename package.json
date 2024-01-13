@@ -1,7 +1,7 @@
 {
   "scripts": {
     "docs:dev": "vitepress dev src",
-    "docs:build": "vitepress build src",
+    "docs:build": "vitepress build src --outDir ./dist",
     "docs:preview": "vitepress preview src"
   },
   "devDependencies": {
