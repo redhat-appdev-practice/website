@@ -3,3 +3,5 @@ node_modules
 yarn.lock
 .history
 package-lock.json
+.idea
+**/.vitepress/cache/**
