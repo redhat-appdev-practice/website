@@ -23,7 +23,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Required to comment on the MR
-    permissions: 
+    permissions:
       id-token: write
       contents: read
       issues: write
@@ -34,15 +34,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.5.2
         with:
-          node-version: 'v16.20.0'
+          node-version: 'v20.11.0'
 
       # Our staging config is slightly different than our normal config
-      - name: Setup Staging Config 
-        run: cp src/.vuepress/config-staging.js src/.vuepress/config.js 
+      - name: Setup Staging Config
+        run: cp src/.vuepress/config-staging.js src/.vuepress/config.js
 
       - name: Build VuePress Static Content
         run: npm install; npm run build
@@ -53,12 +53,12 @@ jobs:
         with:
           # Upload entire repository
           path: 'dist'
-      
+
       # Deploy our uploaded artifact to pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2.0.1
-    
+
       - name: Create comment
         uses: actions/github-script@v6
         with:
