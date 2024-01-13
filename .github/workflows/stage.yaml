@@ -41,8 +41,8 @@ jobs:
           node-version: 'v20.11.0'
 
       # Our staging config is slightly different than our normal config
-      # - name: Setup Staging Config
-      #   run: cp src/.vuepress/config-staging.js src/.vuepress/config.js
+      - name: Setup Staging Config
+        run: cp src/.vuepress/config-staging.js src/.vuepress/config.js
 
       - name: Build VuePress Static Content
         run: npm install; npm run docs:build
