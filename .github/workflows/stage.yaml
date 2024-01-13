@@ -42,7 +42,7 @@ jobs:
 
       # Our staging config is slightly different than our normal config
       - name: Setup Staging Config
-        run: cp src/.vuepress/config-staging.js src/.vuepress/config.js
+        run: cp src/.vitepress/config-stage.mts src/.vitepress/config.mts
 
       - name: Build VuePress Static Content
         run: npm install; npm run docs:build
