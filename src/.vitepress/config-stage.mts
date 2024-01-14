@@ -44,8 +44,8 @@ export default defineConfig({
 
     aside: false,
 
-    logo: '/Icon.svg',
-    logoLink: '/',
+    logo: 'Icon.svg',
+    logoLink: '/${stageBase}/',
 
     sidebar: [
       {
