@@ -15,7 +15,7 @@ export default defineConfig({
   base: `${stageBase}/`,
   ignoreDeadLinks: 'localhostLinks',
   head: [
-    ['base',   { href: "https://redhat-appdev-practice.github.io/website/", target: "_blank"}],
+    ['base',   { href: "https://redhat-appdev-practice.github.io/website/"}],
     ['link',   { rel: "apple-touch-icon", sizes: "180x180", href: `Icon.svg`}],
     ['link',   { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: `Icon.svg`}],
     ['link',   { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: `Icon.svg`}],
