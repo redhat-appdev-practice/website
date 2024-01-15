@@ -87,7 +87,9 @@ export default {
       var base = document.querySelector('base');
       var baseUrl = base && base.href || '';
 
-      let data = `${baseUrl}${this.src}`;
+      if (this.src[0] !== '/') {
+        let baseUrl = '';
+      }
 
       if (
           this.src &&
