@@ -82,14 +82,20 @@ export default {
       } else {
         window.clearInterval(this.$data.timeout);
       }
-      let data = this.src;
+
+      // For sites using <base href="...">, we need to adjust the location of the files when using absolute paths
+      var base = document.querySelector('base');
+      var baseUrl = base && base.href || '';
+
+      let data = `${baseUrl}${this.src}`;
+
       if (
           this.src &&
           !this.src.endsWith(".json") &&
           !this.src.endsWith(".cast")
       ) {
         data =
-            "data:application/json;base64," + Buffer.from(this.src).toString('base64')
+            "data:application/json;base64," + Buffer.from(`${baseUrl}${this.src}`).toString('base64')
       }
 
       this.player = window.asciinema.player.js.CreatePlayer(
