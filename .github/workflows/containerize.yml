@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 'v20.11.0'
 
-      - name: Build VuePress Static Content
+      - name: Build VitePress Static Content
         run: npm install; npm run docs:build
 
       - name: Docker Login

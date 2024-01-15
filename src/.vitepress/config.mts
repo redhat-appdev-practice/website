@@ -8,6 +8,10 @@ export default defineConfig({
   markdown: {
     config(md) {
       md.use(tabsMarkdownPlugin)
+    },
+    toc: {
+      level: [2,3,4],
+      shouldAllowNested: true
     }
   },
   ignoreDeadLinks: 'localhostLinks',

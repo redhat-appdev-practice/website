@@ -59,7 +59,7 @@ git checkout openapi_templating_pre
           <scope>runtime</scope>
           <version>1.4.199</version>
       </dependency>
-    ```  
+    ```
   - Setup up h2 in-memory db by updating `src/main/resources/application.properties` with the following:
     ```properties
     #InMemory DB Connection
@@ -89,7 +89,7 @@ git checkout openapi_templating_pre
       public interface TodoRepository extends JpaRepository<Todo, Integer>{
 
           public List<Todo> getByCompleted(Boolean completed);
-          
+
       }
     ```
     <sub>Spring data is automatically able to create the query based on method name, [more info](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)</sub>
@@ -104,7 +104,7 @@ git checkout openapi_templating_pre
         @Override
         private TodoRepository todoRepository;
     ```
-  - Implement out GET method for specific item in TodoApiController.java. 
+  - Implement out GET method for specific item in TodoApiController.java.
     ```java
       @Override
       public ResponseEntity<Todo> getTodo(@ApiParam(value = "A unique identifier for a `todo`.",required=true) @PathVariable("todoId") Integer todoId) {
@@ -132,13 +132,13 @@ git checkout openapi_templating_pre
       ('OpenApi Generator', 'Generate my OpenAPI Springboot App', now() - INTERVAL 1 DAY, true),
       ('OAG Templating', 'Add DB persistance to my Springboot App', now() + INTERVAL 20 MINUTE, false)
     ```
-    
-   
+
+
 1b. Checkout the branch with jpa_setup <sub>Skip if you did step 1a</sub>
 ```sh
 git checkout openapi_templating_jpa_setup
 ```
-    
+
 
 2. Examine pojo.mustache template file
   - Go to [openapi-generator](https://github.com/OpenAPITools/openapi-generator) github
@@ -203,7 +203,7 @@ git checkout openapi_templating_jpa_setup
       - Validate annotations are showing up on `Todo.java`
     - Run `mvn spring-boot:run`
       - Validate all of endpoints work (some data should be preloaded)
-   
+
 ### Wrap Up
 
-We were able to modify the default pojo template for a spring applications to allow us to insert custom JPA annotations, and proved our annotations worked correctly by connecting our spring-boot application to an in-memory database. In the upcoming labs we will be looking at adding testing to validate that our code adheres to our contract, as well as adding security to our API. 
+We were able to modify the default pojo template for a spring applications to allow us to insert custom JPA annotations, and proved our annotations worked correctly by connecting our spring-boot application to an in-memory database. In the upcoming labs we will be looking at adding testing to validate that our code adheres to our contract, as well as adding security to our API.

@@ -44,7 +44,7 @@ jobs:
       - name: Setup Staging Config
         run: cp src/.vitepress/config-stage.mts src/.vitepress/config.mts
 
-      - name: Build VuePress Static Content
+      - name: Build VitePress Static Content
         run: npm install; npm run docs:build
 
       # Push our site up so it can be used in GitHub Pages
