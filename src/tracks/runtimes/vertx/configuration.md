@@ -1,7 +1,5 @@
 ---
 title: Cloud-Native Configuration
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm

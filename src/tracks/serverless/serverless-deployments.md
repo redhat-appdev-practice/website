@@ -1,7 +1,5 @@
 ---
 title: Serverless Deployments
-initialOpenGroupIndex: -1
-collapsable: true
 sidebarDepth: 1
 tags:
 - serverless

@@ -1,7 +1,5 @@
 ---
 title: Helm Intro
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - helm
 - cloud

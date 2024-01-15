@@ -1,7 +1,5 @@
 ---
 title: Security with OpenAPI
-initialOpenGroupIndex: -1
-collapsable: true
 sidebarDepth: 1
 author: James Land
 tags:

@@ -1,7 +1,5 @@
 ---
 title: Configure JSON Logging
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm
@@ -22,7 +20,7 @@ tags:
 - splunk
 ---
 
-## JSON Logging From Quarkus
+# JSON Logging From Quarkus
 
 In order to work best with log aggregators like EFK Stack or Splunk, you want to output your logs in JSON format for easier indexing.
 

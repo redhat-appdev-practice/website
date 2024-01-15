@@ -1,7 +1,5 @@
 ---
 title: Configure Data Access Layer With EntityFramework
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - dotnet
 - .net
@@ -24,6 +22,8 @@ tags:
 - kubernetes
 - openshift
 ---
+
+# Configure Data Access Layer With EntityFramework
 
 ## Video
 
@@ -62,7 +62,7 @@ tags:
          Todo AddTodo(Todo newTodo);
          Todo GetTodo(Guid id);
       }
-      
+
       public partial class TodoListContext:DbContext, ITodoContext
       {
          public TodoListContext(DbContextOptions<TodoListContext> options) : base(options) { }

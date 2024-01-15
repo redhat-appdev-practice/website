@@ -1,7 +1,5 @@
 ---
 title: Generate a new Quarkus application using OpenAPI Generator
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm
@@ -22,7 +20,7 @@ tags:
 - hibernate
 ---
 
-## Bootstrapping A Project Using OpenAPI Generator
+# Bootstrapping A Project Using OpenAPI Generator
 
 In order to simplify adopting a Contract-First API Development approach, we have created a series of [Maven Archetypes](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html) which make initializing new projects extremely quick and simple. These archetypes are already published to [Maven Central](https://search.maven.org/search?q=g:com.redhat.consulting%20a:openapi*archetype)
 

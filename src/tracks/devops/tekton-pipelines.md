@@ -1,7 +1,5 @@
 ---
 title: Tekton Pipelines
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - tekton
 - devops

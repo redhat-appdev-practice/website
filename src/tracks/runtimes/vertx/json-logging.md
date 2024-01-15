@@ -1,7 +1,5 @@
 ---
 title: JSON Logging From Vert.x
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm

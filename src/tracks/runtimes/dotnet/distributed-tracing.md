@@ -1,7 +1,5 @@
 ---
 title: Distributed Tracing
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - dotnet
 - .net
@@ -27,6 +25,8 @@ tags:
 - kubernetes
 - openshift
 ---
+
+# Distributed Tracing
 
 ## Video
 

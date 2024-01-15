@@ -1,7 +1,5 @@
 ---
 title: Deploy Your Quarkus App To Kubernetes With Helm
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm
@@ -22,7 +20,7 @@ tags:
 - podman
 ---
 
-## Setting Up To Deploy With Helm 3
+# Setting Up To Deploy With Helm 3
 
 Helm helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
 

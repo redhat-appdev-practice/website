@@ -1,7 +1,5 @@
 ---
 title: Configuration
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - dotnet
 - .net
@@ -24,6 +22,8 @@ tags:
 - kubernetes
 - openshift
 ---
+
+# Cloud-Native Configuration
 
 ## Video
 

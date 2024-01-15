@@ -1,7 +1,5 @@
 ---
 title: Maven Archetypes
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - maven
 - mvn

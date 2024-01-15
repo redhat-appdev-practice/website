@@ -1,7 +1,5 @@
 ---
 title: OWASP Zed Attack Proxy & ZAP HUD
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - owasp
 - owasp top ten

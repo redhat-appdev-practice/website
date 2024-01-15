@@ -1,7 +1,5 @@
 ---
 title: Implement Cloud-Native Configuration
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm
@@ -21,6 +19,8 @@ tags:
 - panache
 - hibernate
 ---
+
+# Cloud-Native Configuration
 
 As you have likely already noticed in previous parts of this track, Quarkus is often configured using a [Properties file](https://docs.oracle.com/javase/tutorial/essential/environment/properties.html). This is quite convenient, but we also need to be able to configure in a cloud-native way which may comply with a 12-factor application concept of **configuration from the environment**
 
@@ -81,4 +81,3 @@ As you have likely already noticed in previous parts of this track, Quarkus is o
     ```
     /path/to/quarkus/executable -Dquarkus.config.locations=/path/to/config.yaml
     ```
-

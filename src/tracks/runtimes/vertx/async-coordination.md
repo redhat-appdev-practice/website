@@ -1,7 +1,5 @@
 ---
 title: Asynchronous Coordination In Vert.x
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm

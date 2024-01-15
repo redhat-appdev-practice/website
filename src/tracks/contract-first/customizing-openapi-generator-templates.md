@@ -1,7 +1,5 @@
 ---
 title: Customizing OpenAPI Generator Templates
-initialOpenGroupIndex: -1
-collapsable: true
 sidebarDepth: 1
 tags:
 - openapi

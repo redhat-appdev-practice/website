@@ -1,7 +1,5 @@
 ---
 title: Create Unit Testing Project With MSTest
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - dotnet
 - .net
@@ -24,6 +22,8 @@ tags:
 - kubernetes
 - openshift
 ---
+
+# Setting Up Test Driven Development
 
 ## Video
 

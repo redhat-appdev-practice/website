@@ -1,7 +1,5 @@
 ---
 title: Using Hibernate Reactive With Vert.x
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm

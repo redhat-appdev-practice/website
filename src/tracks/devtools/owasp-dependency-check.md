@@ -1,7 +1,5 @@
 ---
 title: OWASP Dependency Check
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - owasp
 - owasp top ten
