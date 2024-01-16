@@ -43,12 +43,8 @@ jobs:
         with:
           node-version: 'v20.11.0'
 
-      # Our staging config is slightly different than our normal config
-      - name: Setup Staging Config
-        run: cp src/.vitepress/config-stage.mts src/.vitepress/config.mts
-
       - name: Build VitePress Static Content
-        run: npm install; npm run docs:build
+        run: npm install; npm run docs:stage
 
       # Push our site up so it can be used in GitHub Pages
       - name: Upload artifact
