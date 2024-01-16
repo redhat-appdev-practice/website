@@ -1,7 +1,5 @@
 ---
 title: Helm Intro
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - helm
 - cloud
@@ -16,7 +14,7 @@ tags:
 # Introduction to Helm
 
 
-## Videos 
+## Videos
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2jEPTw_UJPk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
@@ -29,11 +27,11 @@ tags:
 ## Prerequisites
 
 * OpenShift 3.11+ Cluster
-	* [CodeReady Containers](https://developers.redhat.com/products/codeready-containers/getting-started/) can be used locally if you do not have access to a lab environment
+  * [CodeReady Containers](https://developers.redhat.com/products/codeready-containers/getting-started/) can be used locally if you do not have access to a lab environment
 
 ### Installing Helm:
 
-It is recommended that you install the Helm CLI that is packaged with the OpenShift version you are using. This can be found on your instance by hitting the `?` in the top right and choosing `Command Line Tools`. 
+It is recommended that you install the Helm CLI that is packaged with the OpenShift version you are using. This can be found on your instance by hitting the `?` in the top right and choosing `Command Line Tools`.
 
 ![Helm Install](/devtools/helm_intro/download.png)
 
@@ -45,7 +43,7 @@ In order to create a basic Helm chart we can simply run the command `helm create
 
 Now if we navigate inside of `example` and run `tree` we should see the following structure:
 
-```
+```text
 ├── charts
 ├── Chart.yaml
 ├── templates
@@ -64,12 +62,14 @@ Now if we navigate inside of `example` and run `tree` we should see the followin
 Best practices when creating a Helm chart is to break each Kubernetes resource you are trying to deploy into it's own file and give it a name based on the resources's type. So as you can probably guess by the file names, when deployed this chart will create a `Deployment` with a `HorizontalPodScaler` and a `ServiceAccount`. We will expose the `Deployment` using a `Service` and `Ingress` controller. Under normal circumstances this is a good starting point for creating a new chart. For the purposes of this lab we want to keep our chart extremely simple, so we are going to remove all of our template files and clear our `values.yaml`.
 
 To do this:
+
 * Remove all the files in our template folder with `rm -r templates/*`
 * Clear our values.yaml file with `rm values.yaml && touch values.yaml`
 
 Now, let's replace the files we removed with a new deployment template file named `deployment.yaml`. In order to create this file we can take advantage of the OpenShift UI or use the `Deployment` provided below.
 
-Using the OpenShift UI: 
+Using the OpenShift UI:
+
 * On the `Administrator` tab navigate to `Workloads` -> `Deployments`
 * Click the `Create Deployment` button
 * Remove the `namespace` line from the provided yaml
@@ -78,6 +78,7 @@ Using the OpenShift UI:
 ![OpenShift Deployment](/devtools/helm_intro/deployment.png)
 
 Using the Provided Deployment config:
+
 * Copy the following Deployment config
 
 #### **`templates/deployment.yaml`**
@@ -103,19 +104,20 @@ spec:
             - containerPort: 8080
 ```
 
-
-Next, let's add some basic [templating](https://helm.sh/docs/chart_template_guide/) to our Helm chart. 
+Next, let's add some basic [templating](https://helm.sh/docs/chart_template_guide/) to our Helm chart.
 
 * Replace `replicas: 3` with `replicas: {{ $.Values.replicaCount }}` inside of our `templates/deployment.yaml`
 * Add `replicaCount: 3` to the `values.yaml` file.\
 <sub>Note: We will go further into depth on templating later in our lab</sub>
 
 Finally, let's deploy our chart. Validate that you are inside of the `example` directory. Make sure you are logged into your cluster with `oc login` then run:
+
 ```
 helm install test-release .
 ```
 
 You should see something similar to the following. If so, congrats you have just created and deployed a Helm chart!
+
 ```
 NAME: test-release
 LAST DEPLOYED: Mon Jan  4 11:39:41 2021
@@ -130,7 +132,8 @@ TEST SUITE: None
 Now that we have created a Helm chart and deployed it to our Kubernetes Cluster, let's take a closer look at the chart itself.
 
 First our `Chart.yaml` file:
-```
+
+```yaml
 apiVersion: v2
 name: example
 description: A Helm chart for Kubernetes
@@ -154,7 +157,6 @@ version: 0.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 appVersion: 1.16.0
-
 ```
 
 * The `apiVersion` version should always be set to `v2` when using Helm 3.
@@ -164,18 +166,19 @@ appVersion: 1.16.0
 * The `appVersion` is less defined and is used to represent the version of the underlying application the chart is deploying, i.e. a chart that deploys Apache httpd 2.4.x could also have an appVersion of 2.4.x.
 * The Chart.yaml can also contain a [dependencies](https://helm.sh/docs/helm/helm_dependency/#helm) section which specifies other Helm charts that will be deployed with this chart. This is something we will go over in more detail in future labs.
 
-If we run the command `helm list` you should see the Helm version and naming information of our chart 
+If we run the command `helm list` you should see the Helm version and naming information of our chart
 
-```
+```text
 NAME        	NAMESPACE   	REVISION	UPDATED                               	STATUS  	CHART        	APP VERSION
-test-release	test-project	1       	2021-01-04 11:39:41.51673257 -0500 EST	deployed	example-0.1.0	1.16.0     
+test-release	test-project	1       	2021-01-04 11:39:41.51673257 -0500 EST	deployed	example-0.1.0	1.16.0
 ```
 
-Next, let's look at our templates, currently we only have `deployment.yaml`. As you may remember, in order to create this template we simply copied a Kubernetes resource from our OpenShift UI into our deployment.yaml. This is because when we do a Helm install it simply takes the post processed files inside of your templates directory and runs them against the Kubernetes API. This effectively means if you can run `kubectl apply` or `oc apply` against a file then it can be used as a valid Helm template file. 
+Next, let's look at our templates, currently we only have `deployment.yaml`. As you may remember, in order to create this template we simply copied a Kubernetes resource from our OpenShift UI into our deployment.yaml. This is because when we do a Helm install it simply takes the post processed files inside of your templates directory and runs them against the Kubernetes API. This effectively means if you can run `kubectl apply` or `oc apply` against a file then it can be used as a valid Helm template file.
 
 While using static template files in Helm is a perfectly valid and a great starting point, you'll probably want to add some templating to allow more reusability in your chart. In the rest of this section we will take a look at some how to do some basic templating. In addition, Helm contains hundreds of [template functions](https://helm.sh/docs/chart_template_guide/function_list/). We recommend skimming over them so that you have an idea of Helm's capabilities as you create your future charts. We especially recommend taking some time to look at the [flow control functions](https://helm.sh/docs/chart_template_guide/control_structures/) as these tend to be the functions that are the most used.
 
 In our chart we modified our deployment's replicas to have the value `{{ $.Values.replicaCount }}`. While it may be pretty obvious what this is doing, let's break it down to make sure we understand exactly what is going on.
+
 * `{{ }}` denotes this is a templatized value
 * `$` specifies we want to start at the root context. You can think of `$` as pre-pending `/` to a cd command.
   * Note you may also see other charts just using `.` rather than `$.`. Most of the time these are functionally equivalent, unless using functions that change the current context such as [with and range](https://helm.sh/docs/chart_template_guide/control_structures/)
@@ -184,43 +187,44 @@ In our chart we modified our deployment's replicas to have the value `{{ $.Value
 
 Finally, let's take a quick look at our `values.yaml` file, which currently just holds `replicaCount`. This will set the desired number of pods we want in our deployment. In a more general sense the `values.yaml` is where we will store our default templated values. When first exploring a new chart, the `values.yaml` and the README.md is a good place to start in order to understand how to use a chart.
 
-
 ### Using a Helm Chart
 
 At this point we have built and deployed a very basic Helm chart and have taken a closer look at the different components. In this section we are going to see how to actually consume these charts.
 
 Firstly, we mentioned briefly in the intro that Helm is a package manager. It is worth noting that while you may never need to to create and deploy your own Helm repository, there are a ton of charts already in existence. This means there is probably already a chart that meets your requirements so try not to reinvent the wheel.
 
-
 #### Finding and Downloading Existing Charts
 
 First, let's take a look at what charts we have available by default:
-```
+
+```bash
 helm search repo
 ```
-<sub>If you are not seeing any charts, your Helm distribution may not have come with the default repository installed. Do not worry we will be installing a new repo in the next few steps.</sub>  
+
+<sub>If you are not seeing any charts, your Helm distribution may not have come with the default repository installed. Do not worry we will be installing a new repo in the next few steps.</sub>
 
 Here you should see a huge list of charts for all sorts of databases, webservers, etc.
 You may also notice that most of the Helm charts included inside of the default repository are "DEPRECATED." we have found the bitnami repository contains a lot of charts that are well documented for most of your basic installations.
 
 In order to add our new repository just run the following command:
-```
+
+```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
 
 Now if we want to find a chart for deploying a basic nginx server we can use:
-```
+
+```bash
 helm search repo nginx
 ```
 
 This existing Helm chart can be deployed by running `helm install nginx-release bitnami/nginx` and viewed on the cluster. Feel free to explore the deployment and once you are done you can remove the chart with `helm uninstall nginx-release`. Another useful command to know is `helm pull --untar bitnami/nginx`, which will pull down a local version of the chart for you to inspect.
 
-
 #### Modifying Default Values
 
 Since we have already installed our Helm chart earlier in this lesson, let's take a quick look at what we have actually deployed using the OpenShift UI.
 
-* Navigate to the `Developer Tab` 
+* Navigate to the `Developer Tab`
 * Open `More` -> `Helm`
 * Should see the following screen with basic release information
 
@@ -230,14 +234,15 @@ If we click inside of our `test-release` link you can find more details, includi
 
 ![Helm Release](/devtools/helm_intro/details.png)
 
-Since we templatized the number of pods lets try to modify that value. 
+Since we templatized the number of pods lets try to modify that value.
 
 ##### User Input - CLI
 
 In order to update the replica count from the CLI we just need to use `--set key=value` option and, since our chart has already been deployed, we are going to use `helm upgrade` instead of `helm install`.
 
 Run the following command:
-```
+
+```bash
 helm upgrade test-release . --set replicaCount=1
 ```
 
@@ -250,12 +255,14 @@ You should pretty quickly see your pod count reduced from `3 of 3` to `1 of 1`. 
 While modifying templated values from the CLI is convenient from a developer perspective we will probably want to have a dedicated set of values for each of our different environments. Let's create a set of values for our "production" environment.
 
 Create `values-prod.yaml` with the following line:
-```
+
+```yaml
 replicaCount: 6
 ```
 
 Now to deploy using our new "production" configuration:
-```
+
+```bash
 helm upgrade test-release . -f values-prod.yaml
 ```
 
@@ -268,7 +275,8 @@ And we should see the pod count increased to `6 of 6`
 For this final section let's expand the chart to actually expose our deployment. Add the following `service` and `route` inside of your `templates` directory:
 
 #### **`service.yaml`**
-```
+
+```yaml
 kind: Service
 apiVersion: v1
 metadata:
@@ -282,9 +290,9 @@ spec:
     app: hello-openshift
 ```
 
-
 #### **`route.yaml`**
-```
+
+```yaml
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
@@ -299,13 +307,13 @@ spec:
   wildcardPolicy: None
 ```
 
-And for fun let's add the `RESPONSE` environment variable as the templated value `response` to our pods so that we can modify what is shown on our webpage. 
+And for fun let's add the `RESPONSE` environment variable as the templated value `response` to our pods so that we can modify what is shown on our webpage.
 
 The new `deployment.yaml` should look like:
 
-
 #### **`deployment.yaml`**
-```
+
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -331,7 +339,8 @@ spec:
 ```
 
 Finally add the following line to our `values.yaml`:
-```
+
+```yaml
 response: "Hello Helm"
 ```
 
@@ -341,9 +350,9 @@ Now, let's hit our endpoint by getting the url from the OpenShift UI, or you can
 
 Add the following lines to your `values.yaml`, then update your `deployment.yaml` to use the templatized probes inside `deployment.spec.template.spec.containers`
 
-
 #### **`value.yaml`**
-```
+
+```yaml
 health:
   readinessProbe:
     httpGet:
@@ -360,6 +369,7 @@ health:
 ```
 
 Hints:
+
 * `toYaml` function converts a map value into its yaml representation, including indentation.
 * [indent](https://helm.sh/docs/chart_template_guide/function_list/#indent) indents every line of a string a specified number of spaces.
 * A basic understanding of [pipelines](https://helm.sh/docs/chart_template_guide/functions_and_pipelines/#helm) is required.

@@ -1,7 +1,5 @@
 ---
 title: Generate A New ASP.NETCore WebAPI Using OpenAPI Generator
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - dotnet
 - .net
@@ -24,6 +22,8 @@ tags:
 - kubernetes
 - openshift
 ---
+
+# Generate A New ASP.NETCore WebAPI Using OpenAPI Generator
 
 ## Video
 

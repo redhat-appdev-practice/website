@@ -1,7 +1,5 @@
 ---
 title: AuditJS
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - javascript
 - node

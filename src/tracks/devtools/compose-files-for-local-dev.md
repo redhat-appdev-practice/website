@@ -1,7 +1,5 @@
 ---
 title: Leveraging Compose Files For Efficient Local Development
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - docker
 - podman

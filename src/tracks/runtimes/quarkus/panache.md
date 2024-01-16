@@ -1,7 +1,5 @@
 ---
 title: Add Panache, Hibernate, and Database Drivers
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm
@@ -25,22 +23,22 @@ tags:
 # Hibernate, Panache, and Database Access
 
 The Panache extensions to Hibernate and JPA used by Quarkus give us extensive flexibility in being able to quickly and efficiently create
-Data Access Object, Repositories, or ActiveRecord style database integrations. For this tutorial, we will leverage the [Repository pattern](https://quarkus.io/guides/hibernate-orm-panache#solution-2-using-the-repository-pattern) capability 
+Data Access Object, Repositories, or ActiveRecord style database integrations. For this tutorial, we will leverage the [Repository pattern](https://quarkus.io/guides/hibernate-orm-panache#solution-2-using-the-repository-pattern) capability
 within Quarkus to allow for simple integration with a PostgreSQL database.
 
 1. Add the H2 & PostgreSQL Database extensions to Quarkus using the Maven plugin
     ```bash
     $ ./mvnw quarkus:list-extensions | grep -i jdbc
-    [INFO] Elytron Security JDBC                              quarkus-elytron-security-jdbc                     
-    [INFO] JDBC Driver - DB2                                  quarkus-jdbc-db2                                  
-    [INFO] JDBC Driver - Derby                                quarkus-jdbc-derby                                
-    [INFO] JDBC Driver - H2                                   quarkus-jdbc-h2                                   
-    [INFO] JDBC Driver - MariaDB                              quarkus-jdbc-mariadb                              
-    [INFO] JDBC Driver - Microsoft SQL Server                 quarkus-jdbc-mssql                                
-    [INFO] JDBC Driver - MySQL                                quarkus-jdbc-mysql                                
-    [INFO] JDBC Driver - Oracle                               quarkus-jdbc-oracle                               
-    [INFO] JDBC Driver - PostgreSQL                           quarkus-jdbc-postgresql                           
-    [INFO] Camel JDBC                                         camel-quarkus-jdbc                             
+    [INFO] Elytron Security JDBC                              quarkus-elytron-security-jdbc
+    [INFO] JDBC Driver - DB2                                  quarkus-jdbc-db2
+    [INFO] JDBC Driver - Derby                                quarkus-jdbc-derby
+    [INFO] JDBC Driver - H2                                   quarkus-jdbc-h2
+    [INFO] JDBC Driver - MariaDB                              quarkus-jdbc-mariadb
+    [INFO] JDBC Driver - Microsoft SQL Server                 quarkus-jdbc-mssql
+    [INFO] JDBC Driver - MySQL                                quarkus-jdbc-mysql
+    [INFO] JDBC Driver - Oracle                               quarkus-jdbc-oracle
+    [INFO] JDBC Driver - PostgreSQL                           quarkus-jdbc-postgresql
+    [INFO] Camel JDBC                                         camel-quarkus-jdbc
     $ ./mvnw quarkus:add-extensions -Dextensions=quarkus-jdbc-postgresql,quarkus-jdbc-h2
     // SNIP
     [INFO] --- quarkus-maven-plugin:2.0.0.Final:add-extensions (default-cli) @ quarkus-todo ---
@@ -80,7 +78,7 @@ within Quarkus to allow for simple integration with a PostgreSQL database.
     public class TodosRepository implements PanacheRepositoryBase<Todo, UUID> {
     }
     ```
-    * This repository indicates that it handles `Todo` entities and uses a `UUID` as the primary key. 
+    * This repository indicates that it handles `Todo` entities and uses a `UUID` as the primary key.
       ::: tip
       If you primary key is a `Long` you could instead just extend `PanacheRepository<Entity>`
       :::

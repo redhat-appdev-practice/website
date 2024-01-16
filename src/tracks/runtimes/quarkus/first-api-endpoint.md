@@ -1,7 +1,5 @@
 ---
 title: Implement Your First API Endpoint
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm
@@ -22,7 +20,7 @@ tags:
 - hibernate
 ---
 
-## Implement Your First API Endpoint
+# Implement Your First API Endpoint
 
 1. Add the Mockito dependency for Quarkus to the Maven `pom.xml`
     ```xml
@@ -71,10 +69,10 @@ tags:
         public void testGetTodosNoResults() {
             // Given
             Mockito.when(repo.listAll()).thenReturn(new ArrayList<>());
-            
+
             // When
             var result = underTest.gettodos();
-            
+
             // Then
             assertEquals(0, result.size(), "Without prepared data, we expect 0 results");
         }
@@ -85,10 +83,10 @@ tags:
             Todo todo = new Todo().author("dphillips").complete(false).title("My test todo")
                     .description("A much longer description of my test Todo item").id(UUID.randomUUID());
             Mockito.when(repo.listAll()).thenReturn(Arrays.asList(todo));
-            
+
             // When
             var result = underTest.gettodos();
-            
+
             // Then
             assertEquals(1, result.size(), "With prepared data, we expect 1 results");
             assertEquals("dphillips", result.get(0).getAuthor(), "The author name should be 'dphillips'");

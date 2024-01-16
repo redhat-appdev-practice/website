@@ -1,7 +1,5 @@
 ---
 title: Using jOOQ With Reactive Database Drivers
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm

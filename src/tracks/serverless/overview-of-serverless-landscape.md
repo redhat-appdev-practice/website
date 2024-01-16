@@ -1,7 +1,5 @@
 ---
 title: Overview of the Serverless Landscape
-initialOpenGroupIndex: -1
-collapsable: true
 sidebarDepth: 1
 tags:
 - serverless

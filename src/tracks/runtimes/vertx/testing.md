@@ -1,7 +1,5 @@
 ---
 title: Implementing Unit & Behaviour Test For Vert.x
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm

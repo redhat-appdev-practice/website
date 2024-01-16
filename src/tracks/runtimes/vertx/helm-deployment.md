@@ -1,7 +1,5 @@
 ---
 title: Deploy Your Vert.x App To Kubernetes With Helm
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm

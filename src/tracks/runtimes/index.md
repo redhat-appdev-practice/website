@@ -1,7 +1,5 @@
 ---
 title: Cloud-Native Runtimes
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - cloud
 - runtimes

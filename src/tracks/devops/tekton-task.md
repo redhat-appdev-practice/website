@@ -1,7 +1,5 @@
 ---
 title: Tekton Task
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - tekton
 - devops

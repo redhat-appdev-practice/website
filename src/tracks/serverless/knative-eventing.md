@@ -1,7 +1,5 @@
 ---
 title: Knative Eventing
-initialOpenGroupIndex: -1
-collapsable: true
 sidebarDepth: 1
 tags:
 - kafka

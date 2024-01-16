@@ -1,7 +1,5 @@
 ---
 title: Introduction to Debezium and CDC
-initialOpenGroupIndex: -1
-collapsable: true
 sidebarDepth: 1
 tags:
 - debezium

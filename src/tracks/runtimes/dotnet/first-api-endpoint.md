@@ -1,7 +1,5 @@
 ---
 title: Test-Driven Development Of An API Endpoint
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - dotnet
 - .net
@@ -24,6 +22,8 @@ tags:
 - kubernetes
 - openshift
 ---
+
+# Implement An API Endpoint
 
 ## Video
 
@@ -73,7 +73,7 @@ Following Test-Driven Development practices, we will now implement our first API
                mock.Setup(ctx => ctx.GetTodo(testId)).Returns(testResult);
                underTest = new DefaultApiControllerImpl(mock.Object);
          }
-         
+
          [TestMethod]
          public void GetTodo()
          {
@@ -92,7 +92,7 @@ Following Test-Driven Development practices, we will now implement our first API
    // SNIP //
    Failed GetTodo [14 ms]
    Error Message:
-      Test method RedHat.TodoList.Tests.TodoApiTest.GetTodo threw exception: 
+      Test method RedHat.TodoList.Tests.TodoApiTest.GetTodo threw exception:
    System.NotImplementedException: The method or operation is not implemented.
    Stack Trace:
          at RedHat.TodoList.ControllerImpl.DefaultApiControllerImpl.GetTodo(Guid todoId) in /home/dphillips/Documents/RedHat/Workspace/CNAD_Enablement/dotnet-openapi-todo/src/RedHat.TodoList/ControllerImpl/DefaultApiImpl.cs:line 23

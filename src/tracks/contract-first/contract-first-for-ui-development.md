@@ -1,7 +1,5 @@
 ---
 title: Contract-First With UI Development
-initialOpenGroupIndex: -1
-collapsable: true
 sidebarDepth: 1
 tags:
 - contract-first
@@ -23,10 +21,9 @@ tags:
 ---
 # Applying Contract-First Development To UI/UX
 
+:::tabs
 
-:::: tabs cache-lifetime="10" :options="{ useUrlFragment: false }"
-
-::: tab "Angular + Prism"
+== Angular + Prism
 
 ## Video
 **COMING SOON**
@@ -34,8 +31,6 @@ tags:
 In most of the other segments we have focused on applying contracts to the creation of the API server or the backend. I would like to state that I feel that is far **more** important to apply contracts to the development of a UI. Why? Generally, user interfaces are what stakeholders need to see in order to determine product-market fit. In other words, if they cannot see and interact with the user interface, they cannot tell if the application we are developing solves the problem it is meant to solve. In my experience, that means that showing a UI which is at least somewhat functional is far more important that a completed or functional backend/API.
 
 Some may ask "Without a backend, how can I tell if my UI is functional?" That's the key goal of this segment. Showing you how you can build, test, and validate a UI and the associated user experience without having an API at all. By leveraging tools available via Contract-First techniques.
-
-[[toc]]
 
 ## Prerequisites
 
@@ -59,7 +54,7 @@ We're going to start with the beginnings of a user interface created using [Angu
 
 ### Clone The Repo
 
-```
+```bash
 git clone https://github.com/redhat-appdev-practice/angular-material-prism-openapi.git
 cd angular-material-prism-openapi
 ```
@@ -74,30 +69,34 @@ cd angular-material-prism-openapi
 1. Add *npm-watch* as a "dev" dependency. We will use it to "watch" for changes to files and restart certain tools.
    * `yarn add -D npm-watch`
 1. Add new "script"s to the `package.json` file as shown:
-   ```json
-   "watch": "npm-watch",
-   "prism": "prism mock -d --cors openapi.yml",
-   "openapi": "rm -f src/sdk; mkdir src/sdk; openapi-generator-cli generate -g typescript-angular -i openapi.yml -o src/sdk/",
-   ```
+
+```json
+"watch": "npm-watch",
+"prism": "prism mock -d --cors openapi.yml",
+"openapi": "rm -f src/sdk; mkdir src/sdk; openapi-generator-cli generate -g typescript-angular -i openapi.yml -o src/sdk/",
+```
+
 1. Add a new "watch" section to your `package.json` after the "scripts" section.
-   ```json
-   "watch": {
-       "openapi": "openapi.yml",
-       "prism": {
-           "patterns": ["openapi.yml"],
-           "inherit": true
-       },
-       "start": "yarn.lock"
-   },
-   ```
    * This is allows us to (re)start components automatically as needed while we develop
    * Each time the OpenAPI Spec file changes, the Angular Services will be regenerated and the Prism mock server will be updated. The Angular Dev server will only restart if we change our underlying libraries.
+
+```json
+"watch": {
+    "openapi": "openapi.yml",
+    "prism": {
+        "patterns": ["openapi.yml"],
+        "inherit": true
+    },
+    "start": "yarn.lock"
+},
+```
+
 1. Start all of our tooling using the command `npm run watch`
    * Prism will start a Mock API server on port 4010
    * OpenAPI Generate will output a set of Angular Services based on the contents of the `openapi.yml` file
    * Angular dev server will start running on port 4200
 
-<asciinema :src="$withBase('/casts/angular-openapi-prism-watch.cast')" cols=120 rows=30 />
+<AsciinemaPlayer src="/casts/angular-openapi-prism-watch.cast" cols=120 rows=30 />
 
 ### Create Models In The API Specification
 
@@ -318,9 +317,8 @@ We now will have a component which will load our Mock Todos from our Mock API au
 1. View the updated page and you should see something like:
    ![Rendered Angular Grid With Prism Data](/angular-prism-rendered-table.png)
 
-:::
+== VueJS + FakeIt
 
-::: tab "VueJS + FakeIt" id="first-tab"
 ## Video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RcpmtPmNS2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -328,8 +326,6 @@ We now will have a component which will load our Mock Todos from our Mock API au
 In most of the other segments we have focused on applying contracts to the creation of the API server or the backend. I would like to state that I feel that is far **more** important to apply contracts to the development of a UI. Why? Generally, user interfaces are what stakeholders need to see in order to determine product-market fit. In other words, if they cannot see and interact with the user interface, they cannot tell if the application we are developing solves the problem it is meant to solve. In my experience, that means that showing a UI which is at least somewhat functional is far more important that a completed or functional backend/API.
 
 Some may ask "Without a backend, how can I tell if my UI is functional?" That's the key goal of this segment. Showing you how you can build, test, and validate a UI and the associated user experience without having an API at all. By leveraging tools available via Contract-First techniques.
-
-[[toc]]
 
 ## Prerequisites
 
@@ -393,7 +389,7 @@ cd contract-first-ui
 
 ### Add The API Client SDK to the Quasar Application
 1. Let's connect our API client to our running application. In your IDE, open the file `src/boot/axios.ts`
-   * Remove the existing code, and add the following: 
+   * Remove the existing code, and add the following:
      ```typescript
      import Vue from 'vue';
      import { TodosApi } from '../apiClient/index';
@@ -544,7 +540,7 @@ cd contract-first-ui
                 format: date
     ```
    * When we save the API Spec, our `watch`ers should automatically rebuild our Client SDK and those fields will
-     be available in our IDE. 
+     be available in our IDE.
    * Also, our `fakeit` Mock API Server will have loaded the changed API Spec and will now return those new fields when we request Todo items
 1. Let's add the `description` field to our UI by way of an `expansion-item` component in `Index.vue`.
    * Replace the `<q-item>&#123;&#123; todo.title }}</q-item>` with:

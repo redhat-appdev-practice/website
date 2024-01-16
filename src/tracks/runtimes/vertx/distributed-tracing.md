@@ -1,7 +1,5 @@
 ---
 title: Distributed Tracing Using Jaeger & OpenTracing
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm

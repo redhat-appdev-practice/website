@@ -1,7 +1,5 @@
 ---
 title: Generate a new Vert.x application using OpenAPI Generator
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm

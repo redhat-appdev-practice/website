@@ -1,7 +1,5 @@
 ---
 title: Getting Started - Pre-requisistes
-initialOpenGroupIndex: -1
-collapsable: true
 tags:
 - java
 - graalvm
@@ -22,7 +20,7 @@ tags:
 - hibernate
 ---
 
-## Preparing Your Development Environment
+# Preparing Your Development Environment
 
 1. Install [Mandrel](https://github.com/graalvm/mandrel/releases/)
 1. Install your favorite IDE. This lab will show using [VSCode](https://code.visualstudio.com/)

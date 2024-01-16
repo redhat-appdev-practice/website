@@ -1,9 +1,9 @@
-# This is a [VuePress](https://vuepress.vuejs.org/) site for [Cloud-Native AppDev](https://appdev.consulting.redhat.com/)
+# This is a [VitePress](https://vitepress.dev/) site for [Cloud-Native AppDev](https://appdev.consulting.redhat.com/)
 
 ## Prerequisites
 
-* NodeJS >= 12
-* NPM >= 6
+* NodeJS >= 18
+* NPM >= 10.2
 * Git
 * A Modern Browser
 * (OPTIONAL) An editor with support for Markdown
@@ -66,17 +66,16 @@ Below are the technical details for creating and validating your text article on
 A set of useful links when writing articles or making changes to this repository
 
 * [Markdown](https://www.markdownguide.org/basic-syntax/) is the techincal writing language used
-* [VuePress](https://vuepress.vuejs.org/guide/getting-started.html) is how we are generating our site
-  * [Custom Containers](https://vuepress.vuejs.org/guide/markdown.html#custom-containers) are a useful trick to know
+* [VitePress](https://vitepress.dev/guide/getting-started) is how we are generating our site
+  * [Custom Containers](https://vitepress.dev/guide/markdown#custom-containers) are a useful trick to know
 
 ### Run the Site on Your Local Machine
 
 * Clone this repository
-* Navigate to the `src` directory (if you see this README on your website you are in the wrong directory)
-* Run `npx vuepress dev --no-cache`
-* Navigate to [http://localhost:8080/](http://localhost:8080/) in a browser
+* Run `npm run docs:dev`
+* Navigate to the URL shown in the console
 
-> **Note:** Depending on your version of node you may need to set the openssl-legacy-provider option so use this command: `NODE_OPTIONS=--openssl-legacy-provider npx vuepress dev --no-cache`
+> **Note:** Depending on your version of node you may need to set the openssl-legacy-provider option so use this command: `NODE_OPTIONS=--openssl-legacy-provider npm run docs:dev --no-cache`
 
 ### Creating New Articles
 
@@ -84,12 +83,11 @@ A set of useful links when writing articles or making changes to this repository
 
 To create a new article first create a new markdown(.md) file inside of `src/tracks/<TRACK FOLDER>`
 
-Every new article should start with some basic [frontmatter](https://vuepress.vuejs.org/guide/frontmatter.html). Frontmatter is a TOML block at the top of your markdown file which allows you to set some additional metadata about your document.
+Every new article should start with some basic [frontmatter](https://vitepress.dev/guide/frontmatter). Frontmatter is a TOML block at the top of your markdown file which allows you to set some additional metadata about your document.
 
   ```markdown
   ---
   title: Behavior-Driven Development
-  collasable: true
   tags:
   - gherkin
   - bdd
@@ -108,8 +106,6 @@ And an example article body should look something like this:
 
   ```markdown
   # My Article Title
-
-  [[toc]]
 
   ## Video
   <!-- Embedded Video -->
@@ -134,20 +130,18 @@ And an example article body should look something like this:
 
 It is important that once you have created your article you also update the navigation so users are able to find it
 
-* Open the `src/.vuepress/config.js` **AND** `src/.vuepress/config-staging.js` file
+* Open the `src/.vitepress/config.mts` **AND** `src/.vitepress/config-stage.mts` file
 * Locate the `sidebar` key under `themeConfig`
-* Locate `children` key beneath `Tracks`
+* Locate `items` key beneath `Tracks`
 * Locate the child for the track you wish to expand
-* Add a new entry to the `children`
+* Add a new entry to the `items`
 
   ```javascript
           {
             title: 'Developer Tools',
-            path: '/tracks/devtools/',
-            collapsable: true,
-            sidebarDepth: -1,
-            initialOpenGroupIndex: -1,
-            children: [
+            link: '/tracks/devtools/',
+            collapsed: true,
+            items: [
               '/tracks/devtools/owasp-dependency-check',
               '/tracks/devtools/owasp-zap-hud',
               '/tracks/devtools/npm-audit-ci-wrapper',
@@ -163,7 +157,7 @@ It is important that once you have created your article you also update the navi
 #### Local Validation
 
 Before creating a Merge Request please run and validate there are no errors:
-`yarn install: yarn build`
+`npm run docs:build`
 
 > **Note:** as mentioned above may need to modify the build to `NODE_OPTIONS=--openssl-legacy-provider yarn build`
 
@@ -186,7 +180,7 @@ If the staging environment is not being updated properly, then validate the work
 
 #### Approval
 
-Once you feel like your article is ready for review please post in the [Google Chat Channel](https://chat.google.com/room/AAAAyFv-1vU?cls=4) and ask for a reviewer. If our reviewers do not find any issues we will merge your branch with the `trunk`
+Once you feel like your article is ready for review please post in the [Slack Channel](https://app.slack.com/client/E030G10V24F/C06E0HFU6UU) and ask for a reviewer. If our reviewers do not find any issues we will merge your branch with the `trunk`
 
 #### Final Publish
 
@@ -211,7 +205,7 @@ You have uploaded new content to our site! In a few months Google Analytics can 
 
 #### Adding images
 
-[Images](https://vuepress.vuejs.org/guide/assets.html#public-files) can be placed in `src/.vuepress/public/` and everything in that directory will be relative to the web root. For example, if you place an image in `src/.vuepress/public/devtools/my-cool-image.svg`, then it's relative path would be `https://<site>/devtools/my-cool-image.svg` and it could be referenced in your markdown with `![Alt Text](/devtools/my-cool-image.svg)`
+[Images](https://vitepress.dev/guide/asset-handling) can be placed in `src/public/` and everything in that directory will be relative to the web root. For example, if you place an image in `src/public/devtools/my-cool-image.svg`, then it's relative path would be `https://<site>/devtools/my-cool-image.svg` and it could be referenced in your markdown with `![Alt Text](/devtools/my-cool-image.svg)`. If you place images in the same directory as your Markdown file, you can just use a relative path like `![Alt Text](my-cool-image.svg)`
 
 ### Adding asciinema recordings/playback
 
@@ -221,16 +215,16 @@ You have uploaded new content to our site! In a few months Google Analytics can 
 * It's more accessible to people with visual impairment
 * It's lighter than a video stream
 
-1. Add your `cast` file to the `src/.vuepress/public/casts` folder
-1. Add the **asciinema** component to your page
+1. Add your `cast` file to the `src/public/casts` folder
+1. Add the **AsciinemaPlayer** component to your page
 
-   ```asciidoc
-   <asciinema :src="$withBase('/casts/my-recording.cast')" cols=120 rows=30 />
+   ```html
+   <AsciinemaPlayer src="/casts/angular-openapi-prism-watch.cast" cols=120 rows=30 />
    ```
 
 #### Known Issues
 
-I trying to use `{{ }}` in your article it must be escaped, see the helm-intro project or [here](https://vuepress.vuejs.org/guide/using-vue.html#escaping)
+If you are trying to use `{{ }}` in your article it must be escaped, see the helm-intro project or [here](https://vitepress.dev/guide/using-vue#escaping)
 
 ## Adding a new Video to YouTube
 
@@ -263,7 +257,7 @@ While some of our members are able to capture the video in a single shot, minor 
 
 ### Uploading your Video
 
-If this is your first video please ask someone in our [Google Chat](https://chat.google.com/room/AAAAyFv-1vU?cls=4) to do the upload with a link to the raw video on Google Drive. We may also give direct access if you become a regular contributor.
+If this is your first video please ask someone in our [Slack Channel](https://app.slack.com/client/E030G10V24F/C06E0HFU6UU) to do the upload with a link to the raw video on Google Drive. We may also give direct access if you become a regular contributor.
 
 ## Other Contributions
 
@@ -273,7 +267,7 @@ If you would like to submit a pull against this repository and have it count tow
   * Better or more idomatic workflow (Subjective and at the discretion of our team to decide if wanted)
   * Fixes to spelling
   * Updated or improved tooling
-* New track pages which align with our [Journey Map](https://lucid.app/documents/embeddedchart/74fe4c6a-a778-4b96-961a-2af86a36326e)
+* New track pages which align with our [Journey Map](https://appdev.consulting.redhat.com/Cloud-Native_Journey_Map.svg)
 
 In order to avoid wasting your time and ours, it is recommended that you submit an issue describing your contribution first.
 
@@ -286,4 +280,4 @@ This section is for folks to recommend tools they find useful.
 ### VS Code Plugins
 
 - [Markdown Linter](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
-- 
+-
