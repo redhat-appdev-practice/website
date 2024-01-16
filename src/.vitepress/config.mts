@@ -1,5 +1,12 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, withBase } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
+
+var baseUrl = "/";
+
+if (process.argv.includes("--base")) {
+  var baseIndex = process.argv.indexOf("--base") + 1;
+  baseUrl = process.argv[baseIndex];
+}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -8,23 +15,20 @@ export default defineConfig({
   markdown: {
     config(md) {
       md.use(tabsMarkdownPlugin)
-    },
-    toc: {
-      level: [2,3,4],
-      shouldAllowNested: true
     }
   },
   ignoreDeadLinks: 'localhostLinks',
   head: [
-    ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/Icon.svg"}],
-    ['link', { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: "/Icon.svg"}],
-    ['link', { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: "/Icon.svg"}],
-    ['link', { rel: "shortcut icon", href: "/Icon.svg"}],
-    ['link', {rel: "shortcut icon", type: "image/png", href: "/favicon.png"}],
-    ['link', {rel: "stylesheet", type: "text/css", href:"/player/asciinema-player.css"}],
-    ['script', {src: "/player/asciinema-player.js"}],
-    ['meta', { name: "viewport", property: "viewport", content: "width=device-width, initial-scale=0.9"}],
-    ['script', {src: 'https://www.googletagmanager.com/gtag/js?id=G-2P1GY1ZQ3B'}],
+    ['link',   { rel: "apple-touch-icon", sizes: "180x180", href: `${baseUrl}Icon.svg`}],
+    ['link',   { rel: "apple-touch-icon", sizes: "180x180", href: `${baseUrl}Icon.svg`}],
+    ['link',   { rel: "icon", type: "image/svg+xml", sizes: "32x32", href: `${baseUrl}Icon.svg`}],
+    ['link',   { rel: "icon", type: "image/svg+xml", sizes: "16x16", href: `${baseUrl}Icon.svg`}],
+    ['link',   { rel: "shortcut icon", href: `${baseUrl}Icon.svg`}],
+    ['link',   { rel: "shortcut icon", type: "image/png", href: `${baseUrl}favicon.png`}],
+    ['link',   { rel: "stylesheet", type: "text/css", href: `${baseUrl}player/asciinema-player.css`}],
+    ['script', { src: `${baseUrl}player/asciinema-player.js`}],
+    ['meta',   { name: "viewport", property: "viewport", content: "width=device-width, initial-scale=0.9"}],
+    ['script', { src: 'https://www.googletagmanager.com/gtag/js?id=G-2P1GY1ZQ3B'}],
     ['script', {}, "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-2P1GY1ZQ3B');"]
   ],
   themeConfig: {
@@ -44,8 +48,8 @@ export default defineConfig({
 
     aside: false,
 
-    logo: '/Icon.svg',
-    logoLink: '/',
+    logo: "/Icon.svg",
+    logoLink: "/",
 
     sidebar: [
       {

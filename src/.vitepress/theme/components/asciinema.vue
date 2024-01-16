@@ -2,7 +2,7 @@
   <div ref="player"></div>
 </template>
 <script>
-import { nextTick } from 'vue';
+import { withBase } from 'vitepress';
 
 export default {
   name: "asciinema-player",
@@ -83,13 +83,7 @@ export default {
         window.clearInterval(this.$data.timeout);
       }
 
-      // For sites using <base href="...">, we need to adjust the location of the files when using absolute paths
-      var base = document.querySelector('base');
-      var baseUrl = base && base.href || '';
-
-      if (this.src[0] !== '/') {
-        let baseUrl = '';
-      }
+      var data = withBase(this.src);
 
       if (
           this.src &&
@@ -97,7 +91,7 @@ export default {
           !this.src.endsWith(".cast")
       ) {
         data =
-            "data:application/json;base64," + Buffer.from(`${baseUrl}${this.src}`).toString('base64')
+            "data:application/json;base64," + Buffer.from(withBase(this.src)).toString('base64')
       }
 
       this.player = window.asciinema.player.js.CreatePlayer(
