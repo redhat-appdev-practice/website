@@ -76,7 +76,7 @@ If you completed the previous lab you should be able to follow the lab by downlo
         -p java8=true
    ```
    **Note:** We are using the *sourceFolder* parameter to change where OpenAPI Generator places the generated Java code. By placing it in `src/main/gen` instead of `src/main/java` we are indicating that this code is created by the generator and should be treated as immutable.
-   
+
    - Open the code in an IDE of your choice and take some time to look around the code. Take note that we are currently generating all the files related to the application inside of the `src/main/gen` folder.
 2. Add the `src/main/gen` to your source directories:
    - Add the following plugin to your `pom.xml`:
@@ -125,12 +125,12 @@ If you completed the previous lab you should be able to follow the lab by downlo
          response.setDate(OffsetDateTime.now().plusDays(1));
          return ResponseEntity.ok(response);
      }
-     ``` 
+     ```
      **Note:** we are returning a `200` response code. This is compliant with our OAS specification. Currently we don't have any validation on which response code we are returning but it is best practice to follow what is specified by your OpenAPI document. And in the future we will be looking at [Schemathesis](https://github.com/schemathesis/schemathesis) which will run test to validate that all expected response codes are returned.
    - Prevent the regeneration of the `TodosApisController.java`:
       - In order to prevent files that you add to your `src/main/java` from being recreated in `src/main/gen` they need to be added to your `.openapi-generator-ignore` file.
       - Add the following lines to prevent any `*Controller.java` files from being added, as well as preventing us from overriding our `pom.xml`:
-      ```regex
+      ```bash
       **/*Controller.java
       pom.xml
       ```
@@ -176,7 +176,7 @@ If you completed the previous lab you should be able to follow the lab by downlo
         </plugin>
         ```
      **Warning:** If you did not add `pom.xml` to your `.openapi-generator-ignore` file the next build will override your `pom.xml` and you will need to add back the previous plugin.
-     
+
      - Explore the new OAS file being pulled from GitHub:
         - Note the new `user` schema as well as the new paths associated with the new user object.
      - Validate that `TodosApisController.java` has been deleted from your `src/main/gen` folder and regenerate your files with `mvn generate-sources`.

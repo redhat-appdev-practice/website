@@ -144,7 +144,7 @@ git checkout openapi_templating_jpa_setup
     - `modules/openapi-generator/src/main/resources/JavaSpring
   - This folder contains all of the template files used to generate the spring code from the previous application. It is worth taking some time to look at some of the different templates
     - Note the `library` folder that contain the 3 different libraries you can set. We chose spring boot when creating our application
-  - Inside the `tempalte` folder of our application you will find `pojo.mustache`. This should match up with the `pojo.mustache` in the openapi-generator repository. with some added TODO tags
+  - Inside the `template` folder of our application you will find `pojo.mustache`. This should match up with the `pojo.mustache` in the openapi-generator repository. with some added TODO tags
 3. Update `pom.xml` to use templates folder
   - Add `<templateDirectory>${project.basedir}/templates</templateDirectory>` to the configuration of the `opeanpi-generator-maven-plugin`
     <sub>Note: be sure to add this to the configuration *NOT* the configOptions</sub>
@@ -152,7 +152,7 @@ git checkout openapi_templating_jpa_setup
   - In order to use custom properties inside of templates are stored in 'vendorExtensions' and should begin with `x-`. You can read more about that [here](https://swagger.io/docs/specification/openapi-extensions/)
     - Add class annotations
       - Add the following directly above `@ApiModel` annotation (~line 4)
-        ```mustache
+        ```handlebars
         {{#vendorExtensions.x-java-class-annotation}}
         {{{.}}}
         {{/vendorExtensions.x-java-class-annotation}}
@@ -168,7 +168,7 @@ git checkout openapi_templating_jpa_setup
     - Add field annotations
       ::: v-pre
       - Add the following directly inside the `{{#vars}}` loop, above `{{#isEnum}}` (~line 13)
-        ```mustache
+        ```handlebars
           {{#vendorExtensions.x-java-field-annotation}}
           {{{.}}}
           {{/vendorExtensions.x-java-field-annotation}}
